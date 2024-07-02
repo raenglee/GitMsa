@@ -6,7 +6,7 @@ public class Ex07 {
 
 		// 주석설정 및 해제 ctrl+/ , ctrl+shift+c
 	
-		// 삼황연산자
+		// 삼항연산자
 		
 //		int a = 10;
 //		int b = 20;
