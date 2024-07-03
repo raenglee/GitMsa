@@ -3,9 +3,15 @@ package ex04;
 public class Exec3_7 {
 	public static void main(String[] args) {
 		int F = 100;
-		float C = (float)((int)((float)((F-32)/1.8)*100))/100; 
+	
+		//풀이
+		float C = (float) ((F-32)/1.8);
+		System.out.println( (int)(C*100)/(double)100 );
+		
+		//float C = (float)((int)((float)((F-32)/1.8)*100))/100; 
 		System.out.println("F = " + F);
 		System.out.println("C = " + C);
+				
 	}
 
 }

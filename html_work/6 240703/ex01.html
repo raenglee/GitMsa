@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input[type="text"] {
+            width: 300px;
+            height: 50px;
+            font-size: 2rem;
+            border-radius: 10px;
+        }
+
+        #female:checked~div {
+            background-color: blueviolet;
+            border: 1px solid black;
+            height: 100px
+        }
+
+        #male:checked~div {
+            background-color: saddlebrown;
+            border: 1px solid black;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="ex04.html" method="get" target="_blank">
+        <fieldset>
+            <legend>회원가입</legend>
+            <div>
+                <label for="id">ID</label>
+                <input type="text" name="id" placeholder="아이디" id="id">
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>성별</legend>
+            <div>
+                <label for="female">여</label>
+                <input type="checkbox" name="gender" id="female">
+                <label for="male">남</label>
+                <input type="checkbox" name="gender" id="male">
+                <div>성별을 선택</div>
+            </div>
+            <input type="submit" value="전송">
+        </fieldset>
+    </form>
+</body>
+
+</html>

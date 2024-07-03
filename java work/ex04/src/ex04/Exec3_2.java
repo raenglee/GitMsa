@@ -7,11 +7,12 @@ public class Exec3_2 {
 	public static void main(String[] args) {
 		int numOfApples = 123;
 		int sizeOfBucket = 10;
-		int numOfBucket = (numOfApples/sizeOfBucket)+(numOfApples%sizeOfBucket == 0 ? 0:1);
+		//int numOfBucket = (numOfApples/sizeOfBucket)+(numOfApples%sizeOfBucket == 0 ? 0:1);
 		
-		//System.out.println(numOfApples%sizeOfBucket);
-		
-		System.out.println("필요한 바구니의 수" + numOfBucket);
+		//풀이
+		int numOfBucket = (numOfApples / sizeOfBucket) + (numOfApples%sizeOfBucket > 0 ? 1 : 0);
+				
+		System.out.println("필요한 바구니의 수 " + numOfBucket);
 		
 	}
 }
