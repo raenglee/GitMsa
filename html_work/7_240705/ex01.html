@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 500px;
+            border: 1px solid #333;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- alt + shift + F 자동정렬-->
+    <div class="container" id="aa"> <!-- 클래스 아이디는 변수명같은것-->
+        <h1>회원 가입을 환영합니다</h1>
+        <form action="">
+            <fieldset>
+                <legend>사용자 정보</legend>
+                <ul>
+                    <li>
+                        <label for="id">아이디</label>
+                        <input type="text" name="" id="id" placeholder="4자 ~ 10자 사이, 공백없이">
+                    </li>
+                    <li>
+                        <label for="email">이메일</label>
+                        <input type="text" name="" id="emial">
+                    </li>
+                    <li>
+                        <label for="password">비밀번호</label>
+                        <input type="text" name="" id="password" placeholder="문자와 숫자, 특수 기호 포함">
+                    </li>
+                    <li>
+                        <label for="passwordy">비밀번호 확인</label>
+                        <input type="text" name="" id="passwordy">
+                    </li>
+                    <li>
+                        <label for="">가입 경로</label>
+                        <select name="" id="">
+                            <option value="">블로그</option>
+                            <option value="">검색</option>
+                            <option value="">소개</option>
+                        </select>
+                    </li>
+                    <li>
+                        <label for="memo">메모</label>
+                        <textarea id="memo" cols="40" rows="4" placeholder="남길 말씀이 있다면 여기에"></textarea>
+                    </li>
+                </ul>
+            </fieldset>
+            <fieldset>
+                <legend>
+                    이벤트와 새로운 소식
+                </legend>
+                <ul>
+                    <li>
+                        <input type="radio" name="mailre" id="">메일 수신
+                        <input type="radio" name="mailre" id="">메일 수신 안 함
+                    </li>
+                </ul>
+            </fieldset>
+            <input type="submit" value="가입하기">
+            <input type="reset" value="취소">
+        </form>
+    </div>
+    <button onclick="asdasd();">넓이 바꾸기</button>
+</body>
+
+</html>
+
+<script>
+    function asdasd(){
+        const aa = document.getElementById('aa')
+        const bb = Math.random()*1200;
+        aa.style.width = `${bb}600px`;
+    }
+</script>
