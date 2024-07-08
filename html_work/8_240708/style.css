@@ -1,0 +1,13 @@
+p{
+    color:crimson;
+}
+div{
+    border: 1px solid black;
+    width: 100px;
+    height: 100px;
+    /*padding-left: 30px; */
+    padding: 0 0 0 30px; /*12시, 3시, 6시, 9시 방향 */
+    /*위의 경우 12시 0...9시 30px*/
+    /* margin-left: 30px; */
+    margin: 0 auto 0 auto;    
+}
