@@ -18,6 +18,8 @@ public class HH {
     }
 }
 
+
 // 0 < value < 1
 // 0.00000 < value < 6.666666
 // 1.00000 < value < 7.666666
+
