@@ -4,6 +4,8 @@
 참고로 재귀 함수의 구현이 처음에는 어려운 편이기 때문에 여기서는 쉬운 문제를 제시하였다
 */
 
+//문제 풀이 ex09에!
+
 import java.util.Scanner;
 
 public class Ex06exam1 {
