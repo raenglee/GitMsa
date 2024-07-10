@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .out-div {
+            position: relative;
+            height: 200px;
+        }
+
+        .in-div {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+        }
+
+        .blue {
+            background-color: blue;
+        }
+
+        .yellow {
+            background-color: yellow;
+            right: 0;
+        }
+
+        .green {
+            background-color: green;
+        }
+        .red{
+            background-color: red;
+            right: 100px;
+            bottom: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="out-div green">
+        <div class="in-div blue">
+            <h1>AA</h1>
+        </div>
+        <div class="in-div yellow">
+            <h1>BB</h1>
+        </div>
+        <div class="in-div red">
+            <h1>CC</h1>
+        </div>
+    </div>
+</body>
+
+</html>
