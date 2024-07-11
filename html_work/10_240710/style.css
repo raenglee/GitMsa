@@ -1,0 +1,89 @@
+/*   *는 all태그 */
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
+
+* {
+    font-family: "black Han Sans", '맑은 고딕';
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 960px;
+    min-width: 960px;
+    margin: 0 auto;
+    /* background-color: rgb(219, 219, 219); */
+}
+
+.header {
+    overflow: hidden;
+}
+
+.logo {
+    float: left;
+    display: block;
+    padding: 0.8rem;
+    margin: 0.2rem;
+}
+
+ul {
+    float: right;
+}
+
+li {
+    list-style: none;
+    float: left;
+}
+
+a {
+    color: #333;
+    display: block;
+    padding: 0.4rem 1rem;
+    margin: 0.8rem 0.3rem;
+    text-decoration: none;
+    /* background-color: rgb(173, 113, 197); */
+}
+
+.sign {
+    background-color: rgb(170, 170, 170);
+    border-radius: 0.3rem;   /* 모서리둥글게 */
+}
+
+.register {
+    background-color: rgb(88, 88, 88);
+    border-radius: 0.3rem;
+}
+/* .slide{
+    height: 500px;
+    overflow: hidden;   /*400px 벗어나는걸 자름
+} */
+
+.slider>div{
+    height: 400px;
+    overflow: hidden;
+}
+.heading>h1,h2{
+    padding-left: 2rem;    /* 안쪽여백 */
+}
+.prevnext{
+    display: flex;
+    justify-content: center;
+    /* overflow: hidden; */
+}
+/* .prevnext>#slider-prev{
+    float: left;
+}
+.prevnext>#slider-next{
+    float: right;
+} */
+ .sub-heading{
+    margin: 2rem 0;
+    display: flex;    /*가로정렬?*/
+    justify-content: space-between;  /*사이사이여백만듦*/
+ }
+ .sub-heading>div{
+    width: 200px;
+    /* background-color: gainsboro; */
+ }

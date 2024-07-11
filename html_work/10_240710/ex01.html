@@ -5,65 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        /*   *는 all태그 */
-        @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
-
-        * {
-            font-family: "black Han Sans", '맑은 고딕';
-            font-weight: 400;
-            font-style: normal;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        .container {
-            width: 960px;
-            min-width: 960px;
-            margin: 0 auto;
-            background-color: rgb(219, 219, 219);
-        }
-
-        .header {
-            overflow: hidden;
-        }
-
-        .logo {
-            float: left;
-            display: block;
-            padding: 0.8rem;
-            margin: 0.2rem;
-        }
-
-        ul {
-            float: right;
-        }
-
-        li {
-            list-style: none;
-            float: left;
-        }
-
-        a {
-            color: #333;
-            display: block;
-            padding: 0.4rem 1rem;
-            margin: 0.8rem 0.3rem;
-            text-decoration: none;
-            /* background-color: rgb(173, 113, 197); */
-        }
-
-        .sign {
-            background-color: rgb(170, 170, 170);
-            border-radius: 0.3rem;   /* 모서리둥글게 */
-        }
-
-        .register {
-            background-color: rgb(88, 88, 88);
-            border-radius: 0.3rem;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bxslider@4.2.17/dist/jquery.bxslider.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".slider").bxSlider({
+                auto: true,
+                speed: 300,
+                nextSelector: '#slider-next',
+                prevSelector: '#slider-prev',
+                nextText: 'Go next →',
+                prevText: '← Go back'
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -83,10 +40,87 @@
                 </ul>
             </div>
         </div>
+        <div class="prevnext">
+            <span id="slider-prev"></span>
+            <span id="slider-next"></span>
+        </div>
         <div class="slide" style="background-color: white;">
-            <h1>slide</h1>
+            <div class="slider">
+                <div>
+                    <img src="images/eee.jpg">
+                    I am a slide.
+                </div>
+                <div>
+                    <img src="images/aaa.jpg">
+                    I am a slide.
+                </div>
+                <div>
+                    <img src="images/bbb.jpg">
+                    I am AAA slide.
+                </div>
+                <div>
+                    <img src="images/ccc.jpg">
+                    I am BBB slide.
+                </div>
+                <div>
+                    <img src="images/ddd.png">
+                    I am CCC slide.
+                </div>
+                <div>
+                    <img src="images/eee.jpg">
+                    I am DDD slide.
+                </div>
+            </div>
         </div>
         <div class="heading"></div>
+        <h1>Heading</h1>
+        <h2>SubHeading</h2>
+        <div class="sub-heading">
+            <div>
+                <h1>홍길동</h1>
+                <p>
+                🧡 내사랑내곁에<br>
+                황당하다
+            </p>
+            </div>
+            <div>
+                <p>
+                <h1>김길동</h1>
+                🧡 내사랑내곁에<br>
+                황당하다
+            </p>
+            </div>
+            <div>
+                <p>
+                <h1>박길동</h1>
+                🧡 내사랑내곁에<br>
+                황당하다
+            </p>
+            </div>
+        </div>
+        <div class="sub-heading">
+            <div>
+                <h1>홍길동</h1>
+                <p>
+                🧡 내사랑내곁에<br>
+                황당하다
+            </p>
+            </div>
+            <div>
+                <p>
+                <h1>김길동</h1>
+                🧡 내사랑내곁에<br>
+                황당하다
+            </p>
+            </div>
+            <div>
+                <p>
+                <h1>박길동</h1>
+                🧡 내사랑내곁에<br>
+                황당하다
+            </p>
+            </div>
+        </div>
     </div>
 </body>
 
