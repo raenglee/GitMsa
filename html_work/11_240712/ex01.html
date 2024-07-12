@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        div{
+            box-sizing: border-box;    /*패딩을 넣은후에도 박스크기 200으로 고정하는것*/
+            padding: 20px;    /* 패딩넣으면 패딩만큼의 넓이가 더해져서 200x200했는데도 240x240으로 바뀜*/
+            width: 200px;
+            height: 200px;
+            background-color: #ccc;
+            box-shadow: 20px 20px 50px 50px #333;
+            animation: aa 2s infinite;   /* aa가 2초동안 무한으로 움직이는것*/
+            border-radius: 20px 50px 70px 90px;   /* 굴곡추가 한개만주면 똑같이, 네군데 주면 다다르게 생김*/
+            margin: 10px;
+        }              
+        div:hover{    /* hover: 상태선택자 마우스 올렸을때 반응*/
+            box-shadow: 50px 50px 5px 5px #333;
+        }
+        @keyframes aa {          /* aa는 변수명 아무거나입력가능 */ /*키프레임:애니메이션속성임*/
+         0%{
+            box-shadow: 0px 0px 5px 5px #333;
+            transform: rotate(0deg);
+         }
+            25% {
+            box-shadow: 150px 150px 5px 5px #333;
+        } 
+        50%{
+          box-shadow: 100px 100px 5px 5px #333;  
+        }
+         100%{
+            box-shadow: 50px 50px 5px 5px #333;
+            transform: rotate(360deg);
+         }
+    }
+    </style>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+</body>
+</html>
