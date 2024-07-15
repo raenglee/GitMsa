@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&display=swap');
+
+    * {
+        font-family: "black Han Sans", '맑은 고딕';
+        font-weight: 400;
+        font-style: normal;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /*모든웹브라우저에서 똑같이 나오게하려면 필수로 세개는 입력해주는게 좋음*/
+
+
+    li {
+        list-style: none;
+    }
+
+    /*li{}라고만 해도 적용이되는구나*/
+    #container {
+        display: flex;
+        /*가로로 배열하는건가?*/
+        flex-direction: column;
+        /*다시 새로로 배열...?*/
+        justify-content: center;
+        /*중간으로*/
+        align-items: center;
+        /*중간으로*/
+        height: 100vh;    /*여백 없게*/
+        color: #ffffff;
+        /*글씨색*/
+        background-image: url(../10_240710/images/aaa.jpg);
+        /*백그라운드로 이미지넣는법*/
+        /*../ 부모폴더찾는것*/
+        background-repeat: no-repeat;
+        /*사진 반복금지*/
+        background-size: cover;
+        /*사진 전부 다 덮기*/
+    }
+
+    #container>div {
+        width: 800px;
+        background-color: rgba(0, 0, 0, 0.1);    /*rgba 투명도까지 조절가능*/
+        border: 1px solid #333;
+        padding: 30px;    /*여백주는거*/
+        margin: 30px;
+    }
+
+    .header{
+        border-radius: 2rem 2rem 0 0; /*모서리 둥글게 탑 레프트라이트*/
+    }
+    .content ul li{
+        display: inline-block;
+        margin: 40px;
+    }
+    
+    .footer{
+        border-radius: 0 0 2rem 2rem; /*모서리 둥글게 탑 레프트라이트*/
+    }
+
+    .footer th,td{
+        padding: .5rem;    /*0.5rem = .5rem 패딩으로 표 사이사이 띄워줌*/
+    }
+
+    .footer>table {
+        /*클래스 아래를 선택할때 > 사용하는듯*/
+        width: 100%;
+        text-align: center;
+        /*글자 중간정렬*/
+    }
+
+    .footer>table,
+    th,
+    td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        /*없으면 두줄로나오고 있으면 한줄로 나오는 태그*/
+    }
+</style>
+
+<body>
+    <div id="container">
+        <div class="header">
+            <h1>레드향</h1>
+            <p>껍질에 붉은 빛이 돌아 레드향이라 불린다.</p>
+        </div>
+        <div class="content">
+            <h1>레드향 샐러드 레시피</h1>
+            <p><b>재료</b> 레드향 1개 아보카도 1개 토마토 1개</p>
+            <ul>
+                <li>샐러드</li>
+                <li>레드향</li>
+                <li>아보카도</li>
+            </ul>
+        </div>
+        <div class="footer">
+            <h1>상품 구성</h1>
+            <table>
+                <tr>
+                    <th>용도</th>
+                    <th>중량</th>
+                    <th>개수</th>
+                </tr>
+                <tr>
+                    <td>선물용</td>
+                    <td>3kg</td>
+                    <td>1개</td>
+                </tr>
+                <tr>
+                    <td>선물용</td>
+                    <td>3kg</td>
+                    <td>1개</td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
