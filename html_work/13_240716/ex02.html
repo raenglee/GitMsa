@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .header,.footer{
+            height: 100px;    /*헤더랑 푸터만 높이변경*/
+        }
+        .header{
+            background-color: aliceblue;
+        }
+        .content{
+            overflow:hidden;    /*어디서부터 어디까지 감싸야한다~ 플로트 있으니 필수 이게뭔데?왜필수지?찾아보기*/
+            background-color: antiquewhite;
+        }
+        .footer{
+            background-color: aliceblue;
+        }
+        .leftside{
+            float: left;    /*왼쪽으로 배치*/
+            height: 500px;
+            background-color: aqua;
+        }
+        .center{
+            float: left;    /*본문의 float를 조정 안해주면 사이드들 높이가 이상해짐*/
+            height: 500px;
+        }
+        .rightside{
+            float: right;    /*오른쪽으로 배치*/
+            height: 500px;
+            background-color: aqua;
+        }
+        .myfix{
+            position: fixed;    /*스크롤바 내려도 그림이 따라옴 위치가 고정!! 배너같은것*/
+            height: 100px;
+            width: 100px;
+            background-color: blueviolet;
+            bottom: 30px;
+            right: 30px;
+            border-radius: 50px;    /*동그라미*/
+        }
+        .myst{
+            position: sticky;    /*스크롤바내려도 글씨가 따라옴*/
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>사이트 제목</h1>
+        </div>
+        <div class="myst"><h2>여기 고정될 예정</h2></div>
+        <div class="content">
+            <div class="leftside"><h2>왼쪽 사이드바</h2></div>
+            <div class="center"><h2>본문</h2></div>
+            <div class="rightside"><h2>오른쪽 사이드바</h2></div>
+        </div>
+        <div class="footer">
+            <h1>푸터</h1>
+        </div>
+    </div>
+    <div class="myfix"></div>
+</body>
+</html>

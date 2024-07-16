@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        a {
+            color: white;
+            /*글자색*/
+            text-decoration: none;
+            padding: 15px 20px;
+            margin: 30px;
+            line-height: 100px;    /*글자 위치조정*/
+            text-transform: uppercase;    /*글자 전부 대문자로*/
+        }
+
+        li {
+            list-style: none;
+            display: inline-block;    /* 가로로 정렬!!*/
+        }
+
+        .container {
+            background-color: rgb(24, 143, 143);
+            width: 1140px;
+            margin: 0 auto;
+            height: 100px;
+        }
+        .active{
+            border: 1px solid white;
+        a{
+            border: 1px solid rgb(24, 143, 143);
+        }
+        }
+        a:hover {
+            border: 1px solid white;    /* hover - 마우스 올리면 변할 효과*/
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <ul>
+            <li><a class="active" href="#" id="menu1">MENU1</a></li>
+            <li><a href="#" id="menu2">abcdef</a></li>
+            <li><a href="#" id="menu3">newMenu</a></li>
+            <li><a href="#" id="menu4">SignIn</a></li>
+            <li><a href="#" id="menu5">SignUP</a></li>
+        </ul>
+    </div>
+    <div id="div1">
+        <p>Stormy night Cloudy sky In a moment you and I</p>
+        <p>One more chance 너와 나 다시 한번 만나게 서로에게 향하게</p>
+        <p>My feeling's getting deeper 내 심박수를 믿어 우리 인연은 깊어 I gotta see the meaning of it</p>
+        <p>I don't know what we've done 되돌아가긴 싫어 もう知っている</p>
+    </div>
+    <div id="div2">
+        <p>Don't know what we've been sold 見つけられるよ So it's sure</p>
+        <p>Golden moon Diamond stars In a moment you and I</p>
+        <p>Second chance しょうがない もう少し待って 너와 내게 향하게</p>
+        <p>My feeling's getting deeper 내 심박수를 믿어 우리 인연은 깊어 I gotta see the meaning of it</p>
+    </div>
+
+</body>
+
+</html>
+<!-- <script>
+    $(document).ready(function(){    /*함수를 실행하라*/
+    $('#menu1').click(function(){ $('#div1').fadeToggle();});    /*메뉴 누르면~되는것*/
+    $('#menu2').click(function(){ $('#div2').fadeToggle();});    /*누르면페이드토글 됨*/
+    });
+</script> -->
+
+<script>
+    $(document).ready(function(){
+    $('#menu1').mouseenter(function(){ $('#div1').fadeIn();});    /*마우스 올리면 페이드인*/
+    $('#menu1').mouseleave(function(){ $('#div1').fadeOut();});    /*마우스 빼면 페이드아웃*/
+    $('#menu2').mouseenter(function(){ $('#div2').fadeIn();});
+    $('#menu2').mouseleave(function(){ $('#div2').fadeOut();});
+    });
+</script>

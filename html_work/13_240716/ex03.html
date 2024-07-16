@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            background-color: aliceblue;
+            position: relative;    /*얘를 기준으로*/
+            height: 300px;
+        }
+        .aa{
+            position: absolute;
+            bottom: 0;    /*위에 포지션-릴레이티브를 기준으로 바닥에붙음, 없으면 바디기준됨*/
+            background-color: greenyellow;
+        }
+        .bb{
+            position: absolute;
+            background-color: red;
+            z-index: 99;    /*높은 순서대로 위로 나옴*/
+        }
+        .cc{
+            /* position: absolute;    -> 이게 없으면 z-index가 높아도 안보임 ,,, 왜지?
+            z-index: 111;
+            bottom: 0;
+            right: 0; */
+            background-color: rebeccapurple;
+            width: 300px;
+            height: 200px;
+            margin: 0 auto;    /*width, height, margin으로 중간정렬 0 auto*/
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="aa">
+            <h1>div</h1>
+        </div>
+        <div class="bb">
+            <h2>div</h2>
+        </div>
+        <div class="cc">
+            <h3>div</h3>
+        </div>
+    </div>
+</body>
+
+</html>
