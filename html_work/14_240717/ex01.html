@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .aa {
+            border: 5px dotted black;
+            background-color: rgb(255, 200, 97);
+            padding: 20px;   /*선을 기준으로 안쪽 여백*/
+            margin: 20px;    /*선을 기준으로 바깥쪽 여백*/
+            width: 300px;
+            float: left;
+        }
+
+        #a{
+            background-clip: border-box;
+        }
+        #b{
+            background-clip: padding-box;
+        }
+        #c{
+            background-clip: content-box;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="aa" id="a">
+        <h1>레드향</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi inventore dolore ex necessitatibus officiis et
+            earum architecto, illo porro voluptate, dignissimos reprehenderit est saepe. Quam accusamus officiis
+            quisquam iste nihil!
+            Quibusdam doloribus necessitatibus, saepe sunt at voluptatibus nobis unde aliquam maiores ea labore! Quo,
+            porro vitae libero nemo, exercitationem pariatur voluptatem odio veritatis necessitatibus quaerat ad soluta
+            reiciendis excepturi debitis.
+            Cum nisi voluptate incidunt vero suscipit, nemo minima quisquam quasi maiores ut, quod hic aspernatur beatae
+            et deserunt veniam ducimus iure aperiam natus qui, nesciunt totam. Sequi officia quae sunt.</p>
+    </div>    <!--Lorem은 * 하고 숫자 붙이면 몇줄할건지-->
+    <div class="aa" id="b">
+        <h1>레드향</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate nesciunt consectetur dolorem dolor atque
+            vel voluptatum iure delectus, amet facere optio dignissimos libero soluta deserunt et maiores reiciendis quo
+            enim!
+            Repellendus, rem officia. Vitae, inventore itaque sequi vero labore nam eveniet, ab rerum facilis,
+            voluptatum tempore deserunt possimus optio beatae officia quia dolorem temporibus dolor minima. Iste, ea
+            libero. Sed!
+            Soluta ipsam dolore veritatis blanditiis cum neque reprehenderit tempore consectetur nemo provident
+            laudantium repellendus repellat, voluptas, id, possimus dignissimos dolorem omnis eligendi. At, iste dolor
+            ducimus quis reiciendis culpa ipsa!</p>
+    </div>
+    <div class="aa" id="c">
+        <h1>레드향</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro accusamus error deleniti delectus eius ipsa,
+            laborum quisquam ex, saepe sunt ducimus dolor amet natus nemo distinctio veniam earum nisi praesentium?
+            Blanditiis facere voluptatem adipisci voluptatibus odio ducimus eligendi quas tempora eveniet rem. Neque
+            voluptate nobis mollitia et minima porro minus dignissimos numquam quae fuga facere, temporibus voluptatum
+            tempore amet dolores!
+            In, adipisci? Esse iste quisquam quam beatae pariatur reiciendis, quas est? Consequuntur quam nostrum
+            laboriosam ratione deleniti ipsum ipsam laudantium iste et, modi explicabo perspiciatis, unde repellendus
+            eum eos incidunt?</p>
+    </div>
+</body>
+
+</html>

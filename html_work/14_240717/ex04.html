@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .back{
+            margin: 30px;
+            height: 300px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;    /*중간정렬*/
+        }
+        .back::before{    /*before은 가상요소*/
+            content:'';
+            background-image: url(../10_240710/images/aaa.jpg);
+            background-size: cover;
+            opacity: 0.7;    /*투명도, 근데 글씨까지 같이 투명해짐*/
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+        }
+        .container {
+            position: relative;    /*투명도를 없애줌 이게 없으면 글자도 투명해짐*/
+        }
+        h1{
+            color: rgb(0, 255, 179);
+            text-shadow: 2px 2px 5px #000;
+        }
+        .grad{
+            height: 300px;
+            background: linear-gradient(to right bottom, rgb(255, 209, 123),rgb(255, 183, 198));    /*그라데이션*/
+        }
+    </style>
+</head>
+<body>
+    <div class="back">
+        <div class="container">
+            <h1>나는 할 수 있다.</h1>
+            <div>
+                냉무
+            </div>
+        </div>
+    </div>
+    <div class="grad">
+    </div>
+</body>
+</html>
