@@ -1,0 +1,59 @@
+
+@font-face {
+    font-family: 'GowunBatang-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+font-family: 'GowunBatang-Regular';
+font-weight: 400;
+font-style: normal;
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+h1{
+    text-align: center;    /*글자 중간으로*/
+    padding: 20px;
+}
+li{
+    list-style: none;
+}
+.container{
+    margin: 0 auto;    /*중간으로*/
+    padding: 2rem;    /*안쪽 여백*/
+    width: 70%;
+    background-color: pink;
+    border-radius: 1rem;
+}
+.container ul{
+    width: 300px;
+    margin: 0 auto;
+}
+label{
+    display: inline-block;    /*아래위 여백*/
+    padding: 10px;
+}
+input{
+    width: 100%;
+    outline: none;    /*인풋박스 눌렀을때 선을 없애줌*/
+    height: 2rem;
+    font-size: 1.7rem;
+    line-height: 2rem;
+    padding: 10px;
+}
+input:focus{
+   border: 3px solid rgb(62, 255, 213);
+}    /*focus - 고급선택자 라인에 줄들어옴*/
+.btn-div{
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+button{
+    margin: 1rem;
+    height: 2rem;
+    width: 8rem;
+    font-size: 1.5rem;
+}
