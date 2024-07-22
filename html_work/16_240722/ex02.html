@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input{display: none;}  /*인풋박스 안보이게함 화면에만 안보일 뿐 존재함 이름 누르면 눌리는것!*/
+        label{cursor: pointer; padding: 0px 20px;}  /*패딩 좌우로만 넣음*/
+        label::after{  /*고급선택자 애프터... 가상선택자, 라벨태그다음에 뭐가 없는데 있지않을까? 하고 넣는것...  ?? */
+            content: '**';  /*내용추가??*/
+            border-right: 1px solid black;  /*박스선을 오른쪽에만 나오게*/
+        }
+        .my-div{display: none;}  /*my-div가 안보이게*/
+        #ck1:checked ~ #lab1{background-color: chartreuse;}  /*ck1이 체크되었을때 lab1에 색이 들어가는것*/
+        #ck2:checked ~ #lab2{background-color: chartreuse;}
+        #ck3:checked ~ #lab3{background-color: chartreuse;}
+        
+        #ck1:checked ~ #div-1 {display: block;}  /*ck1을 누르면 div-1이 나타남*/
+        #ck2:checked ~ #div-2 {display: block;}
+        #ck3:checked ~ #div-3 {display: block;}
+
+        [type=radio]{  /*속성선택자*/
+        }
+
+        [for=ck1]{  /*속성 선택자*/
+             color:deeppink
+         }
+
+    </style>
+</head>
+<body>
+    <div>
+        <h1>ㅎㅎㅎ</h1>
+    
+        <input type="radio" name="gg" id="ck1" checked>  <!--name에 이름 부여해줘야함 그래야 다른거 선택 하면 체크 빠짐-->
+        <input type="radio" name="gg" id="ck2">
+        <input type="radio" name="gg" id="ck3">   
+        <label for="ck1" id="lab1">ck1</label> <!--라벨이름만 눌러도 체크박스에 체크됨-->
+        <label for="ck2" id="lab2">ck2</label>
+        <label for="ck3" id="lab3">ck3</label>
+        <div class="my-div" id="div-1">  <!--클래스는 같은이름여러개되고 아이디는 같은이름 안됨-->
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem natus laudantium ipsa provident! Accusamus dolores sapiente sequi nostrum consequatur aut impedit corrupti repudiandae recusandae, nemo dolore amet aliquid, in tempora!
+        </div>
+        <div class="my-div" id="div-2">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci, officia odio asperiores, possimus architecto nostrum sint consequuntur at dolore doloremque corporis tenetur soluta incidunt omnis enim, beatae blanditiis iusto. Quas.
+        </div>
+        <div class="my-div" id="div-3">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Earum veniam doloremque non ducimus totam id molestiae facere eum sed libero dolorem iusto suscipit placeat, officia amet nobis quidem doloribus. Maiores.
+        </div>
+    </div>
+</body>
+</html>

@@ -1,14 +1,10 @@
 public class Method {
     public static void main(String[] args) {
-        int num1 = 5;
-        System.out.println("1. changeNumber 호출 전, num1 = " + num1);  // 5
-        changenumber(num1);
-        System.out.println("4. changeNumber 호출 후, num1 = " + num1); // 5
+        int number = 100;
+        printNumber(number);
     }
 
-    public static void changenumber(int num2){
-        System.out.println("2. changeNumber 변경 전, num2 = " + num2);  // 5
-        num2 = num2 * 2;  // 10
-        System.out.println("3. changeNumber 변경 후, num2 = " + num2);  // 10
+    public static void printNumber(double n){
+        System.out.println("숫자: " + n);
     }
 }
