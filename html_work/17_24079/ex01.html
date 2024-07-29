@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 id="heading">자바스크립트</h1>
+    <p id="text">위 텍스트를 클릭해 해보세요.</p>
+    <div id="userName"></div>
+    <script>
+// var name = prompt("이름을 입력하세요");
+// document.write("<b><big>"+name+"</big></b>님, 환영합니다");
+
+    const usrName = document.querySelector("#userName");
+    const userName = prompt("이름을 입력해주세요.");
+    usrName.innerText = "어서오세요." + userName + "님, 환영합니다.";
+
+console.log(userName);
+</script>
+</body>
+</html>

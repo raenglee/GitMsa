@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>끝말잇기</title>
+</head>
+<body>
+    <div><span id="order">1</span>번째 참가자</div>
+    <div>제시어: <span id="word"></span></div>
+    <input type="text">
+    <button>입력</button>
+
+    <script>
+        const num = prompt("참가자는 몇 명입니까?")
+        // console.log(num);  참가자 몇명인지 콘솔차에서 확인가능
+        // console.log(typeof(num));
+        const $input = document.querySelector('input');
+        const $button = document.querySelector('button');
+        const $order = document.querySelector('#order');
+        const $word = document.querySelector('#word');
+
+        let newWord;  // 현재 단어
+        let word;  // 제시어
+
+        // 함수의 이름이 없는 익명함수 사용
+        // const onInput = (event) => {
+        //     newWord = event.taarget.value;  // 입력한 단어를 현재단어로 저장
+        // }
+        
+        const onClickButton = () => {
+            // 케이스1:  제시어가 없을 때이므로, 첫 번째 참가자의 첫 번째 시도일 때 실행
+            // 케이스2: 입력한 단어가 맞을 때
+            if(!word || word.at(-1) === newWord[0]) {
+                word = newWord;  //입력한 단어가 제시어 됨
+                $word.textContent = word;  //화면에 제시어를 표시함
+                // 화면에 표시된 순서 가져오기
+                const order = Number($order.textContent)
+                // 새로운 순서 표시해주기
+                if(order + 1 > num) $order.textContent = 1;
+                else $order.textContent = order + 1;
+            }
+
+            // 틀린 단어일 때
+            else { 
+                    alert('틀린 단어입니다.');  
+            }
+                $input.value = "";
+                $input.focus();
+        }            
+        // Event 이름, 콜백함수명
+        // input 이벤트 발생 시 onInput 함수 호출
+        // $input.addEventListener('input', onInput);
+
+        $input.addEventListener('input', (event) => {
+            newWord = event.target.value;
+        });  //이렇게 적어도 문제 없음 이렇게 더 많이 씀
+
+        // click 이벤트 발생 시 onClickButton 함수 호출
+        $button.addEventListener('click', onClickButton);
+
+    </script>
+</body>
+</html>
