@@ -3,27 +3,29 @@ create database madangdb;
 USE madangdb;
 
 CREATE TABLE Book (
-bookid INTEGER PRIMARY KEY,
-bookname VARCHAR(40),
-publisher VARCHAR(40),
-price INTEGER
+    bookid INTEGER PRIMARY KEY,
+    bookname VARCHAR(40),
+    publisher VARCHAR(40),
+    price INTEGER
 );
 
 CREATE TABLE Customer (
-custid INTEGER PRIMARY KEY,
-name VARCHAR(40),
-address VARCHAR(50),
-phone VARCHAR(20)
+    custid INTEGER PRIMARY KEY,
+    name VARCHAR(40),
+    address VARCHAR(50),
+    phone VARCHAR(20)
 );
 
 CREATE TABLE Orders (
-orderid INTEGER PRIMARY KEY,
-custid INTEGER,
-bookid INTEGER,
-saleprice INTEGER,
-orderdate DATE,
-FOREIGN KEY (custid) REFERENCES Customer(custid),
-FOREIGN KEY (bookid) REFERENCES Book(bookid)
+    orderid INTEGER PRIMARY KEY,
+    custid INTEGER,
+    bookid INTEGER,
+    saleprice INTEGER,
+    orderdate DATE,
+    FOREIGN KEY (custid)
+        REFERENCES Customer (custid),
+    FOREIGN KEY (bookid)
+        REFERENCES Book (bookid)
 );
 
 INSERT INTO Book VALUES(1, '축구의 역사', '굿스포츠', 7000);
@@ -72,3 +74,202 @@ where price >= 10000;
 
 select bookname, publisher, price from Book
 where price >= 10000 and price <= 20000;
+
+select publisher from book;
+select distinct publisher from book;
+
+select name, phone from Customer
+where phone is null;
+
+select * from book
+where (publisher = '굿스포츠') AND (price between 10000 and 19999);
+
+select * from book
+-- where (publisher = '굿스포츠') or (publisher like '대한미디어');
+where publisher IN ('굿스포츠', '대한미디어');
+
+select * from book
+where publisher not IN ('굿스포츠', '대한미디어');
+
+select * from book
+where bookname like '_구%';
+
+update book
+set bookname = '그 여자의 축구'
+where bookid = 2;  /*where 안쓰면 모든 책 이름이 다 바뀌어버리므로 조건 꼭 필요*/
+
+select * from book;
+
+-- Delete from book
+-- where bookid = 2;
+
+select * from book;
+
+select * from book
+Order by bookname asc;
+
+select * from book
+Order by bookname desc;
+
+select * from book
+order by price desc, bookname;
+
+select sum(saleprice) from Orders;
+select count(saleprice) from Orders;
+select avg(saleprice) from Orders;
+select max(saleprice) from Orders;
+select min(saleprice) from Orders;
+
+select price as '판매가격' from orders;
+
+select sum(saleprice) as 총합,
+avg(saleprice) as 평균,
+min(saleprice) as minimum,
+max(saleprice) as maximum
+from Orders;
+
+select count(*) from orders;  /*도서 판매건수*/
+
+select custid,
+count(*) as '총 수량',
+sum(saleprice) as '총 판매액'
+from Orders
+group by custid;
+
+select
+custid, count(*) as '주문 도서 총 수량'
+from Orders
+where saleprice>=8000
+group by custid
+having count(*) >= 2;
+
+select name, sum(saleprice)
+from Customer, Orders
+where customer.custid=orders.custid
+group by customer.name
+order by customer.name;
+
+select name, count(*) as '주문 도서 총 수량'
+from customer, Orders
+where customer.custid=orders.custid and saleprice>=8000
+group by customer.name
+order by customer.name;
+
+select name, bookname
+from book, orders, customer
+where book.bookid=orders.bookid and customer.custid=orders.custid
+order by book.bookid;
+
+select customer.name, book.bookname, book.price
+from book, orders, customer
+where book.bookid=orders.bookid
+      and customer.custid=orders.custid
+      and book.price >= 20000
+order by book.bookname;
+
+/*1. 도서번호가 1인 도서의 이름*/
+select bookname
+from book
+where bookid = 1;
+
+/*2. 가격이 2만원 이상인 도서의 이름*/
+select book.bookname, book.price
+from book
+where book.price >= 20000
+order by book.price;
+
+/*3. 박지성의 총 구매 금액*/
+select customer.name, sum(saleprice) as '총합'
+from orders, customer
+where customer.custid=orders.custid
+      and customer.name = '박지성';
+
+/*4. 박지성이 구매한 도서의 수*/
+select customer.name, count(orders.custid) as '총 도서의 수'
+from book, orders, customer
+where book.bookid=orders.bookid
+      and customer.custid=orders.custid
+      and customer.name = '박지성';
+
+/*5. 박지성이 구매한 도서의 출판사 수*/
+select customer.name, count(distinct book.publisher) as '도서 출판사의 수'
+from book, orders, customer
+where book.bookid=orders.bookid
+      and customer.custid=orders.custid
+      and customer.name = '박지성';
+
+/*6. 박지성이 구매한 도서의 이름, 가격, 정가와 판매가격의 차이*/
+select customer.name, book.bookname, book.price - orders.saleprice
+from book, orders, customer
+where book.bookid=orders.bookid
+      and customer.custid=orders.custid
+      and customer.name = '박지성'
+order by orders.saleprice;
+
+/*7. 박지성이 구매하지 않은 도서의 이름*/
+select book.bookname, customer.name
+from book, customer, orders
+where book.bookid=orders.bookid
+      and customer.custid=orders.custid
+      and customer.name not like '박지성'
+order by customer.name;
+
+/*8. 마당서점 도서의 총 개수*/
+select count(bookid) from book;
+
+/*9. 마당 서점에 도서를 납품하는 출판사의 총 개수*/
+select count(distinct publisher) from book;
+
+/*10. 모든 고객의 이름, 주소*/
+select name, address from customer
+order by name;
+
+/*11. 2024년 7월 4일부터 2024년 7월7일 사이에 주문된 도서의 목록*/
+select book.bookname, orders.orderdate
+from book, orders, customer
+where book.bookid=orders.bookid
+      and customer.custid=orders.custid
+      and orderdate between '2024-07-04' and '2024-07-07';
+
+/*12. 성이 김씨인 고객의 이름과 주소*/
+select name, address
+from customer
+where name like '김%';
+
+/*13.성이 김씨이고 이름이 아로 끝나는 고객의 이름과 주소*/
+select name, address
+from customer
+where name like '김%' and name like '%아';
+
+/*14. 주문 금액의 총액과 평균금액*/
+select sum(saleprice), avg(saleprice)
+from orders;
+
+/*15. 고객의 이름과 고객별 구매액*/
+select customer.name, orders.saleprice
+where book.bookid=orders.bookid
+      and customer.custid=orders.custid
+group by customer.name;
+
+/*16. 고객의 이름과 고객이 구매한 도서 목록*/
+select customer.name, orders.bookid
+where book.bookid=orders.bookid
+      and customer.custid=orders.custid
+group by customer.name;
+
+/*가장 비싼 도서의 이름?*/
+select bookname from book
+where price = (select max(price) from book);
+
+/*도서를 구매한 이력이 있는 고객 명*/
+/*서브쿼리*/
+select custid from orders;
+
+select name from customer
+where custid in (select distinct custid from orders);
+
+/*조인*/
+select name
+from customer, orders
+where customer.custid=orders.custid
+      -- and orders.custid;
