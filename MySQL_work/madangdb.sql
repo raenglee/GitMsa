@@ -61,5 +61,14 @@ select * from Customer;
 select bookname, publisher from Book;
 select name, address from Customer;
 
-select publisher, price From Book
-where bookname like '%축구%';
+select bookname, publisher, price From Book
+where bookname like '%축구%' or '역사';
+
+select name, phone from Customer
+where name like '김연아';
+
+select bookname, publisher, price from Book
+where price >= 10000;
+
+select bookname, publisher, price from Book
+where price >= 10000 and price <= 20000;
