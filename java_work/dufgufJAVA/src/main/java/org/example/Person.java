@@ -9,19 +9,11 @@ public class Person {
         passNum = pnum;
     }
     Person(int rnum){
-        regiNum = rnum;
-        passNum = 0;
+        this(rnum, 0);
     }
 
     void showPersonalInfo(){
-    }
-
-    public static void main(String[] args) {
-        Person jung = new Person(335577, 112233);
-
-        Person hong = new Person(775544);
-
-        jung.showPersonalInfo();
-        hong.showPersonalInfo();
+        System.out.println(regiNum);
+        System.out.println(passNum);
     }
 }
