@@ -246,16 +246,18 @@ select sum(saleprice), avg(saleprice)
 from orders;
 
 /*15. 고객의 이름과 고객별 구매액*/
-select customer.name, orders.saleprice
-where book.bookid=orders.bookid
-      and customer.custid=orders.custid
-group by customer.name;
+select customer.name, sum(orders.saleprice) as '총 구매 금액'
+from customer, orders, book
+where customer.custid=orders.custid
+group by customer.name
+order by customer.name;
 
 /*16. 고객의 이름과 고객이 구매한 도서 목록*/
-select customer.name, orders.bookid
+select customer.name, orders.custid, book.bookname
+from customer, orders, book
 where book.bookid=orders.bookid
       and customer.custid=orders.custid
-group by customer.name;
+      order by customer.name;
 
 /*가장 비싼 도서의 이름?*/
 select bookname from book
@@ -271,5 +273,249 @@ where custid in (select distinct custid from orders);
 /*조인*/
 select name
 from customer, orders
+where customer.custid=orders.custid;
+
+/*240731*/
+
+/*대한미디어에서 출판한 도서를 구매한 고객의 이름을 출력하세요*/
+select publisher, bookname from book where publisher like '대한미디어';
+
+select custid from orders
+where bookid in (select publisher from book where publisher like '대한미디어');
+
+/*서브쿼리(서브쿼리)로*/
+select customer.name from customer
+where
+custid in (select custid from orders where
+bookid in (select bookid from book where publisher = '대한미디어'));
+
+/*조인으로*/
+select customer.name from customer, book, orders
+where book.bookid = orders.bookid
+      and customer.custid = orders.custid
+      and book.publisher = '대한미디어';
+            
+select C.name, B.bookname
+from customer C, book B, orders O
+where C.custid=O.custid and B.bookid=O.bookid
+order by C.name;
+
+select C.name, B.bookname
+from book B, customer C
+where (C.custid ,B.bookid) in (select custid, bookid from orders)
+order by C.name;
+
+select C.name,B.bookname
+from customer C, book B
+where C.custid in (select custid from orders) and B.bookid in (select bookid from orders)
+order by c.name;
+
+/*대한민국에 거주하시는 고객 리스트 출력*/
+select name from customer
+where address like '대한민국%';
+
+/*도서를 주문한 고객 리스트 출력 - 서브쿼리 사용*/
+select name from customer
+where custid in (select custid from orders);
+
+/*대한민국에 거주하는 고객의 이름과 도서를 주문한 고객의 이름을 출력하세요.*/
+
+select name from customer
+where address like '대한민국%'
+union
+select name from customer
+where custid in (select custid from orders);
+
+select name from customer
+where address like '대한민국%'
+union all
+select name from customer
+where custid in (select custid from orders);
+
+select * from customer
+union all
+select * from book;
+
+select name, address
+from customer cs
+where exists (select * from orders od where cs.custid=od.custid);
+
+create TABLE NewBook (
+bookid INTEGER PRIMARY KEY,
+bookname VARCHAR(20),
+publisher VARCHAR(20),
+price INTEGER
+);
+
+create table NewCustomer (
+custid integer primary key,
+name varchar(40),
+address varchar(40),
+phone varchar(30)
+);
+
+create table NewOrders (
+orderid integer primary key,
+custid integer not null,
+bookid integer not null,
+saleprice integer,
+orderdate date,
+foreign key(custid) references NewCustomer(custid) on delete cascade
+);
+
+-- 오후수업 조퇴
+
+/*1)박지성이 구매한 도서의 출판사와/ 같은 출판사에서/ 도서를 구매한 /고객의 이름*/
+select customer.name
+from customer
+where customer.name in
+      (select book.publisher
+      from book, orders
+      where book.bookid = orders.bookid
+            and orders.custid = '1');
+
+
+/* 2) 두 개 이상의 서로 다른 출판사에서 도서를 구매한 고객의 이름 */
+/* 3) 전체 고객의 30%이상이 구매한 도서*/
+
+
+/*240801*/
+
+select round(4.875, 1);
+select round(4.875);
+
+/*고객별 평균 주문 금액을 100원 단위로 반올림한 값을 구하세요.*/
+select customer.name, round(avg(orders.saleprice), -2)
+from orders, customer
+where orders.custid = customer.custid
+group by customer.name;
+
+select concat('마당', '서점');
+select lower('MR.SCOTT');
+select upper('mr.scott');
+select lpad('page 1', 10, "*"); /*출력하고싶은문자,왼쪽부터 총문자가 10개가 되도록, 지정한 문자로 채우는것*/
+select replace('jack & jue', 'j','bl');
+select substr('ABCDEFG', 3, 4);
+select trim('=' from "=A= B= C =D E=");
+
+
+/*도서 제목에 야구가 포함된 도서를 농구로 변경한 후 도서 목록을 나타내세요.*/
+select replace(bookname, '야', '농') from book;
+
+/*굿스포츠에서 출판한 도서의 제목과 제목의 문자 수, 바이트 수를 출력하세요*/
+select book.bookname, char_length(bookname) as '문자 수', length(bookname) 
+from book;
+
+/*마당서점의 고객 중에서 성이 같은 사람이 몇명이나 되는지 알고 싶다. 성 별 인원수를 구하시오*/
+select substr(customer.name,1,1) as'성', count(*) as '인원 수'
+from customer
+group by substr(customer.name,1 , 1);
+
+select ADDDATE('2024-07-01', INTERVAL -5 DAY) BEFORE5,
+ADDDATE('2024-07-01', INTERVAL 5 DAY) AFTER5;
+
+/*마당 서점은 주문일로부터 10일 후에 매출을 확정한다. 각 주문의 확정일자를 구하세요*/
+select orderdate as '주문일',
+       adddate(orderdate,interval '10'day) as '주문 확정일자'
+from orders;
+
+/*2024년 7월 7일 주문받은 도서를 모두 나타내세요. 단 주문일은 240704, Jul 04 2024, 24-07-04 Thu 형태로*/
+select orders.orderid as '주문ID',
+	   date_format(orders.orderdate, '%y%m%d') as '주문일',
+	   date_format(orderdate, '%b %d %Y') as '주문일',
+       date_format(orderdate, '%y-%m-%d %a') as '주문일',
+	   orders.custid as '고객ID' , orders.bookid '도서ID'
+from orders where orderdate = '2024-07-04';
+
+create view Vorders
+as select orderid, O.custid, name, O.bookid, bookname, saleprice, orderdate
+from customer C, Orders O, book B
+where C.custid=O.custid and B.bookid=O.bookid;
+
+select*from vorders;
+
+/*주소에 ‘대한민국’을 포함하는 고객들로 구성된 뷰를 만들고 조회하세요. 뷰의 이름은 vw_Customer로 설정하시오.*/
+
+create view vw_Customer
+as select name, address
+from customer
+where address like '%대한민국%';
+
+select * from vw_Customer;
+
+/*Orders 테이블에서 고객명과 도서명을 확인할 수 있는 뷰를 생성한 후, 김연아 고객이 구입한 도서의 주문번호, 도서명, 주문액을 출력하세요.*/
+
+create view vw_Orders (name, bookname, orderid, saleprice)
+as select customer.name, book.bookname, orders.orderid, orders.saleprice
+from customer, book, orders
 where customer.custid=orders.custid
-      -- and orders.custid;
+      and orders.bookid=book.bookid;
+      
+select * from vw_Orders;
+
+select orderid, bookname, saleprice
+      from vw_Orders
+      where customer.name = '김연아';
+
+create view vw_Orders2 (name, bookname, orderid, saleprice, custid, bookid, orderdate)
+as select customer.name, book.bookname, orders.orderid, orders.saleprice, orders.custid, orders.bookid, orders.orderdate
+from customer, book, orders
+where customer.custid=orders.custid
+      and orders.bookid=book.bookid;
+      
+select * from vw_Orders2;
+
+select orderid, bookname, saleprice
+      from vw_Orders2
+      where name = '김연아';
+
+
+
+
+
+select count(phone) from customer;
+
+
+create table Mybook(
+bookid Integer,
+price integer
+);
+
+insert into Mybook values (1, 10000);
+insert into Mybook values (2, 20000);
+insert into Mybook values (3, null);
+
+select * from Mybook;
+
+create table Mybook2(
+bookid Integer not null,
+price integer null
+);
+
+insert into Mybook2 values (1, 10000);
+insert into Mybook2 values (2, 20000);
+insert into Mybook2 (bookid) values (3);
+
+select * from Mybook2;
+
+alter table Mybook2 add primary key (bookid);
+
+select price+100
+from Mybook
+where bookid=3;
+
+select sum(price), avg(price), count(*), count(price)
+from Mybook;
+
+select sum(price), avg(price), count(*), count(price)
+from Mybook
+where bookid >=4;
+
+select count(*) from Mybook
+where price Is NULL;
+
+select name '이름', IFNULL(phone, '연락처 없음') '전화번호'
+from Customer;
+
+select bookid '도서ID', IFNULL(price,'가격 미 입력')'가격'
+from Mybook;
