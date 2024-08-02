@@ -62,41 +62,41 @@ select * from Emp;
 select * from DEPT;
 select * from salgrade;
 
-/*사원의 이름과 직위를 출력하세요. 단 사원의 이름은 '사원이름', 직위는 '사원 직위' 머리글이 나오도록 출력하세요.*/
+/*1. 사원의 이름과 직위를 출력하세요. 단 사원의 이름은 '사원이름', 직위는 '사원 직위' 머리글이 나오도록 출력하세요.*/
 select ename '사원 이름' , job '사원 직위'
 from emp;
 
-/*30번 부서에 근무하는 모든 사원의 이름과 급여를 출력하세요.*/
+/*2. 30번 부서에 근무하는 모든 사원의 이름과 급여를 출력하세요.*/
 select ename '사원 이름', sal '급여'
 from emp
 where deptno = '30';
 
-/*사원번호와 이름, 현재 급여, 증가한 급여분(열 이름은 '증가액'), 10% 인상된 급여(열 이름은 '인상된 급여')를 사원번호순으로 출력하세요.*/
+/*3. 사원번호와 이름, 현재 급여, 증가한 급여분(열 이름은 '증가액'), 10% 인상된 급여(열 이름은 '인상된 급여')를 사원번호순으로 출력하세요.*/
 select empno '사원 번호', ename '사원 이름',
        sal '현재 급여', comm '증가한 급여분',
 	   sal+(sal*'0.1') '인상된 급여'
 from emp
 order by empno;
 
-/*'S'로 시작하는 모든 사원과 부서번호를 출력하세요.*/
+/*4. 'S'로 시작하는 모든 사원과 부서번호를 출력하세요.*/
 select ename '사원 이름', deptno '부서 번호'
 from emp
 where ename like 'S%';
 
-/*모든 사원의 최대 및 최소 급여, 합계 및 평균 급여를 출력하세요. 열 이름은 각각 MAX, MIN, SUM, AVG로 합니다. 단, 소수점 이하는 반올림하여 정수로 출력하세요.*/
+/*5. 모든 사원의 최대 및 최소 급여, 합계 및 평균 급여를 출력하세요. 열 이름은 각각 MAX, MIN, SUM, AVG로 합니다. 단, 소수점 이하는 반올림하여 정수로 출력하세요.*/
 select max(sal) '최대 급여', min(sal) '최소 급여', sum(sal) '합계', round(avg(sal)) '평균'
 from emp;
 
-/*업무 이름과 업무별로 동일한 업무를 하는 사원의 수를 출력하세요. 열 이름은 각각 '업무'와 '업무별 사원수'로 합니다.*/
-select dept.dname '업무', count(deptno)
+/*6. 업무 이름과 업무별로 동일한 업무를 하는 사원의 수를 출력하세요. 열 이름은 각각 '업무'와 '업무별 사원수'로 합니다.*/
+select dept.dname '업무 이름', count(deptno)
 from emp, dept
 where emp.deptno=dept.deptno;
 
-/*사원의 최대 급여와 최소 급여의 차액을 출력하세요.*/
+/*7. 사원의 최대 급여와 최소 급여의 차액을 출력하세요.*/
 select max(sal)-min(sal)
 from emp;
 
-/*30번 부서의 구성원 수와 사원들 급여의 합계와 평균을 출력하세요.*/
+/*8. 30번 부서의 구성원 수와 사원들 급여의 합계와 평균을 출력하세요.*/
 select count(deptno) '구성원 수', sum(sal) '합계', avg(sal)'평균'
 from emp
 where deptno = 30;
@@ -114,6 +114,21 @@ from dept, emp
 where dept.deptno=emp.deptno
       and emp.sal >= 3000
 order by emp.avg(sal);
+
+/*11. 전체 사원 가운데 직속상관이 있는 사원의 수를 출력하세요.*/
+
+select count(emp.ename)
+from emp
+where mgr is not null ;
+
+/*12. EMP테이블에서 이름, 급여, 커미션(COMM)금액, 총액(SAL+COMM)을 구하여 총액이 많은 순서대로 출력하세요.
+단 커미션이 NULL인 사람은 제외합니다.*/
+
+select ename, sal, comm, sum(sal+comm)
+from emp
+where comm is not null
+group by ename
+order by sum(sal+comm);
 
 select * from Emp;
 select * from DEPT;
