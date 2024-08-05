@@ -108,7 +108,6 @@ group by deptno;
 
 /*10. 세일즈맨(SALESMAN)을 제외하고, 업무별 사원의 급여가 3,000 이상인 각 업무에 대해서, 업무명과 업무별 평균 급여를 출력하세요.
 단 평균 급여는 내림차순으로 출력합니다.*/
-
 select dept.dname, emp.avg(sal) 
 from dept, emp
 where dept.deptno=emp.deptno
@@ -116,20 +115,44 @@ where dept.deptno=emp.deptno
 order by emp.avg(sal);
 
 /*11. 전체 사원 가운데 직속상관이 있는 사원의 수를 출력하세요.*/
-
 select count(emp.ename)
 from emp
-where mgr is not null ;
+where mgr is not null;
 
 /*12. EMP테이블에서 이름, 급여, 커미션(COMM)금액, 총액(SAL+COMM)을 구하여 총액이 많은 순서대로 출력하세요.
 단 커미션이 NULL인 사람은 제외합니다.*/
-
 select ename, sal, comm, sum(sal+comm)
 from emp
 where comm is not null
-group by ename
 order by sum(sal+comm);
 
+/*16. 사원번호가 7400이상 7600이하인 사원의 이름을 출력하세요.*/
+select ename
+from emp
+where empno between 7400 and 7600;
+
+/*17. 사원의 이름과 사원의 부서를 출력하세요.*/
+select emp.ename '사원 이름', dept.DNAME '사원 부서'
+from emp, dept
+where emp.DEPTNO=dept.DEPTNO;
+
+/*18. 사원의 이름과 팀장(MGR)의 이름을 출력하세요.*/
+select ename '사원 이름', mgr '팀장'
+from emp;
+
+/*19. 사원 SCOTT보다 급여를 많이 받는 사람의 이름을 출력하세요.*/
+select emp.ename
+from emp, dept
+where emp.DEPTNO=dept.DEPTNO
+      and
+;
+
+/*20. 사원 SCOTT이 일하는 부서번호 혹은 DALLAS에 있는 부서번호를 출력하세요.*/
+select emp.deptno
+from emp, dept
+where emp.DEPTNO=dept.DEPTNO
+      and ename like SCOTT or loc like DALLAS;
+      
 select * from Emp;
 select * from DEPT;
 select * from salgrade;

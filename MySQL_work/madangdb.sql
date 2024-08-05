@@ -519,3 +519,53 @@ from Customer;
 
 select bookid '도서ID', IFNULL(price,'가격 미 입력')'가격'
 from Mybook;
+
+set @seq:=0;
+select (@seq:=@seq+1) '순번', custid, name, phone
+from Customer
+where @seq<3;
+
+select sum(saleprice)
+from Orders
+where custid = (select custid from customer where name = '박지성');
+
+/*평균 주문금액 이하의 주문에 대해서 주문번호와 금액을 나타내시오*/
+select orderid, saleprice
+from orders
+where saleprice <= (select avg(saleprice) from orders);
+
+/*각 고객의 평균 주문금액보다 큰 금액의 주문 내역에 대해서 주문번호, 고객번호, 금액을 나타내시오*/
+select orderid, custid, saleprice
+from orders
+where saleprice > (select avg(saleprice) from orders where orderid);
+
+select orderid, custid, saleprice
+from orders od1, orders od2
+where saleprice > (select avg(saleprice) from orders where od1.custid=od2.custid );
+
+/*3번 고객이 주문한 도서의 최고 금액보다 더 비싼 도서를 구입한 주문의 주문번호와 판매금액을 보이시오.*/
+select orderid, saleprice from orders
+where saleprice > all (select saleprice from orders where custid=3);
+
+/*Exists 연산자를 사용하여 대한민국에 거주하는 고객에게 판매한 도서의 총 판매액을 구하시오.*/
+
+select sum(saleprice)
+from orders
+where exists (select *
+              from customer
+			  where address like '%대한민국%'
+			  and customer.custid=orders.custid);
+              
+/*Q. 마당서점의 고객별 판매액을 나타내시오(고객이름과 고객별 판매액 출력).*/
+select customer.name
+from customer
+where saleprice
+group by customer.name; /*???*/
+
+/*고객번호가 2 이하인 고객의 판매액을 나타내시오(고객이름과 고객별 판매액 출력)*/
+select cs.name, sum(od.saleprice) 'total'
+from (select custid, name from customer where custid <= 2) cs,
+      orders od
+where cs.custid=od.custid
+group by cs.name;
+
