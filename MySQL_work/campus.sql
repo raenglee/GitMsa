@@ -1,6 +1,6 @@
 create database madanguniv;
 
-
+use madanguniv;
 
 create table professor(         -- 마스터테이블
 p_ssn varchar(13) not null primary key,
@@ -10,19 +10,18 @@ p_rank varchar(10) null,
 p_speciality varchar(20) null
 );
 
-
 create table department(
 d_dno varchar(3) not null primary key,
-d_dname varchar(20) not null,
-d_run varchar(20) not null,            
+d_dname varchar(20) not null,            
 d_office varchar(50) null,
-foreign key(run) references professor(ssn)
+d_run varchar(20) not null,
+foreign key(d_run) references professor(p_ssn)
 );
 
 create table graduate(
 g_ssn varchar(13) not null primary key,
 g_name varchar(16) not null,
-g_dno int not null,
+g_dno varchar(3) not null,
 g_age integer not null,
 g_deg_prog varchar(4) not null,
 g_advisor varchar(13) null,      -- 참조하는 칼럼(ssn)과 타입이 같아야함 
@@ -30,8 +29,9 @@ foreign key(g_dno) references department(d_dno),
 foreign key(g_advisor) references graduate(g_ssn) -- 같은 테이블끼리 참조함. 학생조언자가 없을 수 있으므로 null
 );
 
+-- 프로젝트 매니저는 프로젝트 테이블에
 create table project(
-p_pid varchar(13) primary key,
+p_pid varchar(13) not null primary key,
 p_sponsor varchar(20) null,
 p_start_date date not null,
 p_end_date date not null,
@@ -50,6 +50,8 @@ foreign key(d_dno) references department(d_dno),
 primary key(p_ssn, d_dno)
 );
 
+
+-- 공동연구자테이블
 create table work_in(
 p_pid varchar(13) not null,
 p_ssn varchar(13) not null,
@@ -60,12 +62,11 @@ primary key(p_pid, p_ssn)
 
 create table work_prog(
 p_pid varchar(13) not null,
-p_ssn varchar(20) not null,
+g_ssn varchar(13) not null,
 foreign key(p_pid) references project(p_pid),
-foreign key(p_ssn) references graduate(p_ssn),
-primary key(p_pid, p_ssn)
+foreign key(g_ssn) references graduate(g_ssn),
+primary key(p_pid, g_ssn)
 );
-
 
 
 /*
