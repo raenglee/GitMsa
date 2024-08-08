@@ -569,3 +569,107 @@ from (select custid, name from customer where custid <= 2) cs,
 where cs.custid=od.custid
 group by cs.name;
 
+use madangdb;
+
+delimiter //
+create procedure dorepeat(p1 int)
+begin
+	set @x = 0;
+	repeat set @x = @x + 1; until @x > p1 end repeat;
+    end //
+    
+    call dorepeat(1000);
+    
+    select@x;
+    
+    use madangdb;
+    
+delimiter//
+create procedure insertBook(
+    in mybookid integer,
+    in mybookname varchar(40),
+    in mypublisher varchar(40),
+    in myprice integer)
+begin
+    insert into Book(bookid, bookname, publisher, price)
+    values(mybookid, mybookname, mypublisher, myprice);
+end;
+//
+delimiter ;
+    
+call insertBook(13, '스포츠과학', '마당과학서적', 25000);
+select*from book;
+
+
+use madangdb;
+
+delimiter //
+create procedure BookInsertOrUpdate(
+    mybookid integer,
+    mybookname varchar(40),
+    mypublisher varchar(40),
+    myprice int)
+begin
+	declare mycount integer;
+	select count(*) into mycount from book
+		where bookname like mybookname;
+if mycount!=0 then
+	set sql_safe_updates=0;
+	update book set price = myprice
+		where bookname like mybookname;
+else
+	insert into book(bookid, bookname, publisher, price)
+		values(mybookid, mybookname, mypublisher, myprice);
+	end if;
+end;
+//
+delimiter ;
+
+-- 프로시저를 실행하여 테스트하는 부분
+call BookInsertOrUpdate(15, '스포츠 즐거움', '마당과학서적', 25000);
+select*from Book; -- 15번 투플 삽입 결과 확인
+-- BookInsertOrUpdate 프로시저를 실행하여 테스트 하는 부분
+call BookInsertOrUpdate(15, '스포츠 즐거움', '마당과학서적', 20000);
+select*from Book; -- 15번 투플 가격 변경 확인
+
+
+delimiter //
+create procedure Averageprice (
+	out averageval integer)
+begin
+	select avg(price) into Averageval
+    from book where price is not null;
+end;
+//
+delimiter ;
+
+-- 프로시저 Averageprice를 테스트 하는 부분
+call Averageprice(@myvalue);
+select @myvalue;
+
+-- 트리거
+
+Set global log_bin_trust_function_creators = on;
+
+create table Book_log(
+bookid_l integer,
+bookname_l varchar(40),
+publisher_l varchar(40),
+price_l integer);
+
+delimiter //
+create trigger AfterInsertBook
+	after insert on book for each row
+begin
+	declare average integer;
+    insert into Book_log
+    values(new.bookid, new.bookname, new.publisher, new.price);
+end;
+//
+delimiter ;
+
+/*삽입한 내용을 기록하는 트리거 확인*/
+insert into Book values(14, '스포츠 과학 1', '이상미디어', 25000);
+select*from Book where bookid=14;
+select*from Book_log where bookid_l='14'; -- 결과 확인
+
