@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        width: 100px;
+        height: 100px;
+        opacity: 0.5;
+        transition-duration: 1s;
+        transition-delay: 1s;
+        /* transition: 1s 1s; 듀레이션, 딜레이 한번에 적용*/
+      }
+      div:nth-child(1) {
+        transform: rotate(0deg) translate3d(100px, 100px,100px);
+        background-color: red;
+      }
+      div:nth-child(1):hover{
+        transform: rotate(45deg) translate3d(100px, 100px,100px);
+      }
+      div:nth-child(2) {
+        transform: rotate(45deg);
+        background-color: gray;
+      }
+      div:nth-child(2):hover{
+       background-color: green;
+       transform: scale(2);
+      }
+      div:nth-child(3) {
+        transform: scale(2);
+        background-color: black;
+      }
+      div:nth-child(4) {
+        background-color: purple;
+        transform: skew(30px);
+      }
+      div:nth-child(4):hover {
+        background-color: orange;
+        transform: perspective(30px);
+      }
+      div:nth-child(5) {
+        background-color: yellow;
+      }
+      div:nth-child(6) {
+        background-color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </body>
+</html>

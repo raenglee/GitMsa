@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{ width: 100px; height: 100px;}
+        #box1{
+            background-color: red;
+            animation-name: aa;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+        }
+        
+        #box2{
+            background-color: green;
+            animation-name: bb;
+            animation-duration: 3s;
+            position: absolute;
+            top: 200px;
+        }
+        @keyframes aa {
+            from{
+                transform: rotate(0deg);
+            }
+            to{
+                transform: rotate(90deg) scale(2);
+            }
+        }
+        @keyframes bb {
+            0%{
+                top: 200px;
+            }
+            25%{
+                top: 300px;
+            }
+            50%{
+                left:100px;
+                top: 300px;
+                background-color: yellow;
+            }
+            75%{
+                left: 300px;
+                top: 300px;
+            }
+            100%{
+                left:300px;
+                top:100px;
+                background-color: red;
+
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="box1"></div>
+    <div id="box2"></div>
+    
+</body>
+</html>
