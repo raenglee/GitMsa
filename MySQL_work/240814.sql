@@ -1,0 +1,1 @@
+INSERT INTO aa (name,age) VALUES ('홍길동',20);
