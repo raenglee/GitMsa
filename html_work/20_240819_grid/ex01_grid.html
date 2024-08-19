@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #wrapper {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, auto));
+      grid-template-rows: minmax(100px, auto);
+      grid-gap: 20px;
+    }
+
+    .items {
+      padding: 10px;
+      background-color: #eee;
+    }
+
+    .items:nth-child(even) {
+      background-color: #bbb;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="wrapper">
+    <div class="items">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium ab magnam quibusdam eius
+      quidem
+      voluptatibus ex deleniti consequatur sunt nihil officiis iusto eaque quasi, ad facere porro saepe voluptate?
+      Facilis?</div>
+    <div class="items">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium ab magnam quibusdam eius
+      quidem
+      voluptatibus
+      ex deleniti consequatur sunt nihil officiis iusto eaque quasi, ad facere porro saepe voluptate? Facilis?</div>
+    <div class="items">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium ab magnam quibusdam eius
+      quidem
+      voluptatibus
+      ex deleniti consequatur sunt nihil officiis iusto eaque quasi, ad facere porro saepe voluptate? Facilis?</div>
+    <div class="items">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium ab magnam quibusdam eius
+      quidem
+      voluptatibus
+      ex deleniti consequatur sunt nihil officiis iusto eaque quasi, ad facere porro saepe voluptate? Facilis?</div>
+    <div class="items">Lorem ipsum dolor</div>
+  </div>
+</body>
+
+</html>

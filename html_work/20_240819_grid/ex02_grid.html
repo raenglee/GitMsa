@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #wrapper {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 200px);
+
+    }
+
+    .items {
+      padding: 10px;
+    }
+
+    .items:nth-child(even) {}
+
+    .box1 {
+      background-color: aqua;
+      grid-column: 1/3;
+    }
+
+    .box2 {
+      grid-row: 2/4;
+      background-color: rgb(216, 158, 228);
+    }
+
+    .box3 {
+      background-color: chartreuse;
+      grid-column: 2/4;
+      grid-row-start: 2;
+      color: white;
+    }
+
+    .box4 {
+      grid-column-start: 3;
+      grid-row-start: 3;
+      background-color: rgb(253, 181, 184);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="wrapper">
+    <div class="items box1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium ab magnam quibusdam
+      eius
+      quidem
+      voluptatibus ex deleniti consequatur sunt nihil officiis iusto eaque quasi, ad facere porro saepe voluptate?
+      Facilis?</div>
+    <div class="items box2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium ab magnam quibusdam
+      eius
+      quidem
+      voluptatibus
+      ex deleniti consequatur sunt nihil officiis iusto eaque quasi, ad facere porro saepe voluptate? Facilis?</div>
+    <div class="items box3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium ab magnam quibusdam
+      eius
+      quidem
+      voluptatibus
+      ex deleniti consequatur sunt nihil officiis iusto eaque quasi, ad facere porro saepe voluptate? Facilis?</div>
+    <div class="items box4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium ab magnam quibusdam
+      eius
+      quidem
+      voluptatibus
+      ex deleniti consequatur sunt nihil officiis iusto eaque quasi, ad facere porro saepe voluptate? Facilis?</div>
+    <div class="items">Lorem ipsum dolor</div>
+  </div>
+</body>
+
+</html>

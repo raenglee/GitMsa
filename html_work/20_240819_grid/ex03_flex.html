@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    .box1 {
+      display: flex;
+      /*주축을 중심으로 좌우기준 중간*/
+      justify-content: center;
+      /*위아래 기준 중간*/
+      align-items: center;
+      height: 200px;
+      background-color: yellow;
+    }
+
+    span {
+      font-size: 4rem;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #wrapper {
+      /*주축 가로라서 가로로 나옴 일단은*/
+      display: flex;
+      height: 400px;
+    }
+
+    .box2 {
+      width: 200px;
+      background-color: rgb(223, 183, 255);
+    }
+
+    .box3 {
+      /*꽉 채워지는것*/
+      flex: 1;
+      background-color: lightskyblue;
+      /*가로로 정렬*/
+      display: flex;
+      /*다시 세로로*/
+      flex-direction: column;
+    }
+
+    .box3-sub1 {
+      background-color: rgb(131, 196, 142);
+      height: 100px;
+    }
+
+    .box3-sub2 {
+      background-color: rgb(192, 237, 255);
+      /*꽉 채워줌*/
+      flex: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box1"><span>box1</span></div>
+  <div id="wrapper">
+    <div class="box2"><span>box2</span></div>
+    <div class="box3">
+      <div class="box3-sub1"><span>box3</span></div>
+      <div class="box3-sub2"><span>box4</span></div>
+    </div>
+
+  </div>
+</body>
+
+</html>
