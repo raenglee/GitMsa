@@ -1,0 +1,1 @@
+DELETE FROM aa WHERE idx = 1;
