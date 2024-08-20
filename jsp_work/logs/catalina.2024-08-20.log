@@ -1,0 +1,27 @@
+20-Aug-2024 10:16:53.990 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 서버 버전 이름:    Apache Tomcat/10.1.28
+20-Aug-2024 10:16:53.996 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server 빌드 시각:  Aug 2 2024 15:14:43 UTC
+20-Aug-2024 10:16:53.996 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server 버전 번호:  10.1.28.0
+20-Aug-2024 10:16:53.996 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 운영체제 이름:     Windows 10
+20-Aug-2024 10:16:53.996 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 운영체제 버전:     10.0
+20-Aug-2024 10:16:53.996 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 아키텍처:          amd64
+20-Aug-2024 10:16:53.996 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 자바 홈:           C:\Program Files\Java\jdk-13.0.2
+20-Aug-2024 10:16:53.997 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM 버전:          13.0.2+8
+20-Aug-2024 10:16:53.997 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM 벤더:          Oracle Corporation
+20-Aug-2024 10:16:53.997 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:     D:\work\gitmsa\jsp_work
+20-Aug-2024 10:16:53.997 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:     D:\apache-tomcat-10.1.28
+20-Aug-2024 10:16:54.131 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.util.logging.config.file=D:\work\gitmsa\jsp_work/conf/logging.properties
+20-Aug-2024 10:16:54.132 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+20-Aug-2024 10:16:54.132 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djdk.tls.ephemeralDHKeySize=2048
+20-Aug-2024 10:16:54.132 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+20-Aug-2024 10:16:54.132 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+20-Aug-2024 10:16:54.132 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dcatalina.base=D:\work\gitmsa\jsp_work
+20-Aug-2024 10:16:54.133 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Dcatalina.home=d:\apache-tomcat-10.1.28
+20-Aug-2024 10:16:54.133 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log 명령 행 아규먼트:  -Djava.io.tmpdir=D:\work\gitmsa\jsp_work/temp
+20-Aug-2024 10:16:54.170 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent 프로덕션 환경들에서 최적의 성능을 제공하는, APR 기반 Apache Tomcat Native 라이브러리가, 다음 java.library.path에서 발견되지 않습니다: [C:\Program Files\Java\jdk-13.0.2\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files\Java\jdk-17\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Common Files\Autodesk Shared\;c:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\;c:\Program Files\Microsoft SQL Server\100\Tools\Binn\;c:\Program Files\Microsoft SQL Server\100\DTS\Binn\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\dotnet\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\Java\jdk-17\bin;C:\Program Files\Git\cmd;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\nodejs\;C:\Users\user\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Bandizip\;;C:\Users\user\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2024.1.4\bin;;C:\Users\user\.dotnet\tools;C:\Users\user\AppData\Roaming\npm;.]
+20-Aug-2024 10:16:54.591 INFO [main] org.apache.coyote.AbstractProtocol.init 프로토콜 핸들러 ["http-nio-8080"]을(를) 초기화합니다.
+20-Aug-2024 10:16:54.641 INFO [main] org.apache.catalina.startup.Catalina.load [923] 밀리초 내에 서버가 초기화되었습니다.
+20-Aug-2024 10:16:54.704 SEVERE [main] org.apache.catalina.users.MemoryUserDatabase.open 지정된 사용자 데이터베이스 [conf/tomcat-users.xml]을(를) 찾을 수 없었습니다.
+20-Aug-2024 10:16:54.715 INFO [main] org.apache.catalina.core.StandardService.startInternal 서비스 [Catalina]을(를) 시작합니다.
+20-Aug-2024 10:16:54.716 INFO [main] org.apache.catalina.core.StandardEngine.startInternal 서버 엔진을 시작합니다: [Apache Tomcat/10.1.28]
+20-Aug-2024 10:16:54.739 INFO [main] org.apache.coyote.AbstractProtocol.start 프로토콜 핸들러 ["http-nio-8080"]을(를) 시작합니다.
+20-Aug-2024 10:16:55.266 INFO [main] org.apache.catalina.startup.Catalina.start 서버가 [625] 밀리초 내에 시작되었습니다.
