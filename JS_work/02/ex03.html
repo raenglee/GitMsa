@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    console.log(typeof 10);  // console창에서 확인 가능
+    console.log(typeof ("sdasd"));
+    var a = ["봄", "여름", "가을", "겨울"];  // 배열
+    var b = ["남자", "여자"];
+    var c = [10, 20, 30];
+    var d = a.concat(b);
+    var e = b.concat(c);
+
+    console.log(d);
+    console.log(e);
+
+    console.log(a);
+
+    var sea = a.shift(); // 제일앞 요소를...
+    console.log(sea);
+    console.log(a);
+
+    a.unshift("봄봄"); // 제일앞 요소를
+    console.log(a);
+
+    a.push('겨울겨울'); // 제일뒤에 요소가 들어감
+    console.log(a);
+
+    var lastEle = a.pop(); // 제일뒤에것을 꺼내는것 (lastEle를 꺼내니 마지막 요소를 꺼낸듯하다)
+    console.log(lastEle);
+    console.log(a);
+  </script>
+</head>
+
+<body>
+  <div class="container mx-auto w-96 p-4 lg:w-full">
+    <div class="flex flex-col">
+      <h1 class="text-3xl text-red-100 underline m-5 animate-spin">글자</h1>
+      <p class="border border-b-gray-100 p-10 ring-1 animate-bounce">Lorem ipsum dolor sit amet consectetur adipisicing
+        elit. Qui
+        dolore sunt
+        ipsa
+        laborum nisi voluptate iure voluptatem minus rerum, assumenda, iusto aspernatur, voluptates expedita nulla
+        debitis
+        eaque sapiente corrupti ea.</p>
+      <div class="w-full m-3">
+        <img
+          src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FwguI9%2Fbtq2iVvQG4F%2FbfY2uFcuW5ZPKn3PE4sXq1%2Fimg.png"
+          alt="" srcset="" class="object-cover hover:animate-ping">
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
