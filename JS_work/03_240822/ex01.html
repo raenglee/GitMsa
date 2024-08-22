@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    var arr = [];
+
+    // 넣는 함수들
+    arr.unshift(10);
+    arr.unshift(20);
+    arr.unshift(30);
+
+    arr.push(30);
+
+
+    //빼오는 함수
+    var output = arr.shift(); //앞에서 빼는거
+    var output = arr.pop(); //뒤에서 빼는거
+
+    document.write(arr);
+    document.write('<br/>');
+    document.write(output);
+
+  </script>
+</head>
+
+<body>
+  <!-- <div class="container mx-auto w-1/2"> -->
+  <!-- <div class="flex items-center justify-center w-1/2" style="height: 100vh;"> -->
+  <div class="flex items-center justify-center h-screen">
+    <div id="aa" class="flex flex-col items-center justify-center w-96 space-y-5">
+      <h1 class="p-3 bg-fuchsia-200">Heading</h1>
+      <h1 class="bg-slate-800">Heading</h1>
+      <h1 class="bg-slate-300">Heading</h1>
+      <h1 class="bg-orange-300">Heading</h1>
+    </div>
+  </div>
+
+  <script>
+    var h1 = document.getElementById('aa');
+    h1.innerHTML = arr;
+    var h1_1 = document.getElementById('bb');
+    h1_1.innerHTML = output1;
+  </script>
+
+
+</body>
+
+</html>

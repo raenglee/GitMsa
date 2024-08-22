@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+</head>
+
+<body>
+
+  <div>
+    <div>
+      num1 = <input type="text" name="" id="num1" value="123123">
+    </div>
+    <div>
+      num2 = <input type="text" name="" id="num2">
+    </div>
+    <button id="btn">50보다 작은지 확인</button>
+    <div id="print"></div>
+  </div>
+
+  <script>
+    var num1 = document.getElementById('num1');
+    var num2 = document.getElementById('num2');
+    var btn = document.getElementById('btn');
+    var print = document.getElementById('print');
+
+    btn.onclick = () => {
+      num1.value = "1020381";
+      console.log(Boolean(num2.value));
+      console.log(num2.value < 20);
+      if (num1.value < 50 || num2.value < 20)
+        print.innerHTML = '둘 중 한개는 50보다 작습니다.';
+    };
+
+  </script>
+</body>
+
+</html>
