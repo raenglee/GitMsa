@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="http://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+  <div class="flex justify-center items-center h-screen">
+    <!-- sx sm md lg xl xxl -->
+    <div class="p-5 m-2 h-96 bg-slate-200 sm:w-full md:w-2/3">
+      <h1 class="text-5xl p-3">구구단</h1>
+      <label for="gugudan" class="ml-3">몇단</label>
+      <input type="number" name="" id="gugudan" class="p-2 ml-3 focus:outline-none h-8 leading-6 rounded-sm">
+      <button class="bg-blue-300
+                       rounded-sm
+                       p-1
+                       ring-1
+                      hover:bg-blue-200" id="btn">출력</button>
+      <div id="print"></div>
+    </div>
+  </div>
+  <script>
+    var gugu = document.getElementById('gugudan');
+    var btn = document.getElementById('btn');
+    var print = document.getElementById('print');
+
+    btn.onclick = () => {
+      if (gugu.value !== '') {
+        var output = "";
+
+        for (var i = 1; i < 10; i++) {
+          // output = output + (gugu.value +'*'+i+'='+(gugu.value*i)+'<br>');
+          output = `${output} ${gugu.value} * ${i} = ${gugu.value * i}<br/> `;
+        }
+      }
+      print.innerHTML = `<div class='mt-3 bg-red-200 p-5 text-center'>${output}</div>`;
+    }
+  </script>
+</body>
+
+</html>
