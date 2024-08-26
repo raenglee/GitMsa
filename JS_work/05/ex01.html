@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .cont {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .cont>div {
+      width: 200px;
+      height: 200px;
+    }
+
+    :nth-child(1) {
+      /* flex: 1; */
+      background-color: rgb(185, 255, 127);
+    }
+
+    :nth-child(2) {
+      /* flex: 1; */
+      background-color: rgb(255, 127, 180);
+    }
+
+    :nth-child(3) {
+      flex: 1;
+      background-color: rgb(127, 168, 255);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cont">
+    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum modi mollitia tenetur vel. Vel, suscipit atque
+      consequatur accusamus obcaecati necessitatibus odit rem, ratione architecto qui itaque unde? Dolorem, ad itaque.
+    </div>
+    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum modi mollitia tenetur vel. Vel, suscipit atque
+      consequatur accusamus obcaecati necessitatibus odit rem, ratione architecto qui itaque unde? Dolorem, ad itaque.
+    </div>
+    <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum modi mollitia tenetur vel. Vel, suscipit atque
+      consequatur accusamus obcaecati necessitatibus odit rem, ratione architecto qui itaque unde? Dolorem, ad itaque.
+    </div>
+  </div>
+</body>
+
+</html>
