@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+
+
+    /*
+    var 변수: 재선언이 되고 전역변수로 선언하는 것 (옛날 것)
+    const 상수: 기본 타입에서는 상수, 객체랑 배열에서는 상수가 아님
+    let 변수: 변수 선언 값의 변경이 가능
+    */
+
+    var a = 10;
+    function doA() {
+      console.log(a);
+    }
+
+    doA();
+
+    var a = 20;
+    console.log(a);
+
+    let b = 20;
+    console.log(b);
+
+    // let b = 30; 변수 재선언 불가
+
+    const c = 30;
+    // c = 40;  // 상수라서 값 변경 불가
+
+    const d = [];
+    // unshift shift push pop 4개
+    d.push(5); d.push(6); d.push(7);  // 상수인데 상수가아닌 배열이라서 푸쉬 가능
+    //참조변수에서는 내용을 넣을 수 있다.
+    console.log(d);
+
+    const e = {};  // new라는 예약어를 안썼을 뿐 객체 할당한 것임 {};
+    e.a = "10";
+    console.log(e.a);
+    //javascript
+    //java 객체를 선언하게 되면 중간에 변수, 함수를 못넣음
+
+    e.b = () => {
+      console.log('b함수 입니다.');
+    }
+
+    console.log(typeof e.a); // 타입확인 -> String 42번줄의 "10"; <- 이므로
+    console.log(typeof e.b); //e.b의 타입 확인 typeof -> function이라고 나옴
+
+    console.log(e.b);
+    e.b();
+
+  </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @font-face {
+      font-family: 'S-CoreDream-3Light';
+      src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    * {
+      font-family: 'S-CoreDream-3Light';
+    }
+  </style>
+</head>
+
+<body>
+
+  <body class="flex flex-col items-center justify-center bg-gray-100">
+    <button id="btn" class="bg-gradient-to-r
+      from-blue-300
+      to-indigo-600
+      text-white font-semibold
+      py-3 px-6 rounded-full
+      shadow-lg
+      transform
+      transition
+      duration-500
+      hover:scale-105
+      hover:shadow-xl
+      focus:outline-none m-3">
+      확인
+    </button>
+    <div id="print" class="text-2xl">
+    </div>
+
+    <script>
+      const btn = document.getElementById('btn');
+      const print = document.getElementById('print');
+      const arr = ["홍길동", "김길동", "이길동", "박길동", "최길동", "윤길동", "오길동"];
+
+      // console.log(arr.indexOf('홍길동'));  //0번째
+      // console.log(arr.indexOf('길동'));  //없으므로 -1
+      // console.log(arr.indexOf('오길동'));  //6번째
+
+
+      //Number("11.1") => 11.1
+      //parseInt("11.1") => 11      
+
+      btn.onclick = () => {
+        print.innerHTML = " "; // 초기화
+        const indexArr = [];
+
+        let temp = 0;
+        for (let i = 0; i < arr.length; i++) {
+          do {
+            temp = parseInt(Math.random() * 7);  // 중복되는 숫자 없게
+          } while (indexArr.indexOf(temp) > -1);
+          indexArr.push(parseInt(temp));
+        }
+        for (let i = 0; i < arr.length; i++) {
+          print.innerHTML = print.innerHTML + `
+          <div class="font-bold text-gray-800 border border-gray-300 p-3">
+          ${arr[indexArr[i]]}
+          </div>
+          `;
+        }
+      }
+    </script>
+  </body>
+
+</html>
