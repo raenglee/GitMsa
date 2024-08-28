@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button id="btn">버튼</button>
+  
+  <script>
+    // window open() 새로운 창 여는 것, document 현재 문서에서
+    document.getElementById('btn').onclick = (e)=>{
+      console.log(this);
+      console.log(e.target);
+    }
+
+    // document.getElementById('btn').onclick = function(e){
+    //   console.log(this);
+    //   console.log(e.target);
+    // }
+
+  </script>
+</body>
+</html>
