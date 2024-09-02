@@ -7,39 +7,43 @@ import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Ex07 {
-    public static void main(String[] args) {
 
-        List<AA> list = new ArrayList<>();
-        try (Connection conn
-                     = DriverManager.getConnection(
-                "jdbc:mysql://127.0.0.1:3308/kce", "root", "1234")) {
-            PreparedStatement pstmt = conn.prepareStatement("select * from aa order by idx desc");
-            ResultSet rs = pstmt.executeQuery();
+    private MemberRepository memberRepository =
+            new MemberRepository();
 
-            while (rs.next()) {
-                AA member = AA.builder()
-                        .name(rs.getString("name"))
-                        .idx(rs.getInt("idx"))
-                        .age(rs.getInt("age"))
-                        .email(rs.getString("email"))
-                        .password(rs.getString("password"))
-                        .regdate(rs.getObject("regdate", LocalDateTime.class))
-                        .mydate(rs.getObject("mydate", LocalDateTime.class))
-                        .build();
-                list.add(member);
+    Ex07() {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.println("""
+                    뭐할래?
+                    0. 로그인
+                    1. aa select()
+                    2. aa insert()
+                    3. aa update()
+                    4. aa delete()
+                    5. todo select() -> user 사용자
+                    6. todo insert() -> user 정보
+                    7. todo update()
+                    8. todo delete()
+                    """);
+
+            int ra = scanner.nextInt();
+
+            if (ra == 1) {
+                memberRepository.select();
+            } else if (ra == 2) {
+                memberRepository.insert();
+            } else {
+                System.out.println("종료됩니다");
+                break;
             }
-
-            list.stream()
-                    .forEach(System.out::println);
-
-            //라이브러리 추가 되어 있는지 확인
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        new Ex07();
     }
 }
