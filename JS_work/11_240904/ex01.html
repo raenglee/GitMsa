@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  이름: <input type="text" name="" id="name">
+  <div id="nameprint"></div>
+  나이: <input type="text" name="" id="age">
+  <button id="btn">전송</button>
+  <div id="print"></div>
+
+</body>
+
+<script>
+  const name = document.getElementById('name');
+  const nameprint = document.getElementById('nameprint');
+  const age = document.getElementById('age');
+  const print = document.getElementById('print');
+
+  document.getElementById('btn').addEventListener('click', () => {
+    if (name.value == "") {
+      nameprint.innerHTML = "이름을 입력하세요.";
+      return;
+    }
+    console.log('name.value = ' + name.value);
+    fetch(`http://127.0.0.1:8080/member/insert?name=${name.value}&age=${age.value}`)
+      .then(res => {
+        return res.text();
+      })
+      .then(data => {
+        name.value = "";
+        age.value = "";
+        print.innerHTML = data;
+      })
+  })
+</script>
+
+</html>
