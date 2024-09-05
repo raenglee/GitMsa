@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+  <div class="p-4">
+    <h1 class="text-4xl m-3">할일 목록</h1>
+    <ul class="text-2xl">
+      <li><input type="checkbox" name="" id="" class="check mr-3">할일1</li>
+      <li><input type="checkbox" name="" id="" class="check mr-3">할일2</li>
+      <li><input type="checkbox" name="" id="" class="check mr-3">할일3</li>
+      <li><input type="checkbox" name="" id="" class="check mr-3">할일4</li>
+      <li><input type="checkbox" name="" id="" class="check mr-3">할일5</li>
+    </ul>
+  </div>
+</body>
+
+</html>
+
+<script>
+  const checks = document.getElementsByTagName('input');
+  for (let i = 0; i < checks.length; i++) {
+    const element = checks[i];
+
+    /* element.addEventListener('click', function () { console.log(this + '누름'); })  //this -> html
+     화살표함수에선 this를 사용하면 window객체로 들어오므로 e(vent).target으로 해야함 */
+
+    element.addEventListener('click', (e) => {
+
+      /* parentNode -> 부모태그, input태그의 부모태그이므로 li임*/
+      // console.log(e.target.parentNode.style.textDecoration);
+      // console.log(e.target.parentNode.style.color);
+
+      if (e.target.parentNode.style.textDecoration == 'line-through') {
+        e.target.parentNode.style.color = "";
+        e.target.parentNode.style.textDecoration = '';
+      }
+      else {
+        e.target.parentNode.style.color = "#ccc";
+        e.target.parentNode.style.textDecoration = 'line-through';
+      }
+      // console.log(e.target.parentNode.style.textDecoration);
+      // console.log(e.target.parentNode.style.color);
+    })
+  }
+</script>
