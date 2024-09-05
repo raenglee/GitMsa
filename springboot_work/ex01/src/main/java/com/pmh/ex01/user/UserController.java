@@ -1,6 +1,7 @@
 package com.pmh.ex01.user;
 
 import com.pmh.ex01.member.MemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +16,10 @@ import java.time.LocalDateTime;
 @CrossOrigin
 public class UserController {
 
+    @Autowired
+    MemberRepository memberRepository;
+
+//  MemberRepository memberRepository = new MemberRepository()
     @GetMapping("member/insert")
     public String aa(@RequestParam(name = "name", defaultValue = "내이름") String name,
                      @RequestParam(name = "age", defaultValue = "30") int age) {
