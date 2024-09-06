@@ -9,7 +9,7 @@ import java.util.List;
 @RestController  // url 요청(맵핑) 하는 클래스
 @RequestMapping("user")  //주소 줄에 user로 시작 함 (http://localhost:8080/user/select)
 @RequiredArgsConstructor
-
+@CrossOrigin
 public class UserController {
     private final UserRepository userRepository;
 
