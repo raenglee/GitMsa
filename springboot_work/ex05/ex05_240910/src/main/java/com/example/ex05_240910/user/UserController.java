@@ -10,6 +10,7 @@ import java.util.List;
 @RestController
 @RequestMapping("user")     //user에 select, insert 되도록해줌
 @RequiredArgsConstructor
+@CrossOrigin
 
 public class UserController {
     private final UserRepository userRepository;
