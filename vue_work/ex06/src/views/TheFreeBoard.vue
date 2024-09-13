@@ -20,9 +20,10 @@
 
 <script setup>
 import axios from 'axios'
-import { ref } from 'vue';
+// import { ref } from 'vue';
 
-const title = ref('');
+
+// const title = ref('');
 const content = ref('');
 const save = () => {
   const data = {
