@@ -30,7 +30,9 @@ dependencies {
 
 	implementation 'org.modelmapper:modelmapper:3.2.1'
 
-	implementation("org.springframework.boot:spring-boot-starter-validation")
+
+	//Dto에 Min Max 유효성 검사, 이게 실패하면 컨트롤러의 Exception이 실행됨
+	implementation"org.springframework.boot:spring-boot-starter-validation"
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
