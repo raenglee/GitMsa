@@ -28,11 +28,35 @@
 <script setup>
 import axios from 'axios'
 import { ref } from 'vue';
-import {useRouter} from 'vue-router';  //저장 누르면 router push로 인해 list로 이동
+import {useRouter, useRoute} from 'vue-router';  //저장 누르면 router push로 인해 list로 이동
 
-const router = useRouter();
 const title = ref('');
 const content = ref('');
+// const regDate = ref('');
+// const creAuthor = ref('');
+// const idx = ref(0);
+
+const router = useRouter();
+// const route = useRoute();
+
+// const getFreeBoard = () => {
+//   axios
+//     .get(`http://localhost:8080/freeboard/view/${route.params.idx}`)
+//     .then((res) => {
+//       title.value = res.data.title
+//       content.value = res.data.content
+//       regDate.value = res.data.regDate
+//       creAuthor.value = res.data.creAuthor
+//       idx.value = res.data.idx
+//     })
+//     .catch((e) => {
+//       console.log(e)
+//       alert(e.response.data.message)
+//       router.push({ name: 'freeboardlist' })
+//     })
+// }
+
+
 const save = () => {
   const data = {
     title: title.value,
