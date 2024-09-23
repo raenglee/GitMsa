@@ -1,0 +1,29 @@
+sever:
+  port: 8081
+#포트 중복이라서 다른 포트 쓰고싶으면 지정해줄 수 있음 아니면 서버를 여러개 둘 수 없음
+
+spring:
+  application:
+    name: ex09
+
+
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://127.0.0.1:3306/jh
+    username: root
+    password: 1234
+
+
+# 주석은 #으로
+# create 새로 생성, none 아무것도 하지 않음, update 테이블 수정된 것이 있다면 반영
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate.format_sql: true
+    show-sql: true
+    open-in-view: false
+
+my:
+  value: "welcome to my value"

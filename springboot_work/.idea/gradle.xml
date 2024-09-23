@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="delegatedBuild" value="false" />
+        <option name="testRunner" value="PLATFORM" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/ex01" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/ex01" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/ex03" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/ex03" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/ex05" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/ex05" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/ex06-errorCode" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/ex06-errorCode" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/ex07-freeboard" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/ex07-freeboard" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/ex08-jpaAudit" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/ex08-jpaAudit" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/ex09-freeboard" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/ex09-freeboard" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/ex10" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/ex10" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/project01" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/project01" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

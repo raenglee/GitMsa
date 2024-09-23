@@ -44,7 +44,7 @@ const idx = ref(0);
 const doDelete = (idx) => {
   console.log(idx)
   axios
-    .delete(`http://localhost:8080/freeboard/delete/${idx}`)
+    .delete(`http://localhost:10000/freeboard/delete/${idx}`)
     .then(res => {
       alert(res.data);
       if(res.status=='200'){
@@ -59,7 +59,7 @@ const pageMove = () => {
 }
 
 const getFreeBoard = () => {
-  axios.get(`http://localhost:8080/freeboard/view/${route.params.idx}`)
+  axios.get(`http://localhost:10000/freeboard/view/${route.params.idx}`)
     .then(res => {
       title.value = res.data.title;
       content.value = res.data.content;
