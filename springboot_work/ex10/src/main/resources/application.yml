@@ -4,6 +4,10 @@ server:
 spring:
   application:
     name: ex10
+    #sql구문 실행하라
+  sql:
+    init:
+      mode: always
 
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
@@ -13,11 +17,18 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create
     properties:
       hibernate.format_sql: true
     show-sql: true
     open-in-view: false
+    # 스프링부트 시작한 후 data.sql에 있는 insert 구문 실행
+    defer-datasource-initialization: true
 
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+      file-size-threshold: 0
 my:
   value: "welcome to my value"

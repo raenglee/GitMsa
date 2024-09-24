@@ -56,18 +56,17 @@ const viewPage = (idx) => {
   router.push(data);
 }
 
-const getFreeBoard = (pageNum)=>{
-  if(pageNum==undefined) pageNum=0;
-axios.get(`http://localhost:10000/freeboard?pageNum=${pageNum}`)
-.then(res=>{
-  arr.value = res.data.list;
-  totalPages.value = res.data.totalPages;
-})
-.catch(e=>{
-  console.log(e);
-})
+const getFreeBoard = (pageNum) => {
+  if (pageNum == undefined) pageNum = 0;
+  axios.get(`http://localhost:10000/freeboard?pageNum=${pageNum}`)
+    .then(res => {
+      arr.value = res.data.list;
+      totalPages.value = res.data.totalPages;
+    })
+    .catch(e => {
+      console.log(e);
+    })
 }
-
 // page 호출되자 마자 자동 실행
 getFreeBoard();
 
