@@ -31,12 +31,21 @@ const save = () => {
 
   const formData = new FormData()
   formData.append('file', myfile.value) // 'file'이 key여야 한다
-  formData.append('fileDto', new Blob({ name: "filename" }, { type: "applicaiot/json" }));
+  formData.append('fileDto', new Blob(
+    [JSON.stringify({ name: "filename" })]), 
+    { type: "applicaiot/json" })
 
   axios.post('http://localhost:10000/file/upload', formData, {
-    headers: { 'content-Type': 'multipart/form-data' }
+    headers: {
+       'content-Type': 'multipart/form-data' }
   })
-}
+  .then((res)=>{
+    console.log(res);
+  })
+  .catch((e)=>
+  console.log(e)
+)}
+
 
 const onFileChange = (e) => {
   myfile.value = e.target.files[0]

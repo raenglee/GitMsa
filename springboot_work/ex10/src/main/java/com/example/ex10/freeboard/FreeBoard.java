@@ -1,5 +1,6 @@
 package com.example.ex10.freeboard;
 
+import com.example.ex10.File.FileEntity;
 import com.example.ex10.user.User;
 import jakarta.persistence.*;
 import lombok.*;
@@ -10,6 +11,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity // 테이블임을 알려주는 것
 @AllArgsConstructor
@@ -47,4 +50,7 @@ public class FreeBoard {
 
     @Column(columnDefinition = "int default 0")  // 칼럼 정의, 조회수이므로 무조건 처음엔 0이어야함
     private int viewCount;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "freeBoard")
+    private List<FileEntity> list = new ArrayList<>();
 }
