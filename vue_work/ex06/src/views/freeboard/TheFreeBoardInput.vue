@@ -15,7 +15,7 @@
         placeholder="Enter Content here"
       ></textarea>
       <div class="m-3">
-        <input type="file" name="" id="" @change="onFileChange"/>
+        <input type="file" name="" id="" @change="onFileChange" />
       </div>
       <button
         class="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
@@ -32,14 +32,14 @@ import axios from 'axios'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router' //저장 누르면 router push로 인해 list로 이동
 
-const title = ref('');
-const content = ref('');
-const myfile = ref(null);
-const router = useRouter();
+const title = ref('')
+const content = ref('')
+const myfile = ref(null)
+const router = useRouter()
 
 const onFileChange = (e) => {
-  myfile.value = e.target.files[0];
-};
+  myfile.value = e.target.files[0]
+}
 
 const save = () => {
   const data = {
@@ -48,12 +48,8 @@ const save = () => {
   }
 
   const formData = new FormData()
-  formData.append('data', new Blob(
-    [JSON.stringify(data)], 
-    { type: 'application/json' }
-  )
-);
-formData.append("file", myfile.value)
+  formData.append('data', new Blob([JSON.stringify(data)], { type: 'application/json' }))
+  formData.append('file', myfile.value)
 
   axios
     .post('http://localhost:10000/freeboard', formData, {
