@@ -19,8 +19,8 @@ public class UserController {
 
     @GetMapping("select")
     public ResponseEntity<List<User>> select() {
+        List<User>list = userRepository.findAll();
         return ResponseEntity.status(200).body(userRepository.findAll());  // 에러확인
-//        return userRepository.findAll();    //findAll()->try~catch처리 다해줌
     }
 
 

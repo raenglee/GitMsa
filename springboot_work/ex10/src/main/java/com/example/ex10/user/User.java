@@ -1,10 +1,13 @@
 package com.example.ex10.user;
 
+import com.example.ex10.freeboard.FreeBoard;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
     @Configuraion -> 객체 담는통 정의 (환경설정)
@@ -35,7 +38,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // AUTOINCREMENT 이거 설정해줘...
     private Long idx;
 
-    @Column(name ="username", nullable = false, length = 50)
+    @Column(name = "username", nullable = false, length = 50)
     private String name;
     private int age;
 
@@ -47,6 +50,11 @@ public class User {
     private String password;
 
     private LocalDateTime wdate;
+
+    @OneToMany(mappedBy = "user",
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL)
+    private List<FreeBoard> list = new ArrayList<>();
 
 // JPA CLASS -> talbe CREATE가 됩니다.
 

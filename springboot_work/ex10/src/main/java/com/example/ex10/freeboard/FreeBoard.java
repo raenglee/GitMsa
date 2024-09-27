@@ -2,6 +2,7 @@ package com.example.ex10.freeboard;
 
 import com.example.ex10.File.FileEntity;
 import com.example.ex10.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
@@ -32,9 +33,6 @@ public class FreeBoard {
     private String title;
     private String content;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private User user;
-
     @CreatedBy
     private String creAuthor;
 
@@ -51,6 +49,13 @@ public class FreeBoard {
     @Column(columnDefinition = "int default 0")  // 칼럼 정의, 조회수이므로 무조건 처음엔 0이어야함
     private int viewCount;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "freeBoard")
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
+    private User user;
+
+    @OneToMany(mappedBy = "freeBoard",
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL)
     private List<FileEntity> list = new ArrayList<>();
 }

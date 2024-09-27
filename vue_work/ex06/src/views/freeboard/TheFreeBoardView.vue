@@ -13,7 +13,7 @@
         <h1>작성자{{ creAuthor }}</h1>
       </div>
       <div v-for ="item in list" :key="item">
-        <img src="http://localhost:10000/aa.jpg" width="300" alt="" />
+        <img :src="`http://localhost:10000/file/download/${item.name}`" width="300" alt="" />
         {{ item.name }}
       </div>
     </div>

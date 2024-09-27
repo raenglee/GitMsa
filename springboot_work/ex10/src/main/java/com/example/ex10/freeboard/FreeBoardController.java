@@ -82,9 +82,11 @@ public class FreeBoardController {
     @GetMapping("view/{idx}")
     public ResponseEntity<FreeBoardResponseDto> findOne(@PathVariable(name = "idx") long idx) {
 
+        // 해당되는 행을 찾고
         FreeBoard freeBoard = freeBoardRepository.findById(idx).orElseThrow(() -> new BizException(ErrorCode.NOT_FOUND));
-
-        System.out.println(freeBoard.getList());
+        // 수정
+        freeBoard.setViewCount(freeBoard.getViewCount()+1);
+        freeBoardRepository.save(freeBoard);
 
         FreeBoardResponseDto freeBoardResponseDto = modelMapper.map(freeBoard, FreeBoardResponseDto.class);
 
@@ -105,9 +107,10 @@ public class FreeBoardController {
             @Valid @RequestPart(name = "data") FreeBoardReqDto freeBoardReqDto,
             @RequestPart(name = "file", required = false) MultipartFile file) {
 
+        FreeBoard freeBoard = new ModelMapper().map(freeBoardReqDto, FreeBoard.class);
+        freeBoardRepository.save(freeBoard);
 
 //        if(file.getOriginalFilename().contains(".exe")) return;  // 파일 확장자 제한 꼭 해주어야함 <- .exe파일은 리턴하라~
-        System.out.println(freeBoardReqDto);
         if(file!=null) {
             String myfilePath = Paths.get("ex10/images/file/").toAbsolutePath().toString() + "\\" + file.getOriginalFilename();
             try {
@@ -116,21 +119,15 @@ public class FreeBoardController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            FileEntity fileEntity = new FileEntity();
+            //파일 이름 DB name 칼럼에 저장
+            fileEntity.setName(file.getOriginalFilename());
+            //파일 경로 DB path 칼럼에 저장
+            fileEntity.setPath(Paths.get("ex10/images/file/").toAbsolutePath().toString());
+            //파일엔티티와 프리보드 연계
+            fileEntity.setFreeBoard(freeBoard);
+            fileRepository.save(fileEntity);
         }
-
-        FreeBoard freeBoard = new ModelMapper().map(freeBoardReqDto, FreeBoard.class);
-        freeBoardRepository.save(freeBoard);
-
-
-        FileEntity fileEntity = new FileEntity();
-        //파일 이름 DB name 칼럼에 저장
-        fileEntity.setName(file.getOriginalFilename());
-        //파일 경로 DB path 칼럼에 저장
-        fileEntity.setPath(Paths.get("ex10/images/file/").toAbsolutePath().toString());
-        //파일엔티티와 프리보드 연계
-        fileEntity.setFreeBoard(freeBoard);
-        fileRepository.save(fileEntity);
-
         return ResponseEntity.status(200).body(freeBoard);
     }
 

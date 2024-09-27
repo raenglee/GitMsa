@@ -4,13 +4,14 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
   <header>
+    <h1 class="text-5xl"></h1>
     <div class="p-5 bg-slate-500 text-white text-3xl">
       <nav class="flex space-x-5">
         <div>
         <RouterLink to="/">Home</RouterLink>
         </div>
         <div>
-        <RouterLink to="/user">User</RouterLink>
+        <RouterLink to="/userlist">User</RouterLink>
         </div>
         <div class="group relative">
         <RouterLink to="/freeboardlist">FreeBoardList</RouterLink>
