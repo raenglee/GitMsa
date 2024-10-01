@@ -1,6 +1,7 @@
 import axios from 'axios'
+import { GLOBAL_URL } from './util.js';
 
-const URL = 'http://localhost:10000/user'
+const URL = `${GLOBAL_URL}user`;
 
 export const getUsers = async () => {
   try {

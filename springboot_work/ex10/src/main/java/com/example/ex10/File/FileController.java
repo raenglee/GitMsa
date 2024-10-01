@@ -49,7 +49,7 @@ public class FileController {
     public String upload(@RequestPart(name = "file") MultipartFile file,
                          @RequestPart(name = "file") FileReqDto fileReqDto) {
         try{
-        String myfilePath = imagePath.toAbsolutePath().toString() + "\\" + file.getOriginalFilename();
+        String myfilePath = imagePath.toAbsolutePath().toString() + File.pathSeparator + file.getOriginalFilename();
 
         File saveFile = new File(myfilePath);
         file.transferTo(saveFile);

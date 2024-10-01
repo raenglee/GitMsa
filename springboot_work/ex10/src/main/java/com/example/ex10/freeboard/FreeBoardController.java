@@ -112,7 +112,7 @@ public class FreeBoardController {
 
 //        if(file.getOriginalFilename().contains(".exe")) return;  // 파일 확장자 제한 꼭 해주어야함 <- .exe파일은 리턴하라~
         if(file!=null) {
-            String myfilePath = Paths.get("ex10/images/file/").toAbsolutePath().toString() + "\\" + file.getOriginalFilename();
+            String myfilePath = Paths.get("ex10/images/file/").toAbsolutePath().toString() + File.separator + file.getOriginalFilename();
             try {
                 File destFile = new File(myfilePath);
                 file.transferTo(destFile);
