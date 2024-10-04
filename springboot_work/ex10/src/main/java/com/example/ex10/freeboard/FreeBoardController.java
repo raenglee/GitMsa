@@ -4,6 +4,8 @@ import com.example.ex10.File.FileEntity;
 import com.example.ex10.File.FileRepository;
 import com.example.ex10.error.BizException;
 import com.example.ex10.error.ErrorCode;
+import com.example.ex10.user.User;
+import com.example.ex10.user.UserRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.nio.file.Paths;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -33,110 +35,149 @@ public class FreeBoardController {
 
     private final FreeBoardRepository freeBoardRepository;
     private final FileRepository fileRepository;
+    private final UserRepository userRepository;
+
     private final ModelMapper modelMapper;
 
     @Value("${my.value}")
-    private String welcom;
+    private String welcome;
 
     @GetMapping("test")
     public String test() {
-        return welcom;
+        return welcome;
     }
 
     @GetMapping
-    public ResponseEntity<FreeBoardResponsePageDto> findAll(@RequestParam(name = "pageNum", defaultValue = "0") int pageNum
+    public ResponseEntity<FreeBoardResponsePageDto> findALl(
+            @RequestParam(name = "pageNum", defaultValue = "0") int pageNum
             , @RequestParam(name = "size", defaultValue = "5") int size) {
 
         Sort sort = Sort.by(Sort.Direction.DESC, "idx");
-
         Pageable pageable = PageRequest.of(pageNum, size, sort);
 
         //Page=>getTotalElements, getTotalPages등이 존재 List=>그런거 없음
         Page<FreeBoard> page = freeBoardRepository.findAll(pageable);
+        FreeBoardResponsePageDto freeBoardResponsePageDto = modelMapper.map(page, FreeBoardResponsePageDto.class);
 
-        System.out.println("elements = " + page.getTotalElements());
-        System.out.println("pages = " + page.getTotalPages());
+        List<FreeBoardResponseDto> list = freeBoardResponsePageDto
+                .getContent()
+                .stream()
+                .map(freeBoard -> {
+                    FreeBoardResponseDto freeBoardResponseDto = modelMapper.map(freeBoard, FreeBoardResponseDto.class);
 
-        FreeBoardResponsePageDto freeBoardResponsePageDto
-                = modelMapper.map(page, FreeBoardResponsePageDto.class);
+                    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yy/MM/dd hh:mm");
+                    freeBoardResponseDto.setRegDate(dateTimeFormatter.format(freeBoard.getRegDate()));
+                    freeBoardResponseDto.setModDate(dateTimeFormatter.format(freeBoard.getModDate()));
 
-        List<FreeBoardResponseDto> list = new ArrayList<>();
-        for (FreeBoard freeBoard : freeBoardResponsePageDto.getContent()) {
-            FreeBoardResponseDto freeBoardResponseDto
-                    = new ModelMapper().map(freeBoard, FreeBoardResponseDto.class);
+                    if(freeBoard.getUser()!=null) {
+                        freeBoardResponseDto.setCreAuthor(freeBoard.getUser().getName());
+                        freeBoardResponseDto.setModAuthor(freeBoard.getUser().getName());
+                        freeBoardResponseDto.setUserIdx(freeBoard.getUser().getIdx());
+                    }else{
+                        freeBoardResponseDto.setCreAuthor("탈퇴한 회원");
+                        freeBoardResponseDto.setModAuthor("탈퇴한 회원");
+                    }
 
-            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yy년MM월dd일 hh:mm");
-
-            freeBoardResponseDto.setRegDate(dateTimeFormatter.format(freeBoard.getRegDate()));
-            freeBoardResponseDto.setModDate(dateTimeFormatter.format(freeBoard.getModDate()));
-
-            list.add(freeBoardResponseDto);
-
-        }
+                    return freeBoardResponseDto;
+                }).toList();
 
         freeBoardResponsePageDto.setList(list);
-
         return ResponseEntity.ok(freeBoardResponsePageDto);
     }
 
     @GetMapping("view/{idx}")
     public ResponseEntity<FreeBoardResponseDto> findOne(@PathVariable(name = "idx") long idx) {
-
         // 해당되는 행을 찾고
         FreeBoard freeBoard = freeBoardRepository.findById(idx).orElseThrow(() -> new BizException(ErrorCode.NOT_FOUND));
-        // 수정
+        // 조회수 수정
         freeBoard.setViewCount(freeBoard.getViewCount()+1);
         freeBoardRepository.save(freeBoard);
 
         FreeBoardResponseDto freeBoardResponseDto = modelMapper.map(freeBoard, FreeBoardResponseDto.class);
-
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yy년MM월dd일 hh:mm");
-
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yy/MM/dd hh:mm");
         freeBoardResponseDto.setRegDate(dateTimeFormatter.format(freeBoard.getRegDate()));
         freeBoardResponseDto.setModDate(dateTimeFormatter.format(freeBoard.getModDate()));
 
+        if(freeBoard.getUser()!=null) {
+            freeBoardResponseDto.setCreAuthor(freeBoard.getUser().getName());
+            freeBoardResponseDto.setModAuthor(freeBoard.getUser().getName());
+            freeBoardResponseDto.setUserIdx(freeBoard.getUser().getIdx());
+        }else{
+            freeBoardResponseDto.setCreAuthor("탈퇴한 회원");
+            freeBoardResponseDto.setModAuthor("탈퇴한 회원");
+        }
         return ResponseEntity.ok(freeBoardResponseDto);
     }
-
 
     @PostMapping(
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE
     )
+
     public ResponseEntity<FreeBoard> save(
             @Valid @RequestPart(name = "data") FreeBoardReqDto freeBoardReqDto,
             @RequestPart(name = "file", required = false) MultipartFile file) {
 
         FreeBoard freeBoard = new ModelMapper().map(freeBoardReqDto, FreeBoard.class);
-        freeBoardRepository.save(freeBoard);
 
-//        if(file.getOriginalFilename().contains(".exe")) return;  // 파일 확장자 제한 꼭 해주어야함 <- .exe파일은 리턴하라~
-        if(file!=null) {
-            String myfilePath = Paths.get("ex10/images/file/").toAbsolutePath().toString() + File.separator + file.getOriginalFilename();
+        if(freeBoardReqDto.getIdx()==null) {
+            freeBoardRepository.save(freeBoard);
+        }
+        else{
+            FreeBoard dbFreeBoard = freeBoardRepository.findById(freeBoard.getIdx()).orElseThrow();
+            dbFreeBoard = new ModelMapper().map(freeBoardReqDto, FreeBoard.class);
+            freeBoardRepository.save(dbFreeBoard);
+        }
+
+        User user = userRepository.findById(1L).orElse(null);
+        freeBoard.setUser(user);
+
+        if (file != null) {
+            String myFilePath = Paths.get("images/file/").toAbsolutePath() + File.separator + file.getOriginalFilename();
             try {
-                File destFile = new File(myfilePath);
+                File destFile = new File(myFilePath);
                 file.transferTo(destFile);
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
             FileEntity fileEntity = new FileEntity();
             //파일 이름 DB name 칼럼에 저장
             fileEntity.setName(file.getOriginalFilename());
             //파일 경로 DB path 칼럼에 저장
-            fileEntity.setPath(Paths.get("ex10/images/file/").toAbsolutePath().toString());
+            fileEntity.setPath(Paths.get("images/file/").toAbsolutePath().toString());
             //파일엔티티와 프리보드 연계
             fileEntity.setFreeBoard(freeBoard);
             fileRepository.save(fileEntity);
+            freeBoard.setList(Arrays.asList(fileEntity));
+            freeBoardRepository.save(freeBoard);
+        }else{
+            List<FileEntity> list = fileRepository.findByFreeBoardIdx(freeBoard.getIdx());
+            list.forEach(fileEntity -> {
+                fileRepository.deleteById(fileEntity.getIdx());
+            });
+            freeBoardRepository.save(freeBoard);
         }
+
         return ResponseEntity.status(200).body(freeBoard);
     }
 
     @DeleteMapping("delete/{idx}")
     public ResponseEntity<String> deleteById(@PathVariable(name = "idx") long idx) {
-        freeBoardRepository.findById(idx).orElseThrow((() -> new BizException(ErrorCode.NOT_FOUND)));
-        freeBoardRepository.deleteById(idx);
+
+        FreeBoard freeBoard = freeBoardRepository.findById(idx)
+                .orElseThrow(() -> new BizException(ErrorCode.NOT_FOUND));
+
+//        freeBoard.setList(new ArrayList<>());
+        freeBoard.setUser(null);
+        freeBoardRepository.save(freeBoard);
+        freeBoardRepository.delete(freeBoard);
+
+//        fileRepository.findByFreeBoardIdx(
+//                freeBoard.getIdx()).forEach(fileEntity -> {
+//            fileRepository.deleteById(fileEntity.getIdx());
+//        });
+//        freeBoardRepository.cusDeleteByIdx(idx);
         return ResponseEntity.ok("삭제되었습니다.");
     }
-
-
 }

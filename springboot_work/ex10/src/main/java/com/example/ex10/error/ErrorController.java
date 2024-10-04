@@ -10,10 +10,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
-
 @ControllerAdvice
 public class ErrorController {
-
 
     @ExceptionHandler(BizException.class)
     public ResponseEntity<ErrorResponse> mException(BizException e) {
@@ -22,7 +20,6 @@ public class ErrorController {
                 .httpStatus(e.getErrorCode().getHttpStatus())
                 .localDateTime(LocalDateTime.now())
                 .build();
-
         return ResponseEntity
                 .status(errorResponse.getHttpStatus())
                 .body(errorResponse);
@@ -34,7 +31,6 @@ public class ErrorController {
         String msg = (String) Arrays.stream(e.getDetailMessageArguments())
                 .reduce("", (s, s2) -> s.toString() + s2.toString());
 
-
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .httpStatus(HttpStatus.BAD_REQUEST)
                 .message(msg)
@@ -44,20 +40,17 @@ public class ErrorController {
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body(errorResponse);
-
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
 
     public ResponseEntity<ErrorResponse> constraintException(ConstraintViolationException e) {
 
-
         //stream
         String msg = e.getConstraintViolations()
                 .stream()
                 .map(constraintViolation -> constraintViolation.getMessage())
                 .reduce("",(s, s2) -> s+s2);
-
 
         //향상된 for구문
 //        Set<ConstraintViolation<?>> set = e.getConstraintViolations();  //위배된것이 set으로 들어가고
@@ -68,7 +61,6 @@ public class ErrorController {
 //            System.out.println(item.getMessage());
 //            test = item.getMessage();
 //        }
-
 
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .httpStatus(HttpStatus.BAD_REQUEST)
@@ -81,4 +73,3 @@ public class ErrorController {
                 .body(errorResponse);
     }
 }
-

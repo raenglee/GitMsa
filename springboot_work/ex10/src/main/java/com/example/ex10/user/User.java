@@ -4,6 +4,8 @@ import com.example.ex10.freeboard.FreeBoard;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -30,7 +32,7 @@ import java.util.List;
 @ToString
 @Getter
 @Setter
-
+@EntityListeners(AuditingEntityListener.class)
 //Table정의..
 public class User {
 
@@ -49,13 +51,18 @@ public class User {
     @Column(length = 100)
     private String password;
 
+    @Column(updatable = false)
+    @CreatedDate // 자동으로 JPA Entity객체에서 시간 넣는 것
     private LocalDateTime wdate;
+
+    // 테이블 create 하면서 role(역할) 컬럼 추가 (ex User, Admin, User등급...)
+    private String role;
 
     @OneToMany(mappedBy = "user",
             fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL)
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     private List<FreeBoard> list = new ArrayList<>();
 
-// JPA CLASS -> talbe CREATE가 됩니다.
-
 }
+// JPA CLASS -> talbe CREATE가 됩니다.

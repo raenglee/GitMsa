@@ -28,7 +28,6 @@
 </template>
 
 <script setup>
-import axios from 'axios'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router' //저장 누르면 router push로 인해 list로 이동
 import { saveFreeboard } from '@/api/freeboardApi'
@@ -49,17 +48,19 @@ const save = async () => {
   }
 
   const formData = new FormData()
-  formData.append('data', new Blob([JSON.stringify(data)], { type: 'application/json' }))
+  formData.append('data', new Blob(
+                          [JSON.stringify(data)],
+                          { type: 'application/json' }));
   formData.append('file', myfile.value)
 
-  const res = await saveFreeboard(formData)
+  const res = await saveFreeboard(formData);
   if (res.status == 200) {
-    alert('저장하였습니다.')
+    alert('저장하였습니다.');
     router.push({ name: 'freeboardlist' })
-    return
+    return;
   }
   alert('에러' + res.response.data.message)
-}
+};
 </script>
 
 <style></style>

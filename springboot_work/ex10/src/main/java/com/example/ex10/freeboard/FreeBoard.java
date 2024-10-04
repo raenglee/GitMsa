@@ -34,6 +34,7 @@ public class FreeBoard {
     private String content;
 
     @CreatedBy
+    @Column(updatable = false)
     private String creAuthor;
 
     @LastModifiedBy
@@ -49,13 +50,25 @@ public class FreeBoard {
     @Column(columnDefinition = "int default 0")  // 칼럼 정의, 조회수이므로 무조건 처음엔 0이어야함
     private int viewCount;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "freeBoard", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FileEntity> list = new ArrayList<>();
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JsonIgnore
     private User user;
 
-    @OneToMany(mappedBy = "freeBoard",
-            fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL)
-    private List<FileEntity> list = new ArrayList<>();
+    @Override
+    public String toString() {
+        return "FreeBoard{" +
+                "idx=" + idx +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", creAuthor='" + creAuthor + '\'' +
+                ", modAuthor='" + modAuthor + '\'' +
+                ", regDate=" + regDate +
+                ", modDate=" + modDate +
+                ", viewCount=" + viewCount +
+                ", list=" + list +
+                '}';
+    }
 }

@@ -34,18 +34,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void update(UserReqDto userReqDto) {
-        User user = modelMapper.map(userReqDto, User.class);
-        System.out.println("user = " + user);
-
         User dbUser = userRepository.findById(
-                user.getIdx()).orElseThrow(() -> {
-            throw new BizException(ErrorCode.NOT_FOUND);
-        });
+                userReqDto.getIdx()).orElseThrow(() -> { throw new BizException(ErrorCode.NOT_FOUND); } );
 
-        user.setWdate(dbUser.getWdate());
-//        user.setEmail(dbUser.getEmail());
-//        user.setPassword(dbUser.getPassword());
+        // list 가 없어지기 때문에 작성했는글이 수정된다.
+//        dbUser = modelMapper.map(userReqDto, User.class);
 
-        userRepository.save(user);
+        dbUser.setName(userReqDto.getName());
+
+        userRepository.save(dbUser);
     }
 }

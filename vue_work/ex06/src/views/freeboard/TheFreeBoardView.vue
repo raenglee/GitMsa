@@ -35,12 +35,13 @@
 </template>
 
 <script setup>
-import axios from 'axios'
-import { ref } from 'vue'
+import { freeboardDelete, getFreeBoardView } from '@/api/freeboardApi';
+import { ref, watchEffect } from 'vue';
 import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
 const router = useRouter()
+
 const title = ref('초기값')
 const content = ref('초기값')
 const regDate = ref('초기값')
@@ -48,44 +49,35 @@ const creAuthor = ref('초기값')
 const list = ref([])
 const idx = ref(0)
 
-const doDelete = (idx) => {
-  console.log(idx)
-  axios
-    .delete(`http://localhost:10000/freeboard/delete/${idx}`)
-    .then((res) => {
-      alert(res.data)
-      if (res.status == '200') {
-        router.push({ name: 'freeboardlist' })
-      }
-    })
-    .catch((e) => console.log(e))
-}
+const doDelete = async (idx) => {
+  const res = await freeboardDelete(idx);
+  if (res.status == 200) {
+    alert('삭제되었습니다.');
+    router.push({ name: 'freeboardlist' });
+  }else{
+    alert('삭제실패');
+    router.push({ name: 'freeboardlist' });
+  }
+};
+
 
 const pageMove = () => {
-  router.push({ name: 'freeboardupdate', query: { idx: idx.value } })
-}
+  router.push({ name: 'freeboardupdate', query: { idx: idx.value } });
+};
 
-const getFreeBoard = () => {
-  axios
-    .get(`http://localhost:10000/freeboard/view/${route.params.idx}`)
-    .then((res) => {
-      title.value = res.data.title
-      content.value = res.data.content
-      regDate.value = res.data.regDate
-      creAuthor.value = res.data.creAuthor
-      idx.value = res.data.idx
-      list.value = res.data.list
-      console.log(res.data.list)
-    })
-    .catch((e) => {
-      console.log(e)
-      alert(e.response.data.message)
-      router.push({ name: 'freeboardlist' })
-    })
-}
-
-//호출 안해주면 '초기값'만 나옴
-getFreeBoard()
+watchEffect(async () => {
+  const res = await getFreeBoardView(route.params.idx);
+  if (res.status == 200) {
+    title.value = res.data.title;
+    content.value = res.data.content;
+    regDate.value = res.data.regDate;
+    creAuthor.value = res.data.creAuthor;
+    idx.value = res.data.idx;
+  } else {
+    alert(res.response.data.message);
+    router.push({ name: 'freeboardlist' });
+  }
+});
 </script>
 
 <style lang="scss" scoped></style>

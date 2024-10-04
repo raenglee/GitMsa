@@ -20,12 +20,14 @@ public class FreeBoardReqDto {
     @Schema(example = "내용을 넣어주세요")
     @NotEmpty
     private String content;
-    private User user;
+//    private User user;
 
     @Schema(hidden = true)
     private LocalDateTime regDate;
+
     @Schema(hidden = true)
     private LocalDateTime modDate;
+
     @Schema(hidden = true)
     private int viewCount;
 

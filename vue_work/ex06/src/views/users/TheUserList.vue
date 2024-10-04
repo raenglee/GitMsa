@@ -17,10 +17,10 @@
     </div>
     <div class="flex space-x-5 justify-center">
     <button 
-    class="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
+    class="px-4 py-2 bg-indigo-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
     @click="modalUser">취소</button>
     <button
-    class="px-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
+    class="px-4 py-2 bg-indigo-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
     @click="modalUser('save')">저장</button>
   </div>
 </div>
@@ -28,8 +28,7 @@
     <h1 class="h1-blue">UserList</h1>
     <div class="flex flex-wrap">
       <div
-        @click="modalUser(item)"
-        class="cursor-pointer p-5 m-5 w-80 bg-slate-500 text-white rounded"
+        class="cursor-pointer bg-indigo-300 p-5 m-5 w-80 text-white rounded"
         v-for="item in arr"
         :key="item.idx"
       >
@@ -38,7 +37,12 @@
           <h1>이메일 = {{ item.email }}</h1>
           <h1>가입날짜 = {{ item.wdate }}</h1>
           <h1>작성한 글 = {{ item.list.length }}</h1>
-          <button @click.stop="doDelete(item.idx)">삭제</button>
+          <button 
+        class="mt-3 mr-3 px-4 py-2 bg-indigo-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
+        @click.stop="modalUser(item)">수정</button>
+        <button 
+        class="mt-3 px-4 py-2 bg-indigo-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
+        @click.stop="doDelete(item.idx)">삭제</button>
           <!--스탑 -> dodelete만 뜨도록 함 div안에 버튼 두개라서 한개만 열리도록 하는것-->
       </div>
     </div>
@@ -46,7 +50,7 @@
 </template>
 
 <script setup>
-import { getUsers, saveUser } from '@/api/userApi'
+import { deleteUser, getUsers, saveUser } from '@/api/userApi.js';
 import { ref, watchEffect } from 'vue'
 
 const arr = ref([])
@@ -57,21 +61,23 @@ const wdate = ref('');
 const email = ref('');
 
 const isModal = ref(false)
-const doDelete = () => {
-  console.log("doDelete");
-}
+const doDelete = async (idx) => {
+  await deleteUser(idx);
+  const retValue = await getUsers();
+  arr.value = retValue.data;
+};
 const modalUser = async (item) => {
   isModal.value = !isModal.value;
-
-  if(item == 'save'){
-    const result = await saveUser({
-                                  idx:idx.value,
-                                  name:name.value,
-                                  email:email.value,
-                                  password:"마이패스워드"
-                                });
-    //update해야함, axios
-    alert('수정하였습니다.'+result);
+  if (item == 'save') {
+   await saveUser({
+      idx: idx.value,
+      name: name.value,
+      email: email.value,
+      password: '마이패스워드'
+    });
+    alert('수정하였습니다.');
+    const retValue = await getUsers();
+    arr.value = retValue.data;
     return;
   }
 
@@ -81,22 +87,17 @@ const modalUser = async (item) => {
   wdate.value = item.wdate;
 };
 
-//watch안에 있는 함수 즉시 실행
-//await 쓰려면 async 필요 (await = 완벽하게 뜰 때 까지 기다리라는 명령어)
 watchEffect(async () => {
-  const retValue = await getUsers()
-  //  console.log("retValue = "+JSON.stringify(retValue.data))
-  arr.value = retValue.data
-  // console.log(arr.value)
-})
+  const retValue = await getUsers();
+  arr.value = retValue.data;
+});
 </script>
 
 <style scoped>
 .h1-blue {
   font-size: 5rem;
-  color: skyblue;
+  color: blue;
 }
-
 .overlay {
   position: fixed;
   top: 0;
@@ -104,14 +105,12 @@ watchEffect(async () => {
   width: 100%;
   height: 100%;
   z-index: 1000;
-  background-color: rgb(0, 0, 0, 0.2);
+  background-color: rgb(0, 0, 0, 0.3);
   display: none;
 }
-
 .isModal {
   display: block;
 }
-
 .modal {
   position: fixed;
   top: 50%;
@@ -121,7 +120,6 @@ watchEffect(async () => {
   z-index: 1001;
   display: none;
 }
-
 .isView {
   display: block;
 }

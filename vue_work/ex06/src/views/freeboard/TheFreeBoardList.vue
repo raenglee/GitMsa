@@ -5,11 +5,12 @@
       <table class="border border-b-gray-500 w-full">
         <thead>
           <tr>
-            <th class="border">IDX</th>
-            <th class="border">title</th>
-            <th class="border">author</th>
-            <th class="border">regdate</th>
-            <th class="border">viewcount</th>
+            <th class="border text-center text-lg p-2">IDX</th>
+            <th class="border text-center text-lg p-2">title</th>
+            <th class="border text-center text-lg p-2">author</th>
+            <th class="border text-center text-lg p-2">regdate</th>
+            <th class="border text-center text-lg p-2">viewcount</th>
+            <th class="border text-center text-lg p-2">img</th>
           </tr>
         </thead>
         <tbody>
@@ -22,20 +23,22 @@
               class="cusrsor-poiner hover:bg-slate-100"
               @click="viewPage(item.idx)"
             >
-              <td class="border text-center text-lg p-1">{{ item.idx }}</td>
-              <td class="border text-center text-lg p-1">{{ item.title }}</td>
-              <td class="border text-center text-lg p-1">{{ item.creAuthor }}</td>
-              <td class="border text-center text-lg p-1">{{ item.regDate }}</td>
-              <td class="border text-center text-lg p-1">{{ item.viewCount }}</td>
+              <td class="border text-center text-lg p-2">{{ item.idx }}</td>
+              <td class="border text-center text-lg p-2">{{ item.title }}</td>
+              <td class="border text-center text-lg p-2">{{ item.creAuthor }}</td>
+              <td class="border text-center text-lg p-2">{{ item.regDate }}</td>
+              <td class="border text-center text-lg p-2">{{ item.viewCount }}</td>
               <template v-if="item.list[0]">
-                <td class="border text-center text-lg p-1">
-                  <img
-                    :src="`${GLOBAL_URL}/file/aa/${item.list[0].name}`"
+                <td class="border">
+                  <img :src="`${GLOBAL_URL}/file/download/${item.list[0].name}`"
                     alt=""
                     srcset=""
                     width="150"
                   />
                 </td>
+              </template>
+              <template v-else>
+                <td class="border text-center text-lg p-1"></td>
               </template>
             </tr>
           </template>

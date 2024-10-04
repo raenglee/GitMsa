@@ -12,15 +12,17 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 public class Ex10Application {
 
 	public static void main(String[] args) {
-		ApplicationContext applicationContext =
-		SpringApplication.run(Ex10Application.class, args);
+
+		ApplicationContext applicationContext
+				= SpringApplication.run(Ex10Application.class, args);
 
 //		Arrays.stream(applicationContext.getBeanDefinitionNames())
 //				.forEach(System.out::println);
+
 	}
 
 	@Bean
-	public ModelMapper modelMApper(){
+	public ModelMapper modelMapper(){
 		return new ModelMapper();
 	}
 }

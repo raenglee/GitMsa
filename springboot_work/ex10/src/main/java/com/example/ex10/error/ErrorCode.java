@@ -12,18 +12,16 @@ public enum ErrorCode {
     private HttpStatus httpStatus;
     private String message;
 
+    ErrorCode(HttpStatus httpStatus, String message) {
+        this.httpStatus = httpStatus;
+        this.message = message;
+    }
+
     public HttpStatus getHttpStatus() {
         return httpStatus;
     }
 
     public String getMessage() {
         return message;
-    }
-
-    ErrorCode(HttpStatus httpStatus, String message) {
-        this.httpStatus = httpStatus;
-        this.message = message;
-
-
     }
 }

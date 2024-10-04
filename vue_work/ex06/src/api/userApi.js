@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { GLOBAL_URL } from './util.js';
 
-const URL = `${GLOBAL_URL}user`;
+const URL = `${GLOBAL_URL}/user`;
 
 export const getUsers = async () => {
   try {
@@ -23,4 +23,12 @@ export const saveUser = async (item) => {
   }
 };
 
-export const deleteUser = () => {}
+export const deleteUser = async(idx) => {
+  try{
+    const res = await axios.delete(`${URL}/delete/${idx}`);
+    return res;
+  }catch(e){
+    console.log(e);
+    return e;
+  }
+};

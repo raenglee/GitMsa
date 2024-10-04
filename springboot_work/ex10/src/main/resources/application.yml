@@ -11,7 +11,7 @@ spring:
 
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://maria_container:3306/jh
+    url: jdbc:mariadb://localhost:3306/jh
     username: root
     password: 1234
 
@@ -30,5 +30,6 @@ spring:
       max-file-size: 100MB
       max-request-size: 100MB
       file-size-threshold: 0
+      enabled: true
 my:
   value: "welcome to my value"

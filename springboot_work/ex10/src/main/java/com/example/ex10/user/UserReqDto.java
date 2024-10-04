@@ -17,8 +17,7 @@ import java.time.LocalDateTime;
 //프론트에서 오는 파라메타 검사
 public class UserReqDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // AUTOINCREMENT 이거 설정해줘...
+//  Value(strategy = Generation  @GeneratedType.IDENTITY) // AUTOINCREMENT 이거 설정해줘...
     private Long idx;
 
     @Length(min=2, max=100)

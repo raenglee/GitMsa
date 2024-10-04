@@ -14,7 +14,9 @@ public class FreeBoardResponseDto {
     private String title;
     private String content;
 
-    private User user;
+//    private User user;
+
+    private Long userIdx;
 
     private String creAuthor;
     private String modAuthor;
