@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class LoginService implements UserDetailsService {
-
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final ModelMapper modelMapper;
@@ -24,13 +23,11 @@ public class LoginService implements UserDetailsService {
     public void join(JoinDto joinDto) {
         User user = modelMapper.map(joinDto, User.class);
         user.setPassword(
-                passwordEncoder.encode(joinDto.getPassword()));
-
+                passwordEncoder.encode(joinDto.getPassword())
+        );
         user.setRole("ROLE_ADMIN");
-        User dbUser = userRepository.save(user);
+        userRepository.save(user);
     }
-
-
 
     @Override
     public UserDetails loadUserByUsername(String username)

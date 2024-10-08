@@ -1,6 +1,7 @@
 package com.example.org.conf;
 
-import com.example.org.filter.JWTFilter;
+import com.example.org.jwt.JWTFilter;
+import com.example.org.jwt.JWTManager;
 import com.example.org.login.LoginFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -20,11 +21,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final AuthenticationConfiguration authenticationConfiguration;
+    private final JWTManager jwtManager;
 
 //    public SecurityConfig(AuthenticationConfiguration authenticationConfiguration) {
 //        this.authenticationConfiguration = authenticationConfiguration;
 //    }  이 세줄 == @RequiredArgsConstructor
-
 
     // spring session -> attemptAuthentication
     @Bean
@@ -59,11 +60,10 @@ public class SecurityConfig {
                 .requestMatchers("/admin").hasRole("ADMIN")
                 .anyRequest().authenticated());
 
-        http.addFilterBefore(new JWTFilter(), LoginFilter.class);
-        http.addFilterAt(new LoginFilter(
-                        authenticationManager(authenticationConfiguration)
-                ),
-                UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(new JWTFilter(jwtManager), LoginFilter.class);
+        http.addFilterAt( new LoginFilter(
+                authenticationManager(authenticationConfiguration), jwtManager),UsernamePasswordAuthenticationFilter.class);
+
 
         //기존 세션 방식을 사용하지 않겠다(세션 없도록 하겠다)
         http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

@@ -1,13 +1,13 @@
 INSERT INTO users (idx, username, age, email, password, wdate, role)
-VALUES (1, 'Red', 25, 'red@example.com', 'password123', '2024-09-24 10:00:00', 'ROLE_ADMIN');
+VALUES (1, 'Red', 25, 'red@example.com', '$2a$10$cUVnZQldXFb3J5EE97cMBev4fN9ipRNW2h0uS0vV0TDB.iesMnU6O', '2024-09-24 10:00:00', 'ROLE_ADMIN');
 INSERT INTO users (idx, username, age, email, password, wdate, role)
-VALUES (2, 'Blue', 30, 'blue@example.com', 'password123', '2024-09-24 10:00:00', 'ROLE_ADMIN');
+VALUES (2, 'Blue', 30, 'blue@example.com', '$2a$10$cUVnZQldXFb3J5EE97cMBev4fN9ipRNW2h0uS0vV0TDB.iesMnU6O', '2024-09-24 10:00:00', 'ROLE_ADMIN');
 INSERT INTO users (idx, username, age, email, password, wdate, role)
-VALUES (3, 'Green', 22, 'green@example.com', 'password123', '2024-09-24 10:00:00', 'ROLE_ADMIN');
+VALUES (3, 'Green', 22, 'green@example.com', '$2a$10$cUVnZQldXFb3J5EE97cMBev4fN9ipRNW2h0uS0vV0TDB.iesMnU6O', '2024-09-24 10:00:00', 'ROLE_ADMIN');
 INSERT INTO users (idx, username, age, email, password, wdate, role)
-VALUES (4, 'Yellow', 28, 'yellow@example.com', 'password123', '2024-09-24 10:00:00', 'ROLE_ADMIN');
+VALUES (4, 'Yellow', 28, 'yellow@example.com', '$2a$10$cUVnZQldXFb3J5EE97cMBev4fN9ipRNW2h0uS0vV0TDB.iesMnU6O', '2024-09-24 10:00:00', 'ROLE_ADMIN');
 INSERT INTO users (idx, username, age, email, password, wdate, role)
-VALUES (5, 'Purple', 35, 'purple@example.com', 'password123', '2024-09-24 10:00:00', 'ROLE_ADMIN');
+VALUES (5, 'Purple', 35, 'purple@example.com', '$2a$10$cUVnZQldXFb3J5EE97cMBev4fN9ipRNW2h0uS0vV0TDB.iesMnU6O', '2024-09-24 10:00:00', 'ROLE_ADMIN');
 
 INSERT INTO freeboard (idx, title, content, user_idx, cre_author, mod_author, reg_date, mod_date, view_count)
 VALUES (1, 'First Title', 'This is the first content.', 1, 'Author1', 'Modifier1', '2024-09-24 10:00:00', '2024-09-24 10:00:00', 0);
