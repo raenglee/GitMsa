@@ -15,8 +15,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -51,6 +53,17 @@ public class FreeBoardController {
     public ResponseEntity<FreeBoardResponsePageDto> findALl(
             @RequestParam(name = "pageNum", defaultValue = "0") int pageNum
             , @RequestParam(name = "size", defaultValue = "5") int size) {
+
+        System.out.println(SecurityContextHolder.getContext().getAuthentication());
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        //email이 null이 아니고 빈 공백이 아니면 로그인
+        System.out.println("eamil = "+email);
+        if((email == null && email.equals("")) || email.equals("anonymousUser")){
+            System.out.println("로그인 하십시오");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        } else {
+            System.out.println("이미 로그인 되어있습니다.");
+        }
 
         Sort sort = Sort.by(Sort.Direction.DESC, "idx");
         Pageable pageable = PageRequest.of(pageNum, size, sort);

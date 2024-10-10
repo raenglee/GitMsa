@@ -7,11 +7,24 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
 @ControllerAdvice
 public class ErrorController {
+
+    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+    public ResponseEntity<ErrorResponse> sqlIntegrityConstraintViolationException(SQLIntegrityConstraintViolationException e) {
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .message(e.getMessage())
+                .httpStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+                .localDateTime(LocalDateTime.now())
+                .build();
+        return ResponseEntity
+                .status(errorResponse.getHttpStatus())
+                .body(errorResponse);
+    }
 
     @ExceptionHandler(BizException.class)
     public ResponseEntity<ErrorResponse> mException(BizException e) {

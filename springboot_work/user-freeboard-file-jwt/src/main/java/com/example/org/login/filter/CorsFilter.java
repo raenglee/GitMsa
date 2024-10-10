@@ -1,4 +1,4 @@
-package com.example.org.filter;
+package com.example.org.login.filter;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;

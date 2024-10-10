@@ -18,6 +18,7 @@
             <div class="mb-4">
                 <label for="password" class="block text-sm font-medium text-gray-700">비밀번호</label>
                 <input type="password" id="password" name="password" required 
+              
                 value="1234"
                 class="mt-1 p-2 border border-gray-300 rounded w-full" placeholder="비밀번호를 입력하세요">
             </div>
@@ -37,17 +38,27 @@
 
 <script setup>
 import { doJoin } from '@/api/loginApi';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+// const name = ref('홍길동');
 
 const doSubmit = async (event) => {
     console.log('연결됐냐'+event);
     const res = await doJoin( {
-        "name":"홍길동",
-        "password":"1234",
-        "age":"11",
-        "email":"aaa@naver.com"
+        name:'홍길동',
+        password:'1234',
+        age:'19',
+        email:'aaa@naver.com',
     } );
-    console.log(res);
-}
+    if (res.status == '200'){
+        alert('회원가입 성공 로그인 페이지로 이동합니다.');
+        router.push({name:'login'});
+    }
+    else{
+        alert('회원가입 실패'+res.response.data.message);
+    }
+};
 </script>
 
 <style lang="scss" scoped>

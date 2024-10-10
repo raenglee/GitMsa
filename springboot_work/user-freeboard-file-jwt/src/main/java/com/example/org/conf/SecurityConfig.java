@@ -1,7 +1,7 @@
 package com.example.org.conf;
 
-import com.example.org.jwt.JWTFilter;
-import com.example.org.jwt.JWTManager;
+import com.example.org.login.jwt.JWTFilter;
+import com.example.org.login.jwt.JWTManager;
 import com.example.org.login.LoginFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -52,7 +52,7 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(auth -> auth
                 // 일반 사용자들 접근 가능 (페이지 접근 허용)
-                .requestMatchers("/login", "/join", "/", "/freeboard/**", "/user/**").permitAll()
+                .requestMatchers("/login", "/join", "/", "/freeboard/**", "/user/**", "/file/**").permitAll()
                 //swagger 문서와 접근 가능하게
                 .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
                 .requestMatchers("/test/**").permitAll()

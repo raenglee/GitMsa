@@ -1,6 +1,6 @@
 package com.example.org.login;
 
-import com.example.org.jwt.JWTManager;
+import com.example.org.login.jwt.JWTManager;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,6 +24,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
                        JWTManager jwtManager) {
         //post -> get방식으로
         this.setFilterProcessesUrl("/login");
+//        this.setUsernameParameter("email");
         this.authenticationManager = authenticationManager;
         this.jwtManager = jwtManager;
     }
@@ -39,6 +40,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         UsernamePasswordAuthenticationToken token =
                 new UsernamePasswordAuthenticationToken(email, password);
+
         return authenticationManager.authenticate(token);
     }
 

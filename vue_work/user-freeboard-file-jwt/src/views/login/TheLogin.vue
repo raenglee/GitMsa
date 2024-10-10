@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-gray-100 flex items-center justify-center min-height-100">
         <div class="bg-white p-8 rounded-lg shadow-md w-96">
         <h2 class="text-2xl font-bold mb-6 text-center">로그인</h2>
         
@@ -32,13 +32,18 @@
 <script setup>
 import { doLogin } from '@/api/loginApi';
 import { ref } from 'vue';
-const email = ref('');
-const password = ref('');
+// email 변수에 초기값 설정
+const email = ref('aaa@naver.com');
+// password 변수에 초기값 설정
+const password = ref('1234');
 
 const submitLogin = async () => {
     const data = { "email": email.value, "password": password.value };
     const res = await doLogin(data);
     localStorage.setItem('token', res.data);
+    if(res.status==20){
+        alert("로그인 성공");
+    }
 }
 </script>
 
