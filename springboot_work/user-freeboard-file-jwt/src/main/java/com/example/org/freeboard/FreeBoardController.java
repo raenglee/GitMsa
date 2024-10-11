@@ -54,8 +54,12 @@ public class FreeBoardController {
             @RequestParam(name = "pageNum", defaultValue = "0") int pageNum
             , @RequestParam(name = "size", defaultValue = "5") int size) {
 
-        System.out.println(SecurityContextHolder.getContext().getAuthentication());
+//        System.out.println(SecurityContextHolder.getContext().getAuthentication());
+        // aaa@naver.com
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        //ADMIN
+        String role = SecurityContextHolder.getContext().getAuthentication().getAuthorities()
+                .stream().map(grantedAuthority -> grantedAuthority.toString()).toString();
         //email이 null이 아니고 빈 공백이 아니면 로그인
         System.out.println("eamil = "+email);
         if((email == null && email.equals("")) || email.equals("anonymousUser")){
@@ -64,6 +68,9 @@ public class FreeBoardController {
         } else {
             System.out.println("이미 로그인 되어있습니다.");
         }
+        // ADMIN이 아니면 바로 리턴 (등급별로 페이지를 보여주고 안보여주고)
+//        if(!role.equals("ROLE_ADMIN"))
+//            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
 
         Sort sort = Sort.by(Sort.Direction.DESC, "idx");
         Pageable pageable = PageRequest.of(pageNum, size, sort);
