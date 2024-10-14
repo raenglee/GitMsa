@@ -8,6 +8,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,6 +20,7 @@ import java.io.IOException;
 @RestController
 @RequiredArgsConstructor
 @CrossOrigin
+@Slf4j
 public class LoginController {
 
     private final LoginService loginService;
@@ -27,25 +29,44 @@ public class LoginController {
     private final JWTManager jwtManager;
 
     @PostMapping("/join")
-    //리스폰스엔티티안쓰면 에러에도 200ok가 떨어져서 사용 하는것
-    public ResponseEntity join(@RequestBody JoinDto joinDto) {
+    public ResponseEntity<String> join(@RequestBody JoinDto joinDto){
+        log.info(joinDto.toString());
         loginService.join(joinDto);
         return ResponseEntity.ok("success");
+    }
+
+    @GetMapping("/login")
+    public ResponseEntity<String> redirectWithPost(
+            @RequestParam("email") String email,
+            @RequestParam("password") String password,
+            HttpServletResponse response) throws IOException {
+
+        User user = userRepository.findByEmail(email).orElseThrow(
+                () -> new UsernameNotFoundException(email)
+        );
+
+        boolean isMatch = passwordEncoder.matches(password, user.getPassword());
+        if(isMatch){
+            String jwt = jwtManager.createJWT(user.getEmail(), user.getRole());
+            return ResponseEntity.ok(jwt);
+        }else{
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("이메일과 패스워드를 확인하세요");
+        }
     }
 
     @GetMapping("/check")
     public ResponseEntity<User> check(
             @RequestParam("jwt") String jwt,
             HttpServletResponse response) throws IOException {
+        System.out.println("jwt = "+jwt);
 
-        //jwt가 유효한지 확인, 유효하지 않으면 갑자기 Exception 발생
         Jws<Claims> claimsJws = jwtManager.getClaims(jwt);
-        //jwt가 유효하면 email 가져오기
         String email = claimsJws.getPayload().get("email").toString();
-        // email로 DB테이블 조회
         User user = userRepository.findByEmail(email).orElseThrow(
                 () -> new UsernameNotFoundException(email)
         );
+
         return ResponseEntity.ok(user);
     }
 }

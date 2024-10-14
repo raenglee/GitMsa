@@ -14,8 +14,15 @@ import java.util.Arrays;
 @ControllerAdvice
 public class ErrorController {
 
+    @ExceptionHandler(JWTAuthException.class)
+    public ResponseEntity<String> jwtAuthException(JWTAuthException e) {
+        return ResponseEntity
+                .status(HttpStatus.UNAUTHORIZED)
+                .body(e.getMessage());
+    }
+
     @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
-    public ResponseEntity<ErrorResponse> sqlIntegrityConstraintViolationException(SQLIntegrityConstraintViolationException e) {
+    public ResponseEntity<ErrorResponse> sqlIntegrityConstraintViolationException(SQLIntegrityConstraintViolationException e){
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .message(e.getMessage())
                 .httpStatus(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -27,7 +34,7 @@ public class ErrorController {
     }
 
     @ExceptionHandler(BizException.class)
-    public ResponseEntity<ErrorResponse> mException(BizException e) {
+    public ResponseEntity<ErrorResponse> mException(BizException e){
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .message(e.getErrorCode().getMessage())
                 .httpStatus(e.getErrorCode().getHttpStatus())
@@ -38,15 +45,15 @@ public class ErrorController {
                 .body(errorResponse);
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)  //밸리데이션에러
-    public ResponseEntity<ErrorResponse> validityException(MethodArgumentNotValidException e) {
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorResponse> validityException(MethodArgumentNotValidException e){
 
         String msg = (String) Arrays.stream(e.getDetailMessageArguments())
-                .reduce("", (s, s2) -> s.toString() + s2.toString());
+                .reduce("",(s, s2) -> s.toString()+s2.toString());
 
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .httpStatus(HttpStatus.BAD_REQUEST)
-                .message(msg)
+                .message( msg )
                 .localDateTime(LocalDateTime.now())
                 .build();
 
@@ -56,28 +63,17 @@ public class ErrorController {
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ErrorResponse> constraintException(ConstraintViolationException e){
 
-    public ResponseEntity<ErrorResponse> constraintException(ConstraintViolationException e) {
-
-        //stream
+        // Stream
         String msg = e.getConstraintViolations()
                 .stream()
                 .map(constraintViolation -> constraintViolation.getMessage())
                 .reduce("",(s, s2) -> s+s2);
 
-        //향상된 for구문
-//        Set<ConstraintViolation<?>> set = e.getConstraintViolations();  //위배된것이 set으로 들어가고
-//
-//        String test = "";
-//        for(ConstraintViolation<?> item:set){  //set에 있는 위배된  요소를 가져옴
-//            System.out.println(item);
-//            System.out.println(item.getMessage());
-//            test = item.getMessage();
-//        }
-
         ErrorResponse errorResponse = ErrorResponse.builder()
                 .httpStatus(HttpStatus.BAD_REQUEST)
-                .message(msg)
+                .message( msg )
                 .localDateTime(LocalDateTime.now())
                 .build();
 
@@ -85,4 +81,17 @@ public class ErrorController {
                 .status(HttpStatus.BAD_REQUEST)
                 .body(errorResponse);
     }
+
+//    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+//    public ResponseEntity<ErrorResponse> sqlException(SQLIntegrityConstraintViolationException e){
+//        ErrorResponse errorResponse = ErrorResponse.builder()
+//                .message(e.getMessage())
+//                .httpStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+//                .localDateTime(LocalDateTime.now())
+//                .build();
+//        return ResponseEntity
+//                .status(errorResponse.getHttpStatus())
+//                .body(errorResponse);
+//    }
+
 }

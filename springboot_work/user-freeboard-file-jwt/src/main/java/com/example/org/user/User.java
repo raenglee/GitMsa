@@ -1,6 +1,8 @@
 package com.example.org.user;
 
 import com.example.org.freeboard.FreeBoard;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import lombok.*;
@@ -49,6 +51,8 @@ public class User {
     private String email;
 
     @Column(length = 100)
+    @Schema(hidden = true)
+    @JsonIgnore
     private String password;
 
     @Column(updatable = false)

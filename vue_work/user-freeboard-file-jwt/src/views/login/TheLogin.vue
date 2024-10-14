@@ -30,19 +30,32 @@
 </template>
 
 <script setup>
-import { doLogin } from '@/api/loginApi';
+import { doLogin, doLoginCheck } from '@/api/loginApi';
 import { ref } from 'vue';
+import { useRouter} from 'vue-router';  
+import { useLoginStore } from '@/store/loginPinia';
+
 // email 변수에 초기값 설정
 const email = ref('aaa@naver.com');
 // password 변수에 초기값 설정
 const password = ref('1234');
+const router = useRouter();
+
+const loginPinia = useLoginStore();
 
 const submitLogin = async () => {
     const data = { "email": email.value, "password": password.value };
     const res = await doLogin(data);
+
     localStorage.setItem('token', res.data);
-    if(res.status==20){
-        alert("로그인 성공");
+    if(res.status==200){
+        // alert("로그인 성공"+res.data);
+        const result = await doLoginCheck();
+        loginPinia.login(result.data);
+        router.push({name:"freeboardlist"});
+    }else{
+        loginPinia.logout();
+        alert('아이디와 비밀번호를 다시 확인하세요.');
     }
 }
 </script>
