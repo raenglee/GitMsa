@@ -8,6 +8,9 @@ spring:
   sql:
     init:
       mode: always
+  output:
+    ansi:
+      enabled: always
 
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver

@@ -1,0 +1,2 @@
+# maria_container nnetwork 연결
+docker connect --network nginx-spring-maria maria_container

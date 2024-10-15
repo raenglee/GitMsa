@@ -1,0 +1,28 @@
+# build dist 폴더에 index.html
+npm run build
+
+# nginx 컨테이너 생성
+docker run -d --name my-nginx -p 80:80 --name nginx-spring-mariadb nginx
+
+#doocker
+docker network connect my-nginx nginx-spring-mariadb
+
+# host PC에서 dist 경로 이동
+cd dist
+
+# host PC에 있는 index.html 여러 파일을 my-nginx
+docker cp . my-nginx:/usr/share/nginx/html
+
+docker cp default.conf my-nginx:/etc/nginx/conf.d/default.conf
+
+#윈도우 호스트 PC 에서 가상 PC 리눅스인 my-nginx 컨테이너로 이동하는 명령어
+docker exec -it my-nginx bash
+
+#컨테이너를 이미지 파일로 변경하기
+docker commit my-nginx parkmyounghoi/my-nginx
+
+#dockerhub에 업로드 하기
+docker push parkmyounghoi/my-nginx
+
+#에러 페이지 생성 
+error_page 404 /index.html
