@@ -1,0 +1,15 @@
+#컨테이너 중지
+docker stop freeboardvue
+
+#도커 이미지삭제
+docekr rmi raengju/freeboardvue
+#도커 컨테이너 삭제
+docker rm freeboardvue
+
+#도커 이미지 만드는 명령어
+docker build -t raengju/freeboardvue .
+#도커 컨테이너 생성
+docker run -d -p 5173:5173 --name freeboardvue raengju/freeboardvue
+
+#터미널에서 ./cmd_ 입력하면 지금 여기 적혀있는 명령어가 다 실행됨
+#ci/cd -> 명령어를 모아두고 한번에 실행하는 것

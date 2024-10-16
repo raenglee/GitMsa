@@ -1,2 +1,16 @@
 # maria_container nnetwork 연결
-docker connect --network nginx-spring-maria maria_container
+docker network connect nginx-spring-maria maria_container
+
+# \ <- 줄바꿈은 깃배시로 열었을때만 사용 가능
+# -d = 백그라운드 실행 옵션
+docker run -d -p 10000:10000 \
+--network nginx-spring-maria \
+--name freeboard_container \
+raengju/freeboard
+
+docker run -p 10000:10000 \
+-e SPRING_DATASOURCE_URL=jdbc:mariadb://maria_container:3306/jh \
+-e SPRING_DATASOURCE_PASSWORD=1234 \
+-d --network nginx-spring-maria \
+--name freeboard-container \
+raengju/freeboard

@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  # MariaDB 데이터베이스 서비스
+  # docker run -d -p 3306:3306 --name mariadb -e MARIADB_ROOT_PASSWORD=1234 --network nginx-spring-maria mariadb:10.5
+  mariadb:
+    image: mariadb:10.5
+    container_name: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: p@ssword   # root 사용자 비밀번호 설정
+      MYSQL_DATABASE: jh                 # 기본 데이터베이스 설정
+      MYSQL_USER: jh                     # 사용자 설정
+      MYSQL_PASSWORD: p@ssword        # 사용자 비밀번호 설정
+    ports:
+      - 3306:3306  # MariaDB의 포트를 호스트로 노출 (로컬 개발용)
+    networks:
+      - my_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    # volumes:
+    #   - mariadb_data:/var/lib/mysql  # 데이터가 유지되도록 볼륨을 사용
+
+  # Spring Boot 애플리케이션 서비스 docker run -e
+  springboot:
+    image: raengju/freeboard  # 실제 빌드된 Spring Boot 애플리케이션 이미지
+    container_name: springboot
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://mariadb:3306/jh?serverTimezone=Asia/Seoul
+      SPRING_DATASOURCE_USERNAME: jh                       # MariaDB 사용자
+      SPRING_DATASOURCE_PASSWORD: p@ssword              # MariaDB 사용자 비밀번호
+      SERVER_PORT: 8080    # 바꾸고싶으면 바꿔도 됨
+      #      SPRING_SQL_INIT_MODE: never 만약 바꾸고싶다면 이런식으로 바꾸면 됨
+    ports:
+      - 8080:8080  # Spring Boot 포트를 호스트로 노출
+    depends_on:
+      mariadb:  # MariaDB가 스프링부트보다 먼저 실행되도록 설정 마리아디비가 먼저 실행되지않으면 스프링부트는 꺼짐
+        condition: service_healthy
+    networks:
+      - my_network
+    
+
+  # Vue 서비스
+  freebaordvue:
+    image: raengju/freeboardvue
+    container_name: freebaordvue
+    ports:
+      - 5173:5173
+    depends_on:
+      - springboot  # Spring Boot가 먼저 실행되도록 설정
+    networks:
+      - my_network
+    environment:
+    #- CHOKIDAR_USEPOLLING=true  # vue 소스 바뀌면 자동으로 적용 docker copy
+    # 웹브라우저에서 axios 토인할때 사용하는 외부 IP port => 집에서도 호출 가능
+    - VITE_API_URL=http://112.222.157.156:10003  # 여기서 환경 변수를 설정합니다.
+
+
+# 네트워크 설정
+networks:
+  my_network:
+    driver: bridge
