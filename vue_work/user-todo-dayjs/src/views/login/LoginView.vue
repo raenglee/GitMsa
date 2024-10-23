@@ -24,8 +24,9 @@ const kakaoLogin = () => {
 	});
 };
 const kakaoLogout = () => {
-	window.Kakao.Auth.logout();
-	// localStorage.removeItem('kakao_access_token');
+	// window.Kakao.Auth.logout();
+	localStorage.removeItem('kakao_access_token');
+	alert("로그아우 성공");
 	// localStorage.removeItem('kakao_refresh_token');
 	// localStorage.removeItem('kakao_id');
 	// alert('로그아웃 성공');

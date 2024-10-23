@@ -18,15 +18,17 @@
           <RouterLink to="/about" class="hover:text-blue-500">ABOUT</RouterLink>
           <RouterLink to="/month" class="hover:text-blue-500">MONTH</RouterLink>
 					<RouterLink to="/login" class="hover:text-blue-500">LOGIN</RouterLink>
+          <RouterLink to="/message" class="hover:text-blue-500">MESSAGE</RouterLink>
         </div>
       </div>
       <!-- Mobile Menu (hidden by default) -->
 			 <template v-if="mobileMenu">
       <div id="mobile-menu" class="bg-white">
-        <RoterLink to="/" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Home</RoterLink>
-        <RoterLink to="/about" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">ABOUT</RoterLink>
-        <RoterLink to="/month" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">MONTH</RoterLink>
-				<RoterLink to="/login" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">LOGIN</RoterLink>
+        <RouterLink to="/" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Home</RouterLink>
+        <RouterLink to="/about" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">ABOUT</RouterLink>
+        <RouterLink to="/month" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">MONTH</RouterLink>
+				<RouterLink to="/login" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">LOGIN</RouterLink>
+        <RouterLink to="/message" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">MESSAGE</RouterLink>
       </div>
 		</template>
     </div>

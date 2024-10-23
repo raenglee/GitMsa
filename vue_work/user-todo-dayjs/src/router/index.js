@@ -3,6 +3,7 @@ import HomeView from '@/views/HomeView.vue';
 import MonthView from '@/views/MonthView.vue';
 import LoginView from '@/views/login/LoginView.vue';
 import OauthView from '@/views/login/OauthView.vue';
+import MessageView from '@/views/MessageView.vue';
 
 const loginRouter = [
 	{
@@ -17,7 +18,6 @@ const loginRouter = [
 	},
 ];
 const freeBoardRouter = [];
-
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
 	routes: [
@@ -33,7 +33,11 @@ const router = createRouter({
 			name: 'month',
 			component: MonthView,
 		},
-
+		{
+			path: '/message',
+			name: 'message',
+			component: MessageView,
+		},
 		{
 			path: '/about',
 			name: 'about',

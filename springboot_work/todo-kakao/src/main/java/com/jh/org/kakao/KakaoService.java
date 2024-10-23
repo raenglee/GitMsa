@@ -1,5 +1,6 @@
 package com.jh.org.kakao;
 
+import com.jh.org.filter.JWTUtils;
 import com.jh.org.kakao.dto.KakaoTokenDto;
 import com.jh.org.kakao.dto.KakaoUserInfoDto;
 import com.jh.org.kakao.jpa.KakaoEntity;
@@ -7,6 +8,7 @@ import com.jh.org.kakao.jpa.KakaoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -24,8 +26,17 @@ import java.util.UUID;
 public class KakaoService {
 
     private final KakaoRepository kakaoRepository;
+    private final Environment environment;  // 야믈에 있는 oauth 클라이언트 아이디, 시크릿 가져오는것
+    private final JWTUtils jwtUtils;
 
-    public void getToken(String code) {
+    /*
+     * 1. 카카오 "https://kauth.kakao.com/oauth/token" -> access Token 발급
+     * 2. 카카오 "https://kapi.kakao.com/v2/user/me" -> user 정보 가져오기
+     * 3. KakaoEntity -> 테이블 행 삽입 -> 해당하는 이메일 검사
+     * 4. JWT(JSON Wen Token) -> JWTUtils.createJWT(eamil)해서 반환
+     */
+
+    public String getToken(String code) {
 
         try {
             // 토큰 가져오기 시작
@@ -37,10 +48,10 @@ public class KakaoService {
             // body 내용
             MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
             body.add("grant_type", "authorization_code");
-            body.add("client_id", "559f5a4dc876ebc08334fa9126719be9");
+            body.add("client_id", environment.getProperty("oauth.kakao.client_id"));
             body.add("redirect_uri", "http://localhost:5173/oauth");
             body.add("code", code);
-            body.add("client_secret", "bT6qQahRvyJOpbdo4OAMbq0APL567ijM");
+            body.add("client_secret", environment.getProperty("oauth.kakao.client_secret"));
 
             HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(body, headers);
 
@@ -75,37 +86,47 @@ public class KakaoService {
             // db저장
             kakaoRepository.save(kakaoEntity);
 
+            // email만 JWT token에 담는 것
+            String jwt = jwtUtils.createJwt(kakaoEntity.getEmail());
+            return jwt;
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+        return "false";
+
     }
 
-    public void messageSend(String email, String message){
+    public void messageSend(String jwt, String message) {
+        String email = jwtUtils.getEmailFromJwt(jwt);
+
         RestTemplate restTemplate = new RestTemplate();
-        // access
+        // access 메세지 보내는 주소
         String url = "https://kapi.kakao.com/v2/api/talk/memo/default/send";
 
+        // headers 만들기 -> 헤더에는 content-type과 access Token 필요
         MultiValueMap headers2 = new LinkedMultiValueMap();
         headers2.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-        // db accesstoken 가져올 계획...
-//        headers2.add("Authorization", "Bearer " + kakaoTokenDto.getAccess_token());
 
+        KakaoEntity kakaoEntity = kakaoRepository.findByEmail(email);
+        headers2.add("Authorization", "Bearer " + kakaoEntity.getAccess_token());
+
+        // body message
         MultiValueMap<String, String> body2 = new LinkedMultiValueMap<>();
-        body2.add("template_object", String.format(messageString(),"aaa@naver.com"));
+        body2.add("template_object", String.format(messageString(), email, message));
 
         HttpEntity<MultiValueMap<String, String>> requestEntity2 = new HttpEntity<>(body2, headers2);
 
-        ResponseEntity<String> result2 = restTemplate.exchange(url, HttpMethod.POST, requestEntity2 , String.class);
-        log.info("msg 카카오톡 메시지 전송 성공....."+result2.toString());
+        ResponseEntity<String> result2 = restTemplate.exchange(url, HttpMethod.POST, requestEntity2, String.class);
+        log.info("msg 카카오톡 메시지 전송 성공....." + result2.toString());
 
         // 메시지 보내기 끝
     }
 
-    public String messageString(){
+    public String messageString() {
         return "{\n" +
                 "        \"object_type\": \"text\",\n" +
-                "        \"text\": \"안녕하세요 %s 님 우리페이지 가입해 주셔서 감사합니다.\",\n" +
+                "        \"text\": \"%s %s\",\n" +
                 "        \"link\": {\n" +
                 "            \"web_url\": \"http://first.hellomh.site/first/test\",\n" +
                 "            \"mobile_web_url\": \"http://first.hellomh.site/first/test\"\n" +

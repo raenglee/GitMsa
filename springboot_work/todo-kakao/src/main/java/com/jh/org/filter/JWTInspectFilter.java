@@ -19,10 +19,18 @@ public class JWTInspectFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
-        // jwt 들어오면... 안들어오면...
+        /*
+        프론트 에서 넘겨준
+        jwt 토큰 까서...
+        UserPasswordAuthenticationToken
+        authentication
+        securityContext
+         */
 
+//        SecurityContextHolder.getContext()
+//                .setAuthentication(authentication);
 
-        //다음 요청으로 진행하라
+        // 지나가라...
         filterChain.doFilter(request, response);
     }
 }
