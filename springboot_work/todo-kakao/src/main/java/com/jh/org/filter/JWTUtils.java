@@ -20,8 +20,8 @@ import java.util.Date;
 public class JWTUtils {
 
     // Environment || @Value 로 시크릿키를 가져올수있음
-    @Value("${msa.jwt.secret}")
-    private String SECRET_KEY;
+//    @Value("${msa.jwt.secret}")
+    private String SECRET_KEY = "abcdefghijklmnopqrstuvwxyz01234567890";
 
     public String createJwt(String email) {
         String jwt = Jwts.builder()

@@ -20,7 +20,22 @@ export const msgSend = async (message) => {
 				Authorization: `Bearer ${localStorage.getItem('token')}`,
 			},
 		});
-		return res.data;
+		return res;
+	} catch (err) {
+		console.error(err);
+		return err;
+	}
+};
+
+export const loginCheck = async () => {
+	try {
+		const res = await axios.get(`${url}/user/info`, {
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${localStorage.getItem('token')}`,
+			},
+		});
+		return res;
 	} catch (err) {
 		console.error(err);
 		return err;

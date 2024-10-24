@@ -11,20 +11,24 @@
 </template>
 
 <script setup>
-import { watchEffect, ref } from 'vue';
+import { watchEffect } from 'vue';
 import { useRoute } from 'vue-router';
-import { login } from '@/api/lognApi';
+import { login, loginCheck } from '@/api/loginApi';
+import { useUserStore } from '@/stores/user';
 
+const useStore = useUserStore();
 const route = useRoute();
-const loginCheck = ref(false);
 
 watchEffect(async () => {
 	// console.log('code = ', route.query.code);
 	if (route.query.code) {
 		const data = await login(route.query.code);
 		localStorage.setItem('token', data);
-		loginCheck.value = true;
-		console.log('loginCheck.value =' + loginCheck.value);
+		const res = await loginCheck();
+	if (res.status.toString().startsWith('2')) {
+		console.log(res.data);
+		useStore.login(res.data);
+	}
 	}
 });
 </script>

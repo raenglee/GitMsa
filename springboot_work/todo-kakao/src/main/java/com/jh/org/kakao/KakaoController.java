@@ -33,7 +33,6 @@ public class KakaoController {
                                               @RequestHeader(value = "Authorization", required = false) String authorization
     ) {
         log.info(authorization);
-        //b
         try {
             String jwt = authorization.split("Bearer ")[1];
             kakaoService.messageSend(jwt, message);

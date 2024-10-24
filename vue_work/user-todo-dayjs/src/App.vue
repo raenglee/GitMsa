@@ -1,14 +1,14 @@
 <script setup>
-import { RouterView } from 'vue-router'
-import TheLayoutNav from './components/TheLayoutNav.vue';
+import { RouterLink, RouterView } from 'vue-router';
 
+// nav 위치 설정
+import TheLayoutNav from './components/TheLayoutNav.vue';
 </script>
 
 <template>
+	<!-- ...사용한 곳...-->
+	<TheLayoutNav />
 
-  <TheLayoutNav />
-  <RouterView />
+	<RouterView class="pt-16" />
 </template>
-
-<style scoped>
-</style>
+<style scoped></style>

@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import { msgSend } from '@/api/lognApi';
+import { msgSend } from '@/api/loginApi';
 import { ref } from 'vue';
 const message = ref('');
 const sendMessage = async () => {
@@ -26,7 +26,13 @@ const sendMessage = async () => {
 		alert('로그인 하셔야 메세지를 보낼 수 있습니다.');
 		return;
 	}
-	await msgSend(message.value);
+	const res = await msgSend(message.value);
+	if(res.status.toString().startWith('2')) {
+		alert('메시지를 전송하였습니다');
+		message.value = '';
+	} else{
+		alert('메시지 전송 실패')
+	}
 };
 </script>
 
