@@ -30,8 +30,7 @@ public class KakaoUserInfoDto {
     @Data
     @ToString
     public static class KakaoAccount {
-        private boolean profileNicknameNeedsAgreement;
-        private boolean profileImageNeedsAgreement;
+        @JsonProperty(value = "profile")
         private Profile profile;
         @JsonProperty(value = "email")
         private String email;

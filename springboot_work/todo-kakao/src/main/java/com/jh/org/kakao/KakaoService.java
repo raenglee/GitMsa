@@ -1,6 +1,5 @@
 package com.jh.org.kakao;
 
-import com.jh.org.KakaoUtils;
 import com.jh.org.error.UserException;
 import com.jh.org.filter.JWTUtils;
 import com.jh.org.kakao.dto.KakaoTokenDto;
@@ -28,16 +27,15 @@ import java.util.UUID;
 public class KakaoService {
 
     private final KakaoRepository kakaoRepository;
-    private final Environment environment;  // 야믈에 있는 oauth 클라이언트 아이디, 시크릿 가져오는것
+    private final Environment environment;
     private final JWTUtils jwtUtils;
 
     /*
-     * 1. 카카오 "https://kauth.kakao.com/oauth/token" -> access Token 발급
-     * 2. 카카오 "https://kapi.kakao.com/v2/user/me" -> user 정보 가져오기
-     * 3. KakaoEntity -> 테이블 행 삽입 -> 해당하는 이메일 검사
-     * 4. JWT(JSON Wen Token) -> JWTUtils.createJWT(eamil)해서 반환
+     1. 카카오 https://kauth.kakao.com/oauth/token -> accessToken 발급
+     2. 카카오 https://kapi.kakao.com/v2/user/me -> 유저정보 가져오기
+     3. KakaoEntity -> 테이블 행삽입 -> 해당하는 이메일 검사...
+     4. JWT(JSON Web Token) -> JWTUtils.createJWT(email) 해서 반환...
      */
-
     public String getToken(String code) {
 
         try {
@@ -70,7 +68,6 @@ public class KakaoService {
                     , new HttpEntity<>(null, httpHeaders)
                     , KakaoUserInfoDto.class
             );
-
             KakaoUserInfoDto kakaoUserInfoDto = res.getBody();
 
             // 유저 정보 가져오기 끝
@@ -128,7 +125,6 @@ public class KakaoService {
         if (kakaoEntity == null) {
             throw new UserException("could not find Email");
         }
-
 
         headers.add("Authorization", "Bearer " + kakaoEntity.getAccess_token());
 

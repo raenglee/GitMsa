@@ -25,9 +25,7 @@ public class SecurityConfig {
         httpSecurity.httpBasic(http -> http.disable());
 
         // 모든 페이지 요청 허용
-        httpSecurity.authorizeHttpRequests(
-                auth -> auth.requestMatchers("/**").permitAll()
-        );
+        httpSecurity.authorizeHttpRequests( auth -> auth.requestMatchers("/**").permitAll());
 
         httpSecurity.addFilterAt(
                 new SecurityFilter(new JWTUtils()),
@@ -37,7 +35,5 @@ public class SecurityConfig {
         httpSecurity.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         return httpSecurity.build();
-
-
     }
 }

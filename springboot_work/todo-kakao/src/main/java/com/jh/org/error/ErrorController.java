@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ErrorController {
 
     @ExceptionHandler(UserException.class)
-    public ResponseEntity<String> handleMyException(UserException e){
+    public ResponseEntity<String> handleMyException(UserException e) {
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
-                .body(e.getMessage());
+                .body("error/my-error");
     }
 }

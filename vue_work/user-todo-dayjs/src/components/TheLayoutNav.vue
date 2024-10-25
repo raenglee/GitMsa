@@ -3,7 +3,7 @@
 		<div class="container mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="flex justify-between items-center py-4">
 				<!-- Logo -->
-				<div class="text-2xl font-bold text-gray-800 cursor-pointer">ju todo</div>
+				<div class="text-2xl font-bold text-gray-800 cursor-pointer">JU 할일</div>
 				<!-- Hamburger Menu (for mobile) -->
 				<div class="sm:hidden">
 					<button @click="menuDisply" id="menu-btn" class="text-gray-800 focus:outline-none">

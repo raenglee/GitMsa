@@ -19,8 +19,8 @@ const now = dayjs();
 // console.log(now.format('MM-DD'));
 // console.log(now.format('DD'));
 
-// const firstday = dayjs().startOf('month');
-// const lastday = dayjs().endOf('month');
+const firstday = dayjs().startOf('month');
+const lastday = dayjs().endOf('month');
 
 // console.log(dayjs().startOf('year').format('YYYY/MM/DD'));
 // console.log(dayjs().startOf('month').format('YYYY/MM/DD'));
@@ -32,14 +32,14 @@ const now = dayjs();
 // console.log(lastday.day());
 
 // 10월 17일 -> 9월 17일
-const beforeMonth = dayjs().subtract(1,'month').format('YYYY/MM/DD');
+const beforeMonth = dayjs().subtract(1, 'month').format('YYYY/MM/DD');
 
 // 9월 마지막날
 const sepLastday = dayjs(beforeMonth).endOf('month');
 // console.log("sepLastday = "+sepLastday.format('YYYY/MM/DD'));
 
 // 10월 17일 -> 11월 17일
-const afterMonth = dayjs().add(1,'month').format('YYYY/MM/DD');
+const afterMonth = dayjs().add(1, 'month').format('YYYY/MM/DD');
 // 11월 마지막날
 const novLastday = dayjs(afterMonth).endOf('month');
 // console.log("sepLastday = "+novLastday.format('YYYY/MM/DD'));
@@ -55,24 +55,23 @@ const novLastday = dayjs(afterMonth).endOf('month');
 </script>
 
 <template>
-  <main>
-    <h1>HOME 달력 연습</h1>
+	<main>
+		<h1>HOME 달력 연습</h1>
 
-    <h1 class="text-5xl">hello vue</h1>
-    <h1 class="text-5xl">{{ now.format('YYYY/MM/DD') }}</h1>
-    <h1 class="text-5xl">{{ now.get('month') }}월</h1>
+		<h1 class="text-5xl">hello vue</h1>
+		<h1 class="text-5xl">{{ now.format('YYYY/MM/DD') }}</h1>
+		<h1 class="text-5xl">{{ now.get('month') }}월</h1>
 
-    <h1 class="text-5xl">{{ dayjs().subtract(1,'month').format('YYYY/MM/DD') }}</h1>
-    <h1 class="text-5xl">{{ dayjs().subtract(1,'day').format('YYYY/MM/DD') }}</h1>
-    <h1 class="text-5xl">{{ dayjs().subtract(1,'year').format('YYYY/MM/DD') }}</h1>
+		<h1 class="text-5xl">{{ dayjs().subtract(1, 'month').format('YYYY/MM/DD') }}</h1>
+		<h1 class="text-5xl">{{ dayjs().subtract(1, 'day').format('YYYY/MM/DD') }}</h1>
+		<h1 class="text-5xl">{{ dayjs().subtract(1, 'year').format('YYYY/MM/DD') }}</h1>
 
-    <h1 class="text-5xl">{{ now.add(1,'month').format('YYYY/MM/DD') }}</h1>
-    <h1 class="text-5xl">{{ now.add(1,'day').format('YYYY/MM/DD') }}</h1>
-    <h1 class="text-5xl">{{ now.add(1,'year').format('YYYY/MM/DD') }}</h1>
+		<h1 class="text-5xl">{{ now.add(1, 'month').format('YYYY/MM/DD') }}</h1>
+		<h1 class="text-5xl">{{ now.add(1, 'day').format('YYYY/MM/DD') }}</h1>
+		<h1 class="text-5xl">{{ now.add(1, 'year').format('YYYY/MM/DD') }}</h1>
 
-    <hr>
-    <h1 class="text-3xl">첫날 {{ now.startOf('month').format('YYYY/MM/DD') }}</h1>
-    <h1 class="text-3xl">마지막날 {{ now.endOf('month').format('YYYY/MM/DD') }}</h1>
-
-  </main>
+		<hr />
+		<h1 class="text-3xl">첫날 {{ now.startOf('month').format('YYYY/MM/DD') }}</h1>
+		<h1 class="text-3xl">마지막날 {{ now.endOf('month').format('YYYY/MM/DD') }}</h1>
+	</main>
 </template>

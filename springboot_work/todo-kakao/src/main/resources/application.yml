@@ -23,7 +23,7 @@ spring:
 # jpa create
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
 
       ## sql ??? ???
     properties:
