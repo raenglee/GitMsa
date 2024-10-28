@@ -21,13 +21,28 @@ public class TodoController {
     @PostMapping("save")
     public ResponseEntity<TodoEntity> saveTodo(@RequestBody TodoEntity todo,
                                                @AuthenticationPrincipal UserDetails userDetails
-    )   {
+    ) {
+//        UserDetails userDetails1 = (UserDetails)
+//                SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(userDetails == null){
-            // 200 ok
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
+
         KakaoEntity kakaoEntity = kakaoRepository.findByEmail(userDetails.getUsername());
         todo.setKakaoEntity(kakaoEntity);
         return ResponseEntity.ok(todoRepository.save(todo));
     }
+
+    @GetMapping("findall")
+    public ResponseEntity<Iterable<TodoEntity>> findAllTodo(
+            @AuthenticationPrincipal UserDetails userDetails
+    ) {
+        if(userDetails == null){
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        KakaoEntity kakaoEntity = kakaoRepository.findByEmail(userDetails.getUsername());
+        return ResponseEntity.ok(todoRepository.findAllByKakaoEntity(kakaoEntity));
+    }
+
 }

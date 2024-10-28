@@ -13,8 +13,8 @@ const loginRouter = [
 		component: LoginView,
 	},
 	{
-		path: '/loginprocess',
-		name: 'loginprocess',
+		path: '/oauth',
+		name: 'oauth',
 		component: LoginProcessView,
 	},
 ];
@@ -40,14 +40,14 @@ const router = createRouter({
 			component: MessageView,
 		},
 		{
-			path: '/about',
-			name: 'about',
-			component: () => import('../views/AboutView.vue'),
-		},
-		{
 			path: '/mypage',
 			name: 'mypage',
 			component: MyPageView,
+		},
+		{
+			path: '/about',
+			name: 'about',
+			component: () => import('../views/AboutView.vue'),
 		},
 	],
 });

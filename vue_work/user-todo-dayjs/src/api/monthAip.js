@@ -4,7 +4,7 @@ const url = 'http://localhost:20000';
 
 export const saveTodo = async (title, content, selectDate) => {
 	const data = {
-		title, //변수명이랑 객체가 똑같을땐 안적어도 괜찮음
+		title,
 		content,
 		selectDate,
 		completed: false,
@@ -14,7 +14,22 @@ export const saveTodo = async (title, content, selectDate) => {
 		Authorization: `Bearer ${localStorage.getItem('token')}`,
 	};
 	try {
-		const res = await axios.get(`${url}/todo/save`, data, { headers });
+		const res = await axios.post(`${url}/todo/save`, data, { headers });
+		return res;
+	} catch (err) {
+		console.error(err);
+		return err;
+	}
+};
+
+export const getTodos = async () => {
+	if (localStorage.getItem('token') === undefined || localStorage.getItem('token') === null) return;
+	const headers = {
+		'Content-Type': 'application/json',
+		Authorization: `Bearer ${localStorage.getItem('token')}`,
+	};
+	try {
+		const res = await axios.get(`${url}/todo/findall`, { headers });
 		return res;
 	} catch (err) {
 		console.error(err);

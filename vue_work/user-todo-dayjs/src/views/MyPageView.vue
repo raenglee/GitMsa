@@ -1,9 +1,9 @@
 <template>
 	<div class="flex flex-col items-center justify-center gap-4 p-6 rounded-lg shadow-lg min-height-80">
 		<div class="flex flex-col items-center justify-center">
-			<h1 class="text-5xl my-10">MyPageView</h1>
-			<h1>EMAIL = {{ userStore.email }}</h1>
-			<h1>nickName = {{ userStore.nickName }}</h1>
+			<h1 class="text-5xl my-10">마이페이지</h1>
+			<h1>이메일: {{ userStore.email }}</h1>
+			<h1>닉네임: {{ userStore.nickName }}</h1>
 			<h1>userId = {{ userStore.userId }}</h1>
 			<img class="w-64 my-10 rounded-full" :src="userStore.profileImage" />
 		</div>

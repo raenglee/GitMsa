@@ -9,6 +9,6 @@ import TheLayoutNav from './components/TheLayoutNav.vue';
 	<!-- ...사용한 곳...-->
 	<TheLayoutNav />
 
-	<RouterView class="pt-16" />
+	<RouterView />
 </template>
 <style scoped></style>

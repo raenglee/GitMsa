@@ -12,23 +12,23 @@ import java.time.LocalDate;
 @Data
 @Table(name="todos")
 public class TodoEntity {
-
     @Id
     @Schema(hidden = true)
-    //autoIncrement
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Schema(example = "할일 1")
-    @Size(min = 2, max = 255)
+    @Schema(example = "할일제목")
+    @Size(min = 2,max = 255)
     private String title;
-    @Schema(example = "할일을 적으세요")
+    @Schema(example = "할일 적으세요")
     private String content;
     @Schema(example = "false")
-    private boolean Completed;
+    private boolean completed;
     private LocalDate selectDate;
 
     @Schema(hidden = true)
-    @ManyToOne(targetEntity = TodoEntity.class)
+    @ManyToOne
+    @JoinColumn(name = "kakao_id")
     private KakaoEntity kakaoEntity;
+
 }

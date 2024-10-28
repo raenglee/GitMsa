@@ -5,14 +5,24 @@
 @tailwind utilities;
 
 * {
-   font-family: 'Noto Sans KR', 'Open Sans', sans-serif;
-   font-optical-sizing: auto;
-   font-weight: 800;
-   font-style: normal;
-   font-variation-settings: 'wdth' 100;
+	font-family: 'Noto Sans KR', 'Open Sans', sans-serif;
+	font-optical-sizing: auto;
+	font-weight: 800;
+	font-style: normal;
+	font-variation-settings: 'wdth' 100;
 }
 
 .min-height-80 {
-    @apply min-h-screen;
-    min-height: calc(100vh - 80px);
- }
+	@apply min-h-screen;
+	min-height: calc(100vh - 80px);
+}
+
+.toast{
+	position: fixed;
+	top: 7rem;
+	right: 2rem;
+	padding: 1rem;
+	border-radius: 0.5rem;
+	background-color: cornflowerblue;
+	transition: opacity 0.5;
+}

@@ -4,9 +4,11 @@ const url = 'http://localhost:20000';
 
 // const apiClient = axios.create({
 // 	baseURL: 'http://localhost:20000',
-// 	headers: { 'content-Type': 'application/json', Authorization: 'Bearer ' + localStorage.getItem('token') },
+// 	headers: {
+// 		'content-type': 'application/json',
+// 		Authorization: 'Bearer ' + localStorage.getItem('token'),
+// 	},
 // });
-
 
 export const login = async (code) => {
 	try {
@@ -44,8 +46,8 @@ export const loginCheck = async () => {
 				Authorization: `Bearer ${localStorage.getItem('token')}`,
 			},
 		});
-		// const res = await apiClient.get('/user/info',);
-		return res
+		// const res = await apiClient.get(`/user/info`);
+		return res;
 	} catch (err) {
 		console.error(err);
 		return err;
