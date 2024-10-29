@@ -26,7 +26,6 @@ watchEffect(async () => {
 		if (!res.status.toString().startsWith('2')) return;
 		res = await loginCheck();
 		if (res.status.toString().startsWith('2')) {
-			console.log(res.data);
 			useStore.login(res.data);
 		}
 	}
