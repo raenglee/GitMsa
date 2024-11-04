@@ -7,8 +7,12 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/raenglee/spring-cloud-config
+          uri: https://github.com/dron512/spring-cloud-config
           default-label: main
+#          username: <github-id>
+#          password: <github-password>
+
+# 환경설정 변경되면 refresh post 요청을 환경설정 업데이트..
 management:
   endpoints:
     web:
