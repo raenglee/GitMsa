@@ -3,6 +3,7 @@ package com.green.userservice.user.service;
 import com.green.userservice.error.UserException;
 import com.green.userservice.user.jpa.UserEntity;
 import com.green.userservice.user.jpa.UserRepository;
+import com.green.userservice.user.vo.LoginResponse;
 import com.green.userservice.user.vo.UserRequest;
 import com.green.userservice.user.vo.UserResponse;
 import lombok.RequiredArgsConstructor;
@@ -34,5 +35,10 @@ public class UserSerivceImpl implements UserService{
         UserResponse userResponse = mapper.map(userEntity,UserResponse.class);
 
         return userResponse;
+    }
+
+    @Override
+    public LoginResponse login(String email, String password){
+        return null;
     }
 }
