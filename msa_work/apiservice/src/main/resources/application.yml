@@ -23,3 +23,7 @@ spring:
           uri: lb://FIRST-SERVICE
           predicates:
             - Path=/first-service/**
+        - id: second-service
+          uri: lb://SECOND-SERVICE
+          predicates:
+            - Path=/second-service/**
