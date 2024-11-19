@@ -24,13 +24,13 @@ public class UserController {
     }
 
     @GetMapping("login")
-    public ResponseEntity<LoginResponse> getUser() {
-        @RequestParam(value = "email") String eamil,
-        @RequestParam(value = "password") String password) {
+    public ResponseEntity<LoginResponse> getUser(
+            @RequestParam(value = "email") String email,
+            @RequestParam(value = "password") String password) {
 
-    LoginResponse loginResponse = userService.login(email, password);
+        LoginResponse loginResponse = userService.login(email,password);
 
-        return ResponseEntity.ok(null);
+        return ResponseEntity.ok(loginResponse);
     }
 
     @GetMapping("kakaologin")

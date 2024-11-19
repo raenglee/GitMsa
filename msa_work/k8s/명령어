@@ -1,0 +1,2 @@
+kubectl scale deployment firstservice --replicas=3
+kubectl scale deployment secondservice --replicas=3

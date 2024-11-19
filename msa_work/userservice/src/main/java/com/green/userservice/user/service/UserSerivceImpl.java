@@ -1,6 +1,7 @@
 package com.green.userservice.user.service;
 
 import com.green.userservice.error.UserException;
+import com.green.userservice.jwt.JwtUtils;
 import com.green.userservice.user.jpa.UserEntity;
 import com.green.userservice.user.jpa.UserRepository;
 import com.green.userservice.user.vo.LoginResponse;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -17,6 +19,7 @@ import java.util.UUID;
 public class UserSerivceImpl implements UserService{
 
     private final UserRepository userRepository; // UserRepository dependency injection
+    private final JwtUtils jwtUtils;
 
     @Override
     public UserResponse join(UserRequest userRequest) {
@@ -38,7 +41,22 @@ public class UserSerivceImpl implements UserService{
     }
 
     @Override
-    public LoginResponse login(String email, String password){
-        return null;
+    public LoginResponse login(String email, String password) {
+
+        // email password 확인 하고 틀리면 Exception 처리
+        UserEntity userEntity =
+                userRepository.findByEmailAndPassword(email, password)
+                        .orElseThrow(
+                                () ->
+                                new UserException("Invalid email or password")
+                        );
+        // 로그인한 유저가 있으면 loginResponse 객체 생성해서 controller에 반환
+        LoginResponse loginResponse = new LoginResponse();
+        loginResponse.setUserId(userEntity.getUserId());
+        loginResponse.setAccessToken(jwtUtils.createAccessToken(userEntity.getEmail(), userEntity.getUserId()));
+        loginResponse.setRefreshToken(jwtUtils.createRefreshToken(userEntity.getEmail()));
+        loginResponse.setEmail(userEntity.getEmail());
+
+        return loginResponse;
     }
 }
