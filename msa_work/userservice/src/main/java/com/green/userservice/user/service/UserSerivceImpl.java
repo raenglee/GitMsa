@@ -11,12 +11,14 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class UserSerivceImpl implements UserService{
+public class UserSerivceImpl implements UserService {
 
     private final UserRepository userRepository; // UserRepository dependency injection
     private final JwtUtils jwtUtils;
@@ -35,7 +37,7 @@ public class UserSerivceImpl implements UserService{
         userEntity.setUserId(UUID.randomUUID().toString());
         userEntity = userRepository.save(userEntity); // UserRepository 에서 UserEntity를 저장
 
-        UserResponse userResponse = mapper.map(userEntity,UserResponse.class);
+        UserResponse userResponse = mapper.map(userEntity, UserResponse.class);
 
         return userResponse;
     }
@@ -48,7 +50,7 @@ public class UserSerivceImpl implements UserService{
                 userRepository.findByEmailAndPassword(email, password)
                         .orElseThrow(
                                 () ->
-                                new UserException("Invalid email or password")
+                                        new UserException("Invalid email or password")
                         );
         // 로그인한 유저가 있으면 loginResponse 객체 생성해서 controller에 반환
         LoginResponse loginResponse = new LoginResponse();
@@ -58,5 +60,14 @@ public class UserSerivceImpl implements UserService{
         loginResponse.setEmail(userEntity.getEmail());
 
         return loginResponse;
+    }
+
+    public List<UserResponse> list() {
+        List<UserEntity> list = userRepository.findAll();
+        List<UserResponse> userResponses = new ArrayList<>();
+        list.forEach(
+                userEntity -> userResponses.add(new ModelMapper().map(userEntity, UserResponse.class))
+        );
+        return userResponses;
     }
 }

@@ -27,7 +27,7 @@ public class JWTUtills {
         this.accessTokenExpirationTime = this.environment.getProperty("token.access_token_expiration");
         this.refreshTokenExpirationTime = this.environment.getProperty("token.refresh_token_expiration");
         this.secretKey = new SecretKeySpec( Base64.getEncoder().encode( SECRET_KEY.getBytes()),
-                SignatureAlgorithm.HS256.getJcaName()); )
+                SignatureAlgorithm.HS256.getJcaName());
     }
 
     public String createAccessToken(String email, String userId){

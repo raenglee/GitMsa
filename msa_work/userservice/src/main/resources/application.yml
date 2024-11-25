@@ -6,10 +6,10 @@ spring:
     name: user-service
 
   datasource:
-    username: root
-    password: 1234
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://localhost:3306/msa?serverTimezone=Asia/Seoul
+    username: root
+    password: 1234
   output:
     ansi:
       enabled: always
@@ -33,23 +33,23 @@ spring:
 mh:
   value: "abcdefg"
 
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka
+  #eureka:
+  #  client:
+  #    register-with-eureka: true
+  #    fetch-registry: true
+  #    service-url:
+  #      defaultZone: http://localhost:8761/eureka
   #      defaultZone: http://localhost:8762/eureka, http://kubernetes.docker.internal:8763/eureka
 
-  instance:
-    instance-id: ${spring.cloud.client.ip-address}:${spring.application.instance_id:${random.value}}
-    prefer-ip-address: true
+#  instance:
+#    instance-id: ${spring.cloud.client.ip-address}:${spring.application.instance_id:${random.value}}
+#    prefer-ip-address: true
 
-logging:
-  level:
-    com.green.userservice.feignclient: DEBUG
-  pattern:
-    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
+#logging:
+#  level:
+#    com.green.userservice.feignclient: DEBUG
+#  pattern:
+#    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
 
 # management:
 #   tracing:
@@ -62,13 +62,11 @@ logging:
 #     tracing:
 #       endpoint: http://localhost:9411/api/v2/spans
 
-# refresh 가 되는 설정
-#management:
-#  endpoints:
-#    web:
-#      exposure:
-#        include: "*"
-# jwt 비밀번호
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
 token:
   access_token_expiration_time: 86400 # 하루
@@ -77,3 +75,5 @@ token:
 
 gateway:
   ip: 127.0.0.1
+
+first-service-url: http://localhost:40001

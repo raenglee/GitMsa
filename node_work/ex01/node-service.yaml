@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment # pod 여러개
+metadata:
+  name: node-service-deployment
+spec: # 어떻게 만들지 대한 내용
+  replicas: 1 # 몇개의 pod 만들래?
+  selector:
+    matchLabels:
+      app: node-service # 쿠버네티스 안에서 변수명
+  template:
+    metadata:
+      labels:
+        app: node-service # 서비스에서 찾는 변수명
+    spec: # pod 하나하나에 대한 내용
+      containers:
+        - name: node-service
+          image: raengju/node-service  # dockerhub 에 있는 image
+          ports:
+            - containerPort: 3000 #default one
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: node-service
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 3000
+      targetPort: 3000
+  selector:
+    app: node-service

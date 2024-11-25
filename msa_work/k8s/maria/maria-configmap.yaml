@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: mariadb-initdb-config
+#  namespace: maria-name
 data:
   init.sql: |
     CREATE DATABASE IF NOT EXISTS mydata;
