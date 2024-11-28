@@ -28,12 +28,13 @@ ext {
 }
 
 dependencies {
-	// actuator 환경설정 새로고침
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	// bootsrap.yml 생성해서 config서버 위치 지정
-	implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
-	implementation 'org.springframework.cloud:spring-cloud-starter-config'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator' // 메트릭 자동생성
+	implementation 'io.micrometer:micrometer-core' // 메트릭 생성 라이브러리
+	implementation 'io.micrometer:micrometer-registry-prometheus' // 프로메테우스에서 메트릭 자동으로..
 
+	implementation 'io.micrometer:micrometer-tracing-bridge-brave'
+	implementation 'io.zipkin.reporter2:zipkin-reporter-brave'
+	
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
@@ -42,6 +43,7 @@ dependencies {
 
 	implementation 'org.springframework.cloud:spring-cloud-starter'
 	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+	implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
@@ -53,13 +55,6 @@ dependencies {
 
 	implementation 'org.modelmapper:modelmapper:3.2.0'
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
-
-	implementation 'org.jsoup:jsoup:1.15.4'
-
-	implementation 'io.jsonwebtoken:jjwt-api:0.12.3'
-	implementation 'io.jsonwebtoken:jjwt-impl:0.12.3'
-	implementation 'io.jsonwebtoken:jjwt-jackson:0.12.3'
-
 }
 
 dependencyManagement {

@@ -1,3 +1,5 @@
+# svc 같은건데 ingress 패스 설정하면 내가 svc 처럼 만들어주꼐
+
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -355,11 +357,13 @@ spec:
       port: 80
       protocol: TCP
       targetPort: http
+      nodePort: 32000
     - appProtocol: https
       name: https
       port: 443
       protocol: TCP
       targetPort: https
+      nodePort: 32001
   selector:
     app.kubernetes.io/component: controller
     app.kubernetes.io/instance: ingress-nginx

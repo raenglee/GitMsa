@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment # pod 여러개
 metadata:
-  name: user-service-deployment
+  name: order-service-deployment
 spec: # 어떻게 만들지 대한 내용
-  replicas: 3 # 몇개의 pod 만들래?
+  replicas: 1 # 몇개의 pod 만들래?
   selector:
     matchLabels:
-      app: user-service # 쿠버네티스 안에서 변수명
+      app: order-service # 쿠버네티스 안에서 변수명
   template:
     metadata:
       labels:
-        app: user-service # 서비스에서 찾는 변수명
+        app: order-service # 서비스에서 찾는 변수명
     spec: # pod 하나하나에 대한 내용
       containers:
-        - name: user-service
-          image: parkmyounghoi/user-service:msa.k8.02  # dockerhub 에 있는 image
+        - name: order-service
+          image: raengju/order-service:msa.k8.01  # dockerhub 에 있는 image
           ports:
-            - containerPort: 40003 #default one
+            - containerPort: 40004 #default one
           env:
             - name: SPRING_DATASOURCE_URL
               valueFrom:
                 configMapKeyRef:
                   name: msa-k8s-configmap
-                  key: spring-datasource-url-user
+                  key: spring-datasource-url-order
             - name: SPRING_DATASOURCE_USERNAME
               valueFrom:
                 configMapKeyRef:
@@ -32,7 +32,7 @@ spec: # 어떻게 만들지 대한 내용
               valueFrom:
                 configMapKeyRef:
                   name: msa-k8s-configmap
-                  key: user-service-port
+                  key: order-service-port
             - name: FIRST_SERVICE_URL
               value: first-service:40001
             - name: ORDER_SERVICE_URL
@@ -42,11 +42,11 @@ spec: # 어떻게 만들지 대한 내용
 apiVersion: v1
 kind: Service
 metadata:
-  name: user-service
+  name: order-service
 spec:
   type: LoadBalancer
   ports:
-    - port: 40003
-      targetPort: 40003
+    - port: 40004
+      targetPort: 40004
   selector:
-    app: user-service
+    app: order-service

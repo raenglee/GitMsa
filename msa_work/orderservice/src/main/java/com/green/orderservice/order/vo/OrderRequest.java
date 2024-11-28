@@ -1,30 +1,20 @@
 package com.green.orderservice.order.vo;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+
+import java.util.Date;
 
 @Data
 public class OrderRequest {
 
-    @Schema(hidden=true)
-    private Long id;
-
-    @NotNull(message = "Email cannot be null")
-    @Email
-    @Schema(example = "aaa@naver.com")
-    private String email;
-
-    @Schema(hidden=true)
-    private String userId;
-
-    @Schema(example = "홍길동")
-    private String name;
-
-    @NotNull(message = "password cannot be null")
-    @Size(min = 8, message = "password must be greater than 8")
-    @Schema(example = "abcd1234")
-    private String password;
+    private String productId;
+    private Integer qty;
+    private Integer unitPrice;
+//    private Integer totalPrice;
 }

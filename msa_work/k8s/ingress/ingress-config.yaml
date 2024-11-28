@@ -27,8 +27,15 @@ spec:
                 name: user-service
                 port:
                   number: 40003
-          - path: /
+          - path: /order-service
             pathType: Prefix
+            backend:
+              service:
+                name: order-service
+                port:
+                  number: 40004
+          - path: /
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: node-service

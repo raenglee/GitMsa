@@ -1,0 +1,51 @@
+#apiVersion: v1
+#kind: Namespace
+#metadata:
+#  name: maria-name
+---
+apiVersion: apps/v1
+kind: Deployment # pod 여러개
+metadata:
+  name: mariadb-catalog-deployment
+#  namespace: maria-name
+spec: # 어떻게 만들지 대한 내용
+  replicas: 1 # 몇개의 pod 만들래?
+  selector:
+    matchLabels:
+      app: mariadb-catalog # 쿠버네티스 안에서 변수명
+  template:
+    metadata:
+      labels:
+        app: mariadb-catalog # 서비스에서 찾는 변수명
+    spec: # pod 하나하나에 대한 내용
+      containers:
+        - name: mariadb-catalog
+          image: mariadb  # dockerhub 에 있는 image
+          ports:
+            - containerPort: 3306 #default one
+          env:  # 환경설정
+            - name: MARIADB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secret
+                  key: password
+          volumeMounts:
+            - name: mariadb-initdb-config-catalog
+              mountPath: /docker-entrypoint-initdb.d
+      volumes:
+        - name: mariadb-initdb-config-catalog
+          configMap:
+            name: mariadb-initdb-config-catalog
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mariadb-catalog
+spec:
+  type: NodePort
+  ports:
+    - port: 3306
+      targetPort: 3306
+      nodePort: 30308
+  selector:
+    app: mariadb-catalog

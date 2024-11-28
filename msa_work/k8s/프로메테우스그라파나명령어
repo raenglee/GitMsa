@@ -1,0 +1,18 @@
+docker run \
+    --name prometheus \
+    -d \
+    -p 9090:9090 \
+    -v ./prometheus.yml:/etc/prometheus/prometheus.yml \
+    prom/prometheus
+
+# docker cp ./prometheus.yml prometheus:/etc/prometheus/prometheus.yml
+# docker cp ./promethuesk8s.yml prometheus:/etc/prometheus/prometheus.yml
+
+
+docker run \
+    --name prometheus \
+    -d \
+    -p 9090:9090 \
+    prom/prometheus
+
+docker run -d -p 3000:3000 --name=grafana grafana/grafana-enterprise

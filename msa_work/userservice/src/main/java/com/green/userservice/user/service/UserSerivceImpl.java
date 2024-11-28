@@ -62,6 +62,7 @@ public class UserSerivceImpl implements UserService {
         return loginResponse;
     }
 
+    @Override
     public List<UserResponse> list() {
         List<UserEntity> list = userRepository.findAll();
         List<UserResponse> userResponses = new ArrayList<>();
@@ -69,5 +70,14 @@ public class UserSerivceImpl implements UserService {
                 userEntity -> userResponses.add(new ModelMapper().map(userEntity, UserResponse.class))
         );
         return userResponses;
+    }
+
+    @Override
+    public UserResponse getUser(String userId) {
+        UserEntity userEntity = userRepository.findByUserID(userId).orElseThrow
+                () ->new UserException(String.format("User with id '%s' not found", userId))
+        );
+        UserResponse userResponse = new NModelMapper().map(userEntity)
+        return null;
     }
 }

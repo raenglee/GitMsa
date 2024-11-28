@@ -1,4 +1,4 @@
-package com.green.orderservice.order.vo;
+package com.green.userservice.user.vo;
 
 import lombok.Data;
 

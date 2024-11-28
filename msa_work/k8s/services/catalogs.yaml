@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment # pod 여러개
+metadata:
+  name: catalog-service-deployment
+spec: # 어떻게 만들지 대한 내용
+  replicas: 1 # 몇개의 pod 만들래?
+  selector:
+    matchLabels:
+      app: catalog-service # 쿠버네티스 안에서 변수명
+  template:
+    metadata:
+      labels:
+        app: catalog-service # 서비스에서 찾는 변수명
+    spec: # pod 하나하나에 대한 내용
+      containers:
+        - name: ucatalogservice
+          image: parkmyounghoi/catalog-service:k8.0.1  # dockerhub 에 있는 image
+          ports:
+            - containerPort: 5000 #default one
+          env:
+            - name: SERVER_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: msa-k8s-configmap
+                  key: user-service-port
+            - name: DB_HOST
+              value: mariadb
+            - name: SPRING_DATASOURCE_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: msa-k8s-configmap
+                  key: spring-datasource-username
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mariadb-secret
+                  key: password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalog-service
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 5000
+      targetPort: 5000
+  selector:
+    app: catalog-service

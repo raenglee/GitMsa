@@ -29,14 +29,12 @@ ext {
 
 dependencies {
 	// actuator 환경설정 새로고침
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator' // 메트릭 자동생성
+	implementation 'io.micrometer:micrometer-core' // 메트릭 생성 라이브러리
+	implementation 'io.micrometer:micrometer-registry-prometheus' // 프로메테우스에서 메트릭 자동으로..
 
-	// eureka client 이거 있어야 eureka 서버에 등록됨.
-//	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
-
-	// bootsrap.yml 생성해서 config서버 위치 지정
-//	implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
-//	implementation 'org.springframework.cloud:spring-cloud-starter-config'
+	implementation 'io.micrometer:micrometer-tracing-bridge-brave'
+	implementation 'io.zipkin.reporter2:zipkin-reporter-brave'
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -64,8 +62,6 @@ dependencies {
 	implementation 'io.jsonwebtoken:jjwt-api:0.12.3'
 	implementation 'io.jsonwebtoken:jjwt-impl:0.12.3'
 	implementation 'io.jsonwebtoken:jjwt-jackson:0.12.3'
-
-
 }
 
 dependencyManagement {

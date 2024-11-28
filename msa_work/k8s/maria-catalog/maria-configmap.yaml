@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mariadb-initdb-config-catalog
+data:
+  init.sql: |
+    CREATE DATABASE IF NOT EXISTS msa CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+    use msa;
