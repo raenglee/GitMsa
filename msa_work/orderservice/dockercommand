@@ -1,8 +1,13 @@
 #이미지 삭제
-docker rmi raengju/order-service:msa.k8.01
+kubectl delete deploy order-service-deployment
+docker rmi parkmyounghoi/order-service:msa.k8.01
+docker rmi parkmyounghoi/order-service:msa.k8.02
+docker rmi parkmyounghoi/order-service:msa.k8.03
+docker rmi parkmyounghoi/order-service:msa.k8.04
+docker rmi parkmyounghoi/order-service:msa.k8.05
 
 #이미지 생성
-docker build -t raengju/order-service:msa.k8.01 .
+docker build -t parkmyounghoi/order-service:msa.k8.06 .
 
 #이미지 dockerhub 업로드 명령어
-docker push raengju/order-service:msa.k8.01
+docker push parkmyounghoi/order-service:msa.k8.06

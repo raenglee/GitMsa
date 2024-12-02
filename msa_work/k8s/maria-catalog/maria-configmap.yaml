@@ -6,3 +6,19 @@ data:
   init.sql: |
     CREATE DATABASE IF NOT EXISTS msa CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
     use msa;
+    -- 테이블 생성
+    CREATE TABLE catalogs (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    product_id VARCHAR(255) NOT NULL,
+    product_name VARCHAR(255) NOT NULL,
+    stock INT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL
+    );
+    
+    -- 데이터 삽입
+    INSERT INTO catalogs (product_id, product_name, stock, created_at)
+    VALUES
+    ('p-001', 'Product A', 50, NOW()),
+    ('p-002', 'Product B', 30, NOW()),
+    ('p-003', 'Product C', -100, NOW());
+

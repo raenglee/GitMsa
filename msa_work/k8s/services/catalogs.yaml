@@ -15,8 +15,9 @@ spec: # 어떻게 만들지 대한 내용
       containers:
         - name: ucatalogservice
           image: parkmyounghoi/catalog-service:k8.0.1  # dockerhub 에 있는 image
+#          imagePullPolicy: Always # 매번 이미지를 가져오도록 설정
           ports:
-            - containerPort: 5000 #default one
+            - containerPort: 40005 #default one
           env:
             - name: SERVER_PORT
               valueFrom:
@@ -35,6 +36,11 @@ spec: # 어떻게 만들지 대한 내용
                 secretKeyRef:
                   name: mariadb-secret
                   key: password
+            - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+              valueFrom:
+                configMapKeyRef:
+                  name: msa-k8s-configmap
+                  key: spring-kafka-bootstrap-servers
 ---
 apiVersion: v1
 kind: Service
@@ -43,7 +49,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-    - port: 5000
-      targetPort: 5000
+    - port: 40005
+      targetPort: 40005
   selector:
     app: catalog-service

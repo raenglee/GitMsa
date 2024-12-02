@@ -21,3 +21,7 @@ data:
   spring-datasource-url-order: "jdbc:mariadb://mariadb-order:3306/msa"
   spring-datasource-url-catalog: "jdbc:mariadb://mariadb-catalog:3306/msa"
   spring-datasource-username: "root"
+
+  management-zipkin-tracing-endpoint: "http://zipkin-service:9411/api/v2/spans"
+
+  spring-kafka-bootstrap-servers: "192.168.65.3:9094"

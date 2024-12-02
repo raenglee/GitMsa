@@ -1,5 +1,6 @@
-kubectl scale deployment firstservice --replicas=3
+kubectl scale deployment first-service-deployment --replicas=3
 kubectl scale deployment secondservice --replicas=3
 
-# 접속 테스틈 명령어
-for i in {1..10}; do curl localhost:40001/first-service/test; done
+# 접속 테스트 명령어
+for i in {1..100}; do curl localhost:40001/first-service/test; done
+

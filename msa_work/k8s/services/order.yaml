@@ -14,7 +14,9 @@ spec: # 어떻게 만들지 대한 내용
     spec: # pod 하나하나에 대한 내용
       containers:
         - name: order-service
-          image: raengju/order-service:msa.k8.01  # dockerhub 에 있는 image
+          image: parkmyounghoi/order-service:msa.k8.06  # dockerhub 에 있는 image
+#          imagePullPolicy: Always # 매번 이미지를 가져오도록 설정
+
           ports:
             - containerPort: 40004 #default one
           env:
@@ -33,10 +35,20 @@ spec: # 어떻게 만들지 대한 내용
                 configMapKeyRef:
                   name: msa-k8s-configmap
                   key: order-service-port
+            - name: MANAGEMENT_ZIPKIN_TRACING_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  name: msa-k8s-configmap
+                  key: management-zipkin-tracing-endpoint
             - name: FIRST_SERVICE_URL
               value: first-service:40001
             - name: ORDER_SERVICE_URL
               value: order-service:40004
+            - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+              valueFrom:
+                configMapKeyRef:
+                  name: msa-k8s-configmap
+                  key: spring-kafka-bootstrap-servers
 
 ---
 apiVersion: v1

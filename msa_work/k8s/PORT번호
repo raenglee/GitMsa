@@ -1,3 +1,5 @@
-firstservicce = 40001
-secondservicce = 40002
-userservicce = 40003
+firstservice=40001
+secondservice=40002
+userservice=40003
+orderservice=40004
+catalogservice=40005

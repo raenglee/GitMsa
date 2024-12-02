@@ -20,5 +20,5 @@ public class UserResponse {
 
     private String password;
 
-    private List<OrderResponse> list;
+    private List<OrderResponse> orderResponses;
 }

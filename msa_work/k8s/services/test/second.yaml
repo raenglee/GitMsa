@@ -14,7 +14,7 @@ spec: # 어떻게 만들지 대한 내용
     spec: # pod 하나하나에 대한 내용
       containers:
         - name: second-service
-          image: raengju/second-service:msa.k8.01  # dockerhub 에 있는 image
+          image: parkmyounghoi/second-service:msa.k8.02  # dockerhub 에 있는 image
           ports:
             - containerPort: 40002 #default one
 ---

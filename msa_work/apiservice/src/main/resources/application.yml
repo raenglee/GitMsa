@@ -27,3 +27,7 @@ spring:
           uri: lb://SECOND-SERVICE
           predicates:
             - Path=/second-service/**
+
+# localhost:8000/first-service/test
+# ->
+# FIRST-SERVICE/first-servuce/test

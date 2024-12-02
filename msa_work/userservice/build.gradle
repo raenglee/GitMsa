@@ -33,8 +33,13 @@ dependencies {
 	implementation 'io.micrometer:micrometer-core' // 메트릭 생성 라이브러리
 	implementation 'io.micrometer:micrometer-registry-prometheus' // 프로메테우스에서 메트릭 자동으로..
 
+	// zipkin 시작
 	implementation 'io.micrometer:micrometer-tracing-bridge-brave'
+	implementation 'io.zipkin.brave:brave-instrumentation-spring-web'
 	implementation 'io.zipkin.reporter2:zipkin-reporter-brave'
+	implementation 'io.micrometer:micrometer-observation'
+	implementation 'io.github.openfeign:feign-micrometer'
+	// zipkin 끝
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'

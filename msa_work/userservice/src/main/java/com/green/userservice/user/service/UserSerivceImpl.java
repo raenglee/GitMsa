@@ -1,10 +1,12 @@
 package com.green.userservice.user.service;
 
 import com.green.userservice.error.UserException;
+import com.green.userservice.feign.OrderClient;
 import com.green.userservice.jwt.JwtUtils;
 import com.green.userservice.user.jpa.UserEntity;
 import com.green.userservice.user.jpa.UserRepository;
 import com.green.userservice.user.vo.LoginResponse;
+import com.green.userservice.user.vo.OrderResponse;
 import com.green.userservice.user.vo.UserRequest;
 import com.green.userservice.user.vo.UserResponse;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,7 @@ public class UserSerivceImpl implements UserService {
 
     private final UserRepository userRepository; // UserRepository dependency injection
     private final JwtUtils jwtUtils;
+    private final OrderClient orderClient;
 
     @Override
     public UserResponse join(UserRequest userRequest) {
@@ -74,10 +77,12 @@ public class UserSerivceImpl implements UserService {
 
     @Override
     public UserResponse getUser(String userId) {
-        UserEntity userEntity = userRepository.findByUserID(userId).orElseThrow
-                () ->new UserException(String.format("User with id '%s' not found", userId))
+        UserEntity userEntity = userRepository.findByUserId(userId).orElseThrow(
+                () -> new UserException(String.format("User with id %s not found", userId))
         );
-        UserResponse userResponse = new NModelMapper().map(userEntity)
-        return null;
+        UserResponse userResponse = new ModelMapper().map(userEntity, UserResponse.class);
+        List<OrderResponse> orderResponses = orderClient.getOrders(userId);
+        userResponse.setOrderResponses(orderResponses);
+        return userResponse;
     }
 }

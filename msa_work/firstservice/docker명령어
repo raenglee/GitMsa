@@ -1,6 +1,6 @@
 #이미지 삭제
-docker rmi raengju/first-service:msa.k8.01
+docker rmi parkmyounghoi/first-service:msa.k8.01
 #이미지 생성
-docker build -t raengju/first-service:msa.k8.01 .
+docker build -t parkmyounghoi/first-service:msa.k8.01 .
 #이미지 dockerhub 업로드 명령어
-docker push raengju/first-service:msa.k8.01
+docker push parkmyounghoi/first-service:msa.k8.01

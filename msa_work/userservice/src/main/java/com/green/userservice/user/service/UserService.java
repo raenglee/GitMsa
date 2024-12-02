@@ -13,4 +13,6 @@ public interface UserService {
     UserResponse join(UserRequest userRequest);
     LoginResponse login(String email, String password);
     List<UserResponse> list();
+
+    UserResponse getUser(String userId);
 }

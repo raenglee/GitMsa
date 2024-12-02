@@ -13,8 +13,8 @@ spec: # 어떻게 만들지 대한 내용
         app: first-service # 서비스에서 찾는 변수명
     spec: # pod 하나하나에 대한 내용
       containers:
-        - name: first-service
-          image: raengju/first-service:msa.k8.01  # dockerhub 에 있는 image
+        - name: first-serviceclear
+          image: parkmyounghoi/first-service:msa.k8.01  # dockerhub 에 있는 image
           ports:
             - containerPort: 40001 #default one
 ---

@@ -1,8 +1,10 @@
 #이미지 삭제
-docker rmi parkmyounghoi/user-service:msa.k8.02
+kubectl delete deploy user-service-deployment
+docker rmi parkmyounghoi/user-service:msa.k8.04
+docker rmi parkmyounghoi/user-service:msa.k8.05
 
 #이미지 생성
-docker build -t parkmyounghoi/user-service:msa.k8.02 .
+docker build -t parkmyounghoi/user-service:msa.k8.06 .
 
 #이미지 dockerhub 업로드 명령어
-docker push parkmyounghoi/user-service:msa.k8.02
+docker push parkmyounghoi/user-service:msa.k8.06
