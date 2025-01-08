@@ -1,0 +1,16 @@
+{
+  "name": "0108",
+  "version": "1.0.0",
+  "main": "ex01.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "vue": "^3.5.13"
+  }
+}
