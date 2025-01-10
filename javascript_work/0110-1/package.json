@@ -1,0 +1,20 @@
+{
+  "name": "0110-1",
+  "version": "1.0.0",
+  "type":"module",
+  "main": "index.js",
+  "scripts": {
+    "start": "set AA=20 && node ex01.js",
+    "dev": "set AA=10 && node ex01.js",
+    "aaa": "echo aaa && ls -al",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "mysql2": "^3.12.0"
+  }
+}
